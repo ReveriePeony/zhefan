@@ -1,0 +1,8 @@
+server:
+    port: 80
+    maxHttpHeaderSize: 10240000
+    
+spring:
+    profiles:
+        active: yummy
+        
