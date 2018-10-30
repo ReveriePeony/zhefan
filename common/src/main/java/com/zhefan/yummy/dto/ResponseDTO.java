@@ -41,89 +41,42 @@ public class ResponseDTO<T> implements Serializable {
 		this.data = data;
 	}
 
-	/**
-	 * 创建响应成功
-	 *
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createBySuccess() {
-		return createBySuccessMessage(ResponseEnums.SUCCESS.getMsg());
+	public static <T> ResponseDTO<T> createSuccess() {
+		return createSuccess(ResponseEnums.SUCCESS.getMsg());
 	}
 
-	/**
-	 * 创建响应成功
-	 *
-	 * @param data 数据包
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createBySuccess(T data) {
-		return createBySuccess(null, data);
+	public static <T> ResponseDTO<T> createSuccess(T data) {
+		return createSuccess(ResponseEnums.SUCCESS.getMsg(), data);
 	}
 
-	/**
-	 * 创建响应成功
-	 *
-	 * @param msg 返回消息
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createBySuccessMessage(String msg) {
-		return createBySuccess(msg, null);
+	public static <T> ResponseDTO<T> createSuccess(String msg) {
+		return createSuccess(msg, null);
 	}
 
-	/**
-	 * 创建响应成功
-	 *
-	 * @param msg  消息
-	 * @param data 数据包
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createBySuccess(String msg, T data) {
-		return createBySuccessCodeMessage(ResponseEnums.SUCCESS.getCode(), msg, data);
+	public static <T> ResponseDTO<T> createSuccess(String msg, T data) {
+		return createSuccess(ResponseEnums.SUCCESS.getCode(), msg, data);
 	}
 
-	/**
-	 * 创建响应成功
-	 *
-	 * @param code 状态码
-	 * @param msg  消息
-	 * @param data 数据包
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createBySuccessCodeMessage(int code, String msg, T data) {
+	public static <T> ResponseDTO<T> createSuccess(int code, String msg, T data) {
 		return new ResponseDTO<>(code, msg, data);
 	}
 
-	/**
-	 * 创建响应失败
-	 *
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createByError() {
-		return createByErrorCodeMessage(ResponseEnums.ERROR.getCode(), ResponseEnums.ERROR.getMsg());
+	public static <T> ResponseDTO<T> createError() {
+		return createError(ResponseEnums.SYSTEM_ERROR.getCode(), ResponseEnums.SYSTEM_ERROR.getMsg());
 	}
 
-	/**
-	 * 创建响应失败
-	 *
-	 * @param errorMessage 消息
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createByErrorMessage(String errorMessage) {
-		return createByErrorCodeMessage(ResponseEnums.ERROR.getCode(), errorMessage);
+	public static <T> ResponseDTO<T> createError(String errorMessage) {
+		return createError(ResponseEnums.SYSTEM_ERROR.getCode(), errorMessage);
 	}
 
-	/**
-	 * 创建响应失败
-	 *
-	 * @param errorCode    状态码
-	 * @param errorMessage 消息
-	 * @return ResponseDTO
-	 */
-	public static <T> ResponseDTO<T> createByErrorCodeMessage(int errorCode, String errorMessage) {
+	public static <T> ResponseDTO<T> createError(int errorCode, String errorMessage) {
 		return new ResponseDTO<>(errorCode, errorMessage);
 	}
+	
+	public static <T> ResponseDTO<T> createError(ResponseEnums responseEnums) {
+		return new ResponseDTO<>(responseEnums.getCode(), responseEnums.getMsg());
+	}
 
-	// 使之不在json序列化结果当中，作用用于判断
 	@JsonIgnore
 	public boolean isSuccess() {
 		return this.code == ResponseEnums.SUCCESS.getCode();

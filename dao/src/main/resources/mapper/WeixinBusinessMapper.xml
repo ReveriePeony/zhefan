@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhefan.yummy.dao.WeixinBusinessDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.zhefan.yummy.entity.WeixinBusiness">
+		<id column="id" property="id" />
+		<result column="gerent_id" property="gerentId" />
+		<result column="app_id" property="appId" />
+		<result column="app_secret" property="appSecret" />
+		<result column="creation_time" property="creationTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, gerent_id, app_id, app_secret, creation_time
+    </sql>
+
+</mapper>

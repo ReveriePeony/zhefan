@@ -1,4 +1,4 @@
-package com.zhefan.yummy.web.service;
+package com.zhefan.yummy.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zhefan.yummy.base.BaseService;

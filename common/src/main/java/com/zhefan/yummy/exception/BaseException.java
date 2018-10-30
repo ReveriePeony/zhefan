@@ -25,7 +25,7 @@ public class BaseException extends RuntimeException {
 
     public BaseException(String message) {
         super(message);
-        this.code = ResponseEnums.ERROR.getCode();
+        this.code = ResponseEnums.SYSTEM_ERROR.getCode();
         this.message = message;
     }
 

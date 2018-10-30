@@ -1,4 +1,4 @@
-package com.zhefan.yummy.web.service.impl;
+package com.zhefan.yummy.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +8,8 @@ import com.zhefan.yummy.base.BaseServiceImpl;
 import com.zhefan.yummy.dao.THotelDAO;
 import com.zhefan.yummy.entity.THotel;
 import com.zhefan.yummy.param.HotelParameter.HotelQuery;
+import com.zhefan.yummy.service.THotelService;
 import com.zhefan.yummy.vo.HotelVo;
-import com.zhefan.yummy.web.service.THotelService;
 
 /**
  * <p>

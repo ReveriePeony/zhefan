@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.zhefan.yummy.service.THotelService;
 import com.zhefan.yummy.util.RedisCacheUtil;
-import com.zhefan.yummy.web.service.THotelService;
 
 /**
  * 拦截器

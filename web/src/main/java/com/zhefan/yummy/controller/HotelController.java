@@ -27,9 +27,9 @@ import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.THotel;
 import com.zhefan.yummy.param.HotelParameter.HotelQuery;
+import com.zhefan.yummy.service.THotelService;
 import com.zhefan.yummy.util.QrCodeUtil;
 import com.zhefan.yummy.vo.HotelVo;
-import com.zhefan.yummy.web.service.THotelService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +54,7 @@ public class HotelController extends BaseController {
     public ResponseDTO<Page<HotelVo>> hotelR(HotelQuery hpage, HttpSession session) {
         Integer busid = getLoginUserId(session);
         Page<HotelVo> page = tHotelService.queryHotelHome(busid, hpage);
-        return ResponseDTO.createBySuccess(page);
+        return ResponseDTO.createSuccess(page);
     }
 
     @ApiOperation(value = "删除 酒店", notes = "删除 酒店")
@@ -68,7 +68,7 @@ public class HotelController extends BaseController {
         h.setUpdatedAt(new Date());
         h.setUpdatedBy(busid);
         tHotelService.update(h, wrapper);
-        return ResponseDTO.createBySuccess();
+        return ResponseDTO.createSuccess();
     }
 
     @ApiOperation(value = "二维码", notes = "二维码")

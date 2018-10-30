@@ -8,15 +8,15 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @ServletComponentScan
 @SpringBootApplication
-public class HotelApplication extends SpringBootServletInitializer {
+public class YummyApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(HotelApplication.class);
+        return application.sources(YummyApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(HotelApplication.class, args);
+        SpringApplication.run(YummyApplication.class, args);
     }
 
 }

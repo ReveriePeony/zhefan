@@ -48,7 +48,6 @@
         <dev.lib.jjwt>0.7.0</dev.lib.jjwt>
         <dev.lib.lombok>1.16.18</dev.lib.lombok>
         <dev.lib.joda-time>2.9.9</dev.lib.joda-time>
-        <dev.lib.gt-api>1.3.16-SNAPSHOT</dev.lib.gt-api>
     </properties>
 
     <parent>
@@ -171,6 +170,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <!-- <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency> -->
 
         <!-- Spring Boot Reids 依赖 -->
         <dependency>
