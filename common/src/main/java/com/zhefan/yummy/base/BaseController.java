@@ -3,13 +3,11 @@ package com.zhefan.yummy.base;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import com.zhefan.yummy.constant.CommonSessionConst;
 import com.zhefan.yummy.exception.ResponseEntityException;
 import com.zhefan.yummy.util.RedisCacheUtil;
 
@@ -26,26 +24,6 @@ public abstract class BaseController {
 	RedisCacheUtil redisCacheUtil;
 
 	/**
-	 * 获取Sessionid
-	 *
-	 * @param session HttpSession
-	 * @return
-	 */
-	public String getSessionId(HttpSession session) {
-		return session.getId();
-	}
-
-	/**
-	 *
-	 * @param session HttpSession
-	 * @return int
-	 */
-	public Integer getLoginUserId(HttpSession session) {
-		Object o = session.getAttribute("");
-		return 33;
-	}
-
-	/**
 	 * 参数校验
 	 *
 	 * @param result BindingResult
@@ -59,11 +37,7 @@ public abstract class BaseController {
 			}
 		}
 	}
-
-//	protected String authorizeMember(HttpServletRequest request, Map<String, Object> map) throws Exception {
-//		
-//	}
-
+	
 	/**
 	 * 判断浏览器
 	 *

@@ -16,13 +16,13 @@ public class ParamPage extends Page{
 	
 	private static final long serialVersionUID = 4953570822783975651L;
 
-	private Integer page;
+	private Integer page = 1;
 	
-	private Integer pageSize;
+	private Integer pageSize = 10;
 	
 	private String orderByField;
 	
-	public Page initPage() {
-		return new Page<>(page, pageSize, orderByField);
+	public <T> Page<T> initPage() {
+		return new Page<T>(page, pageSize, orderByField);
 	}
 }

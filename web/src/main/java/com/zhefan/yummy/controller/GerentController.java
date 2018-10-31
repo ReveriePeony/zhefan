@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -27,6 +28,7 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.service.GerentService;
 import com.zhefan.yummy.util.QrCodeUtil;
+import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -49,13 +51,13 @@ public class GerentController extends BaseController {
 	
 	@SuppressWarnings("rawtypes")
 	@PostMapping("login")
-	public ResponseDTO login(@RequestParam String name, @RequestParam String password) {
-		log.info("test ");
+	public ResponseDTO login(@RequestParam String name, @RequestParam String password, HttpServletRequest request) {
 		Wrapper<Gerent> wrapper = new EntityWrapper<>();
 		wrapper.eq("name", name).eq("password", DigestUtils.md5Hex(password).toUpperCase());
 		Gerent gerent = gerentService.selectOne(wrapper);
-		System.err.println(gerent);
 		if(gerent != null) {
+			log.debug(gerent.toString());
+			SessionUtil.setLoginInfo(request, gerent);
 			return ResponseDTO.createSuccess("success");
 		}
 		return ResponseDTO.createError(ResponseEnums.LOGIN_ERROR);
@@ -75,7 +77,7 @@ public class GerentController extends BaseController {
 			outputStream.flush();  
 			outputStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e.getCause());
 		}
     }
 }

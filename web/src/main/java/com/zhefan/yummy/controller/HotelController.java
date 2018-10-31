@@ -52,21 +52,21 @@ public class HotelController extends BaseController {
     @ApiOperation(value = "酒店列表", notes = "酒店列表")
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseDTO<Page<HotelVo>> hotelR(HotelQuery hpage, HttpSession session) {
-        Integer busid = getLoginUserId(session);
-        Page<HotelVo> page = tHotelService.queryHotelHome(busid, hpage);
-        return ResponseDTO.createSuccess(page);
+//        Integer busid = getLoginUserId(session);
+//        Page<HotelVo> page = tHotelService.queryHotelHome(busid, hpage);
+        return ResponseDTO.createSuccess();
     }
 
     @ApiOperation(value = "删除 酒店", notes = "删除 酒店")
     @DeleteMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @SuppressWarnings("rawtypes")
     public ResponseDTO roomCategoryD(@RequestBody @ApiParam("酒店ID 数组") List<Integer> ids, HttpSession session) {
-        Integer busid = getLoginUserId(session);
+//        Integer busid = getLoginUserId(session);
         Wrapper<THotel> wrapper = new EntityWrapper<>();
         wrapper.in("id", ids);
         THotel h = new THotel();
         h.setUpdatedAt(new Date());
-        h.setUpdatedBy(busid);
+//        h.setUpdatedBy(busid);
         tHotelService.update(h, wrapper);
         return ResponseDTO.createSuccess();
     }

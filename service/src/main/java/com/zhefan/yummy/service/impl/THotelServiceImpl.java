@@ -25,7 +25,6 @@ public class THotelServiceImpl extends BaseServiceImpl<THotelDAO, THotel> implem
 	@Autowired
 	THotelDAO tHotelDAO;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Page<HotelVo> queryHotelHome(Integer busid, HotelQuery hpage) {
 		Page<HotelVo> page = hpage.initPage();

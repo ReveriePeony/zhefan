@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.zhefan.yummy.interceptor.SecurityInterceptor;
+import com.zhefan.yummy.interceptor.AuthInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -38,18 +38,19 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 				.addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-		// super.addResourceHandlers(registry);
+		super.addResourceHandlers(registry);
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		InterceptorRegistration addInterceptor = registry.addInterceptor(new SecurityInterceptor());
-//        addInterceptor.excludePathPatterns("/backstage/home", "/error", "/v2/**", "/webjars/**", "/swagger-resources/**");
+		InterceptorRegistration addInterceptor = registry.addInterceptor(new AuthInterceptor());
+		addInterceptor.excludePathPatterns("/", "/gerent/login", "/error", "/v2/**", "/webjars/**",
+				"/swagger-resources/**");
 		super.addInterceptors(registry);
 	}
 
 	/**
-	 * 跨域配置 默认设置全局跨域配置 TODO: 部署服务器需要注释掉。因为，nginx已配置跨域。否则会起冲突
+	 * 跨域配置 默认设置全局跨域配置 部署服务器需要注释掉。因为，nginx已配置跨域。否则会起冲突
 	 *
 	 * @param registry Corsregistry
 	 */
