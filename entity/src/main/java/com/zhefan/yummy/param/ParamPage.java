@@ -22,7 +22,7 @@ public class ParamPage extends Page{
 	
 	private String orderByField;
 	
-	public <T> Page<T> initPage() {
-		return new Page<T>(page, pageSize, orderByField);
+	public Page initPage() {
+		return new Page(page, pageSize, orderByField);
 	}
 }

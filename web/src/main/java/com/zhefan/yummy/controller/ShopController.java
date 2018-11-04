@@ -30,6 +30,7 @@ public class ShopController extends BaseController {
 	@Autowired
 	private ShopService shopService;
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("findAll/{gerentId}")
 	public ResponseDTO<Page<Shop>> login(@PathVariable("gerentId") Integer gerentId, ParamPage paramPage) {
 		Wrapper<Shop> wrapper = new EntityWrapper<>();
