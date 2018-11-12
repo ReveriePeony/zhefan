@@ -9,14 +9,30 @@
 		<result column="avatar" property="avatar" />
 		<result column="password" property="password" />
 		<result column="creation_time" property="creationTime" />
+		<result column="tel" property="tel" />
 		<result column="creator" property="creator" />
 		<result column="creator_id" property="creatorId" />
 		<result column="status" property="status" />
+		<result column="role_id" property="roleId" />
+		<result column="role_name" property="roleName" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, avatar, password, creation_time, creator, creator_id, status
+        id, name, avatar, password, creation_time, tel, creator, creator_id, status, role_id, role_name
     </sql>
 
+	<select id="queryHotelHome" resultType="Map">
+		SELECT id hotelId, name, phone, address, logo, shop_id shopId,
+		longitude, latitude, `desc`
+		FROM t_hotel
+		WHERE mark_modified = 0
+		<if test="req.hotelId != null">
+			AND id = #{req.hotelId}
+		</if>
+		<if test="busId != null">
+			AND bus_id = #{busId}
+		</if>
+	</select>
+	
 </mapper>

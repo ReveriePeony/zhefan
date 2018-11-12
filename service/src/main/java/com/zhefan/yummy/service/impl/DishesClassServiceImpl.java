@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author ReverirNight@Foxmail.com
- * @since 2018-10-30
+ * @since 2018-11-12
  */
 @Service
 public class DishesClassServiceImpl extends BaseServiceImpl<DishesClassDAO, DishesClass> implements DishesClassService {

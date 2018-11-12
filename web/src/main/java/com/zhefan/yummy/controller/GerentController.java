@@ -30,7 +30,9 @@ import com.zhefan.yummy.service.GerentService;
 import com.zhefan.yummy.util.QrCodeUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -41,6 +43,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author ReverirNight@Foxmail.com
  * @since 2018-10-30
  */
+@Api(tags = "后台账号")
 @Slf4j
 @RestController
 @RequestMapping("/gerent")
@@ -49,9 +52,11 @@ public class GerentController extends BaseController {
 	@Autowired
 	private GerentService gerentService;
 	
+	@ApiOperation(value = "登录", notes = "登录")
 	@SuppressWarnings("rawtypes")
 	@PostMapping("login")
-	public ResponseDTO login(@RequestParam String name, @RequestParam String password, HttpServletRequest request) {
+	public ResponseDTO login(@ApiParam("账号") @RequestParam String name, 
+			@ApiParam("密码") @RequestParam String password, HttpServletRequest request) {
 		Wrapper<Gerent> wrapper = new EntityWrapper<>();
 		wrapper.eq("name", name).eq("password", DigestUtils.md5Hex(password).toUpperCase());
 		Gerent gerent = gerentService.selectOne(wrapper);

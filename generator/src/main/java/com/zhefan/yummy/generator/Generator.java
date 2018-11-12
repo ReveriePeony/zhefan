@@ -28,7 +28,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class Generator {
 
 	static String[] generatorTableName = new String[] { "t_dishes", "t_dishes_class", "t_gerent", "t_shop", "t_user",
-			"t_weixin_business" };
+			"t_weixin_business", "t_area", "t_menu", "t_order", "t_order_detail", "t_role", "t_role_menu", "t_table", 
+			"t_table_type" };
 
 	public static void main(String[] args) {
 		

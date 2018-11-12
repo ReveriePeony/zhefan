@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author ReverirNight@Foxmail.com
- * @since 2018-10-30
+ * @since 2018-11-12
  */
 @Data
 @Accessors(chain = true)
@@ -70,6 +70,14 @@ public class Dishes extends Model<Dishes> {
      * 是否售罄 0-false 1-true
      */
 	private Integer soldOut;
+    /**
+     * 序号
+     */
+	private Integer serialNo;
+    /**
+     * 描述
+     */
+	private String remark;
 
 
 	@Override

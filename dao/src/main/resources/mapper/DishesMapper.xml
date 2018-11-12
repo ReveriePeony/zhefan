@@ -15,11 +15,13 @@
 		<result column="creator_id" property="creatorId" />
 		<result column="status" property="status" />
 		<result column="sold_out" property="soldOut" />
+		<result column="serial_no" property="serialNo" />
+		<result column="remark" property="remark" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out
+        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark
     </sql>
 
 </mapper>

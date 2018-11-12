@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhefan.yummy.dao.OrderDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.zhefan.yummy.entity.Order">
+		<id column="id" property="id" />
+		<result column="gerent_id" property="gerentId" />
+		<result column="shop_id" property="shopId" />
+		<result column="order_number" property="orderNumber" />
+		<result column="price" property="price" />
+		<result column="creation_time" property="creationTime" />
+		<result column="process_time" property="processTime" />
+		<result column="book" property="book" />
+		<result column="book_id" property="bookId" />
+		<result column="status" property="status" />
+		<result column="area_name" property="areaName" />
+		<result column="table_name" property="tableName" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, gerent_id, shop_id, order_number, price, creation_time, process_time, book, book_id, status, area_name, table_name
+    </sql>
+
+</mapper>

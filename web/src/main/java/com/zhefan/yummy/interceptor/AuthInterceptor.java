@@ -40,11 +40,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		log.debug(request.getLocalAddr() + " " + request.getRequestURL());
-		Gerent gerent = SessionUtil.getLoginBean(request);
-		if (gerent == null) {
-			response.sendRedirect("/");
-			return false;
-		}
+//		Gerent gerent = SessionUtil.getLoginBean(request);
+//		if (gerent == null) {
+//			response.sendRedirect("/");
+//			return false;
+//		}
 		return true;
 
 	}

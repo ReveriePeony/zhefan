@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author ReverirNight@Foxmail.com
- * @since 2018-10-30
+ * @since 2018-11-12
  */
 @Data
 @Accessors(chain = true)
@@ -47,6 +47,10 @@ public class Gerent extends Model<Gerent> {
      */
 	private String creationTime;
     /**
+     * 手机号
+     */
+	private String tel;
+    /**
      * 创建者名称
      */
 	private String creator;
@@ -58,6 +62,14 @@ public class Gerent extends Model<Gerent> {
      * 状态 0-注销 1-正常
      */
 	private Integer status;
+    /**
+     * 角色ID
+     */
+	private Integer roleId;
+    /**
+     * 角色名
+     */
+	private String roleName;
 
 
 	@Override
