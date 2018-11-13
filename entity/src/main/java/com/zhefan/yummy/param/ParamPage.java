@@ -31,4 +31,11 @@ public class ParamPage extends Page{
 	public Page initPage() {
 		return new Page(page, pageSize, orderByField);
 	}
+	
+	public Page initPage(Integer page, Integer pageSize) {
+		this.page = page;
+		this.pageSize = pageSize;
+		return new Page(page, pageSize, orderByField);
+	}
+	
 }

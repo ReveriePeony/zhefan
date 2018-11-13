@@ -61,7 +61,7 @@ public class DishesClass extends Model<DishesClass> {
 	 * 使用状态 0-注销 1-正常
 	 */
 	@ApiModelProperty("使用状态 0-注销 1-正常")
-	private Integer status;
+	private Integer status = 1;
 	/**
 	 * 序号
 	 */

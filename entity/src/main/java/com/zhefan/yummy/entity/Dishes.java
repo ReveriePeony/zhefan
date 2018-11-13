@@ -78,12 +78,12 @@ public class Dishes extends Model<Dishes> {
      * 使用状态 0-下架 1-上架
      */
 	@ApiModelProperty(value = "使用状态 0-下架 1-上架")
-	private Integer status;
+	private Integer status = 1;
     /**
      * 是否售罄 0-false 1-true
      */
 	@ApiModelProperty(value = "是否售罄 0-false 1-true")
-	private Integer soldOut;
+	private Integer soldOut = 0;
     /**
      * 序号
      */

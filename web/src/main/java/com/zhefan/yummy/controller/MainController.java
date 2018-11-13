@@ -38,6 +38,13 @@ public class MainController implements ErrorController {
 	public String getErrorPath() {
 		return PATH;
 	}
+//	
+//	@GetMapping("/login")
+//	public ModelAndView login(HttpServletRequest request) {
+//		ModelAndView view = new ModelAndView();
+//		view.setViewName("/login.html");
+//		return view;
+//	}
 
 	@ApiOperation(hidden = true, value = "")
 	@RequestMapping(PATH)

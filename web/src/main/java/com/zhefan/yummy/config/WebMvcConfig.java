@@ -24,6 +24,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("/index.html");
+		registry.addViewController("/login").setViewName("/login.html");
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		InterceptorRegistration addInterceptor = registry.addInterceptor(new AuthInterceptor());
-		addInterceptor.excludePathPatterns("/", "/gerent/login", "/error", "/v2/**", "/webjars/**",
+		addInterceptor.excludePathPatterns("/", "/login", "/gerent/login", "/error", "/v2/**", "/webjars/**",
 				"/swagger-resources/**");
 		super.addInterceptors(registry);
 	}

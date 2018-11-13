@@ -17,8 +17,10 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Area;
-import com.zhefan.yummy.param.RequestTable;
+import com.zhefan.yummy.entity.Gerent;
+import com.zhefan.yummy.param.RequestArea;
 import com.zhefan.yummy.service.AreaService;
+import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,14 +53,14 @@ public class AreaController extends BaseController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@ApiOperation(value = "新增", notes = "新增")
+	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
-	public ResponseDTO save(@RequestBody RequestTable table, HttpServletRequest request) {
-//		Gerent gerent = SessionUtil.getLoginBean(request);
+	public ResponseDTO save(@RequestBody RequestArea area, HttpServletRequest request) {
+		Gerent gerent = SessionUtil.getLoginBean(request);
 		Area entity = new Area();
-		System.err.println(table);
-		BeanUtils.copyProperties(table, entity);
-		System.err.println(entity);
+		BeanUtils.copyProperties(area, entity);
+		entity.setCreatorId(gerent.getId());
+		entity.setCreationTime(getCurrentTime());
 		boolean b = areaService.insertOrUpdate(entity);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
@@ -68,7 +70,6 @@ public class AreaController extends BaseController {
 	@ApiOperation(value = "删除", notes = "删除")
 	@PostMapping("del")
 	public ResponseDTO list(@RequestBody List<Integer> ids) {
-		System.err.println(ids);
 		boolean b = areaService.deleteBatchIds(ids);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
