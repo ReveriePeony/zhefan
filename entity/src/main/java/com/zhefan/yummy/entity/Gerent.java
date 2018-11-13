@@ -26,59 +26,63 @@ import lombok.experimental.Accessors;
 @TableName("t_gerent")
 public class Gerent extends Model<Gerent> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-	@TableId(value="id", type= IdType.AUTO)
+	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
-    /**
-     * 名称
-     */
+	/**
+	 * 名称
+	 */
 	@ApiModelProperty("名称")
 	private String name;
-    /**
-     * 头像
-     */
+	/**
+	 * 昵称
+	 */
+	@ApiModelProperty("昵称")
+	private String nick;
+	/**
+	 * 头像
+	 */
 	@ApiModelProperty("头像")
 	private String avatar;
-    /**
-     * 密码
-     */
+	/**
+	 * 密码
+	 */
 	@ApiModelProperty("密码")
 	private String password;
-    /**
-     * 创建时间
-     */
+	/**
+	 * 创建时间
+	 */
 	private String creationTime;
-    /**
-     * 手机号
-     */
+	/**
+	 * 手机号
+	 */
 	@ApiModelProperty("手机号")
 	private String tel;
-    /**
-     * 创建者名称
-     */
+	/**
+	 * 创建者名称
+	 */
 	@ApiModelProperty("创建者名称")
 	private String creator;
-    /**
-     * 创建者ID
-     */
+	/**
+	 * 创建者ID
+	 */
 	private Integer creatorId;
-    /**
-     * 状态 0-注销 1-正常
-     */
+	/**
+	 * 状态 0-注销 1-正常
+	 */
 	@ApiModelProperty("状态 0-注销 1-正常")
-	private Integer status;
-    /**
-     * 角色ID
-     */
+	private Integer status = 1;
+	/**
+	 * 角色ID
+	 */
 	@ApiModelProperty("角色ID")
 	private Integer roleId;
-    /**
-     * 角色名
-     */
+	/**
+	 * 角色名
+	 */
 	@ApiModelProperty("角色名")
 	private String roleName;
-
 
 	@Override
 	protected Serializable pkVal() {

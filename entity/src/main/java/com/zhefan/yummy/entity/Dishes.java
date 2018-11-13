@@ -2,18 +2,13 @@ package com.zhefan.yummy.entity;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotations.Version;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -32,6 +27,14 @@ import lombok.experimental.Accessors;
 public class Dishes extends Model<Dishes> {
 
     private static final long serialVersionUID = 1L;
+    
+    public static final Integer STATUS_UP = 1;
+
+    public static final Integer STATUS_DOWN = 0;
+    
+    public static final Integer SOLD_IN = 0;
+    
+    public static final Integer SOLD_OUT = 1;
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;

@@ -1,6 +1,9 @@
 package com.zhefan.yummy.service;
 
 import com.zhefan.yummy.entity.Menu;
+
+import java.util.List;
+
 import com.zhefan.yummy.base.BaseService;
 
 /**
@@ -12,5 +15,8 @@ import com.zhefan.yummy.base.BaseService;
  * @since 2018-11-12
  */
 public interface MenuService extends BaseService<Menu> {
+
+	List<Menu> selectMenuList(Integer roleId);
+	
 	
 }

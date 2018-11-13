@@ -59,8 +59,10 @@ public class AreaController extends BaseController {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		Area entity = new Area();
 		BeanUtils.copyProperties(area, entity);
-		entity.setCreatorId(gerent.getId());
-		entity.setCreationTime(getCurrentTime());
+		if(area.getId() == null) {
+			entity.setCreatorId(gerent.getId());
+			entity.setCreationTime(getCurrentTime());
+		}
 		boolean b = areaService.insertOrUpdate(entity);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
@@ -69,7 +71,7 @@ public class AreaController extends BaseController {
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
 	@PostMapping("del")
-	public ResponseDTO list(@RequestBody List<Integer> ids) {
+	public ResponseDTO del(@RequestBody List<Integer> ids) {
 		boolean b = areaService.deleteBatchIds(ids);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();

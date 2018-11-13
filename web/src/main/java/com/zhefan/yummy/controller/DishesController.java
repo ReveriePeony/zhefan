@@ -66,9 +66,11 @@ public class DishesController extends BaseController {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		Dishes entity = new Dishes();
 		BeanUtils.copyProperties(clas, entity);
-		entity.setCreatorId(gerent.getId());
-		entity.setCreationTime(getCurrentTime());
-		entity.setCreator(gerent.getName());
+		if(clas.getId() == null) {
+			entity.setCreatorId(gerent.getId());
+			entity.setCreationTime(getCurrentTime());
+			entity.setCreator(gerent.getNick());
+		}
 		boolean b = dishesService.insertOrUpdate(entity);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
@@ -77,8 +79,60 @@ public class DishesController extends BaseController {
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
 	@PostMapping("del")
-	public ResponseDTO list(@RequestBody List<Integer> ids) {
+	public ResponseDTO del(@RequestBody List<Integer> ids) {
 		boolean b = dishesService.deleteBatchIds(ids);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "上架", notes = "上架")
+	@PostMapping("sale")
+	public ResponseDTO sales(@RequestBody List<Integer> ids) {
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setSoldOut(Dishes.STATUS_UP);
+		boolean b = dishesService.update(entity, wrapper);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "下架", notes = "下架")
+	@PostMapping("notSale")
+	public ResponseDTO notSale(@RequestBody List<Integer> ids) {
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setSoldOut(Dishes.STATUS_DOWN);
+		boolean b = dishesService.update(entity, wrapper);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "售罄", notes = "售罄")
+	@PostMapping("soldOut")
+	public ResponseDTO soldOut(@RequestBody List<Integer> ids) {
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setSoldOut(Dishes.SOLD_OUT);
+		boolean b = dishesService.update(entity, wrapper);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "有货", notes = "有货")
+	@PostMapping("sold")
+	public ResponseDTO sold(@RequestBody List<Integer> ids) {
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setSoldOut(Dishes.SOLD_IN);
+		boolean b = dishesService.update(entity, wrapper);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
 	}

@@ -43,8 +43,8 @@ public class OrderDetail extends Model<OrderDetail> {
     /**
      * 单价
      */
-	@ApiModelProperty("单价")
-	private Double price;
+	@ApiModelProperty("单价(分)")
+	private Integer price;
     /**
      * 菜品类型名称
      */

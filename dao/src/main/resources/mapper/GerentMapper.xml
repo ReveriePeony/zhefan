@@ -6,6 +6,7 @@
 	<resultMap id="BaseResultMap" type="com.zhefan.yummy.entity.Gerent">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
+		<result column="nick" property="nick" />
 		<result column="avatar" property="avatar" />
 		<result column="password" property="password" />
 		<result column="creation_time" property="creationTime" />
@@ -19,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, avatar, password, creation_time, tel, creator, creator_id, status, role_id, role_name
+        id, name, nick, avatar, password, creation_time, tel, creator, creator_id, status, role_id, role_name
     </sql>
 
 	<select id="queryHotelHome" resultType="Map">

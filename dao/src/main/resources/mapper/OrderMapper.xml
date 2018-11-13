@@ -16,6 +16,7 @@
 		<result column="status" property="status" />
 		<result column="area_name" property="areaName" />
 		<result column="table_name" property="tableName" />
+		<result column="being" property="being" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->

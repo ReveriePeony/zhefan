@@ -44,7 +44,7 @@ public class Menu extends Model<Menu> {
      * 菜单类型 0-菜单 1-URL
      */
 	@ApiModelProperty("菜单类型 0-菜单 1-URL")
-	private Integer menuType;
+	private Integer menuType = 0;
     /**
      * 创建时间
      */

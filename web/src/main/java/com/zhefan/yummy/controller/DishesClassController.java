@@ -60,9 +60,11 @@ public class DishesClassController extends BaseController {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		DishesClass entity = new DishesClass();
 		BeanUtils.copyProperties(clas, entity);
-		entity.setCreatorId(gerent.getId());
-		entity.setCreationTime(getCurrentTime());
-		entity.setCreator(gerent.getName());
+		if(clas.getId() == null) {
+			entity.setCreatorId(gerent.getId());
+			entity.setCreationTime(getCurrentTime());
+			entity.setCreator(gerent.getNick());
+		}
 		boolean b = dishesClassService.insertOrUpdate(entity);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
@@ -71,7 +73,7 @@ public class DishesClassController extends BaseController {
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
 	@PostMapping("del")
-	public ResponseDTO list(@RequestBody List<Integer> ids) {
+	public ResponseDTO del(@RequestBody List<Integer> ids) {
 		boolean b = dishesClassService.deleteBatchIds(ids);
 		if(!b) return ResponseDTO.error();
 		return ResponseDTO.success();
