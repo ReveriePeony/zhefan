@@ -2,14 +2,13 @@ package com.zhefan.yummy.entity;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
 
-import com.baomidou.mybatisplus.annotations.Version;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -21,6 +20,7 @@ import lombok.experimental.Accessors;
  * @author ReverirNight@Foxmail.com
  * @since 2018-11-12
  */
+@Api("店铺")
 @Data
 @Accessors(chain = true)
 @TableName("t_shop")
@@ -33,26 +33,32 @@ public class Shop extends Model<Shop> {
     /**
      * 商家(后台)账号ID
      */
+	@ApiModelProperty("商家(后台)账号ID")
 	private Integer gerentId;
     /**
      * 店铺名称
      */
+	@ApiModelProperty("店铺名称")
 	private String shopName;
     /**
      * 地址
      */
+	@ApiModelProperty("地址")
 	private String address;
     /**
      * 经度
      */
+	@ApiModelProperty("经度")
 	private Double longitude;
     /**
      * 纬度
      */
+	@ApiModelProperty("纬度")
 	private Double latitude;
     /**
      * 图片
      */
+	@ApiModelProperty("图片")
 	private String shopImg;
     /**
      * 创建时间
@@ -69,10 +75,12 @@ public class Shop extends Model<Shop> {
     /**
      * 使用状态 0-注销 1-正常
      */
+	@ApiModelProperty("使用状态 0-注销 1-正常")
 	private Integer status;
     /**
      * 序号
      */
+	@ApiModelProperty("序号")
 	private Integer serialNo;
     /**
      * 描述

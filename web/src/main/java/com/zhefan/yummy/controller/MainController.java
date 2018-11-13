@@ -15,12 +15,17 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSONObject;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author ReverirNight@Foxmail.com
  * @datetime 2018年10月31日
  *
+ *
  */
+@Api(tags = "公共")
 @Controller
 public class MainController implements ErrorController {
 
@@ -34,6 +39,7 @@ public class MainController implements ErrorController {
 		return PATH;
 	}
 
+	@ApiOperation(hidden = true, value = "")
 	@RequestMapping(PATH)
 	@ResponseBody
 	public JSONObject doHandleError(HttpServletRequest request) {

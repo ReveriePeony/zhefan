@@ -3,8 +3,12 @@ package com.zhefan.yummy.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +17,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Area;
+import com.zhefan.yummy.param.RequestTable;
 import com.zhefan.yummy.service.AreaService;
 
 import io.swagger.annotations.Api;
@@ -36,11 +41,37 @@ public class AreaController extends BaseController {
 	private AreaService areaService;
 	
 	@ApiOperation(value = "列表", notes = "列表")
-	@GetMapping("list")
-	public ResponseDTO<List<Area>> list(@ApiParam("商店ID") Integer shopId) {
+	@PostMapping("list")
+	public ResponseDTO<List<Area>> list(@ApiParam("商店ID") Integer shopId, 
+			@ApiParam("区域ID") Integer areaId) {
 		Wrapper<Area> wrapper = new EntityWrapper<>();
 		wrapper.eq("shop_id", shopId);
-		return ResponseDTO.createSuccess(areaService.selectList(wrapper));
+		if(areaId != null) wrapper.eq("id", areaId);
+		return ResponseDTO.success(areaService.selectList(wrapper));
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "新增", notes = "新增")
+	@PostMapping("save")
+	public ResponseDTO save(@RequestBody RequestTable table, HttpServletRequest request) {
+//		Gerent gerent = SessionUtil.getLoginBean(request);
+		Area entity = new Area();
+		System.err.println(table);
+		BeanUtils.copyProperties(table, entity);
+		System.err.println(entity);
+		boolean b = areaService.insertOrUpdate(entity);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "删除", notes = "删除")
+	@PostMapping("del")
+	public ResponseDTO list(@RequestBody List<Integer> ids) {
+		System.err.println(ids);
+		boolean b = areaService.deleteBatchIds(ids);
+		if(!b) return ResponseDTO.error();
+		return ResponseDTO.success();
 	}
 	
 }

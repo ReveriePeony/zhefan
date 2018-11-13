@@ -1,5 +1,6 @@
 package com.zhefan.yummy.base;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
+import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.exception.ResponseEntityException;
 import com.zhefan.yummy.util.RedisCacheUtil;
+import com.zhefan.yummy.util.SessionUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +39,14 @@ public abstract class BaseController {
 				throw new ResponseEntityException(error.getDefaultMessage());
 			}
 		}
+	}
+	
+	protected String getCurrentTime() {
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+	}
+	
+	protected Gerent getGerent(HttpServletRequest request) {
+		return SessionUtil.getLoginBean(request);
 	}
 	
 	/**

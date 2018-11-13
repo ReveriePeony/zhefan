@@ -3,6 +3,10 @@ package com.zhefan.yummy.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.enums.IdType;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -21,6 +25,7 @@ import lombok.experimental.Accessors;
  * @author ReverirNight@Foxmail.com
  * @since 2018-11-12
  */
+@Api("角色")
 @Data
 @Accessors(chain = true)
 @TableName("t_role")
@@ -33,6 +38,7 @@ public class Role extends Model<Role> {
     /**
      * 角色名
      */
+	@ApiModelProperty("角色名")
 	private String roleName;
     /**
      * 创建时间

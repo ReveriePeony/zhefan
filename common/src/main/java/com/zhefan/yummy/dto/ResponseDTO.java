@@ -41,39 +41,39 @@ public class ResponseDTO<T> implements Serializable {
 		this.data = data;
 	}
 
-	public static <T> ResponseDTO<T> createSuccess() {
-		return createSuccess(ResponseEnums.SUCCESS.getMsg());
+	public static <T> ResponseDTO<T> success() {
+		return success(ResponseEnums.SUCCESS.getMsg());
 	}
 
-	public static <T> ResponseDTO<T> createSuccess(T data) {
-		return createSuccess(ResponseEnums.SUCCESS.getMsg(), data);
+	public static <T> ResponseDTO<T> success(T data) {
+		return success(ResponseEnums.SUCCESS.getMsg(), data);
 	}
 
-	public static <T> ResponseDTO<T> createSuccess(String msg) {
-		return createSuccess(msg, null);
+	public static <T> ResponseDTO<T> success(String msg) {
+		return success(msg, null);
 	}
 
-	public static <T> ResponseDTO<T> createSuccess(String msg, T data) {
-		return createSuccess(ResponseEnums.SUCCESS.getCode(), msg, data);
+	public static <T> ResponseDTO<T> success(String msg, T data) {
+		return success(ResponseEnums.SUCCESS.getCode(), msg, data);
 	}
 
-	public static <T> ResponseDTO<T> createSuccess(int code, String msg, T data) {
+	public static <T> ResponseDTO<T> success(int code, String msg, T data) {
 		return new ResponseDTO<>(code, msg, data);
 	}
 
-	public static <T> ResponseDTO<T> createError() {
-		return createError(ResponseEnums.SYSTEM_ERROR.getCode(), ResponseEnums.SYSTEM_ERROR.getMsg());
+	public static <T> ResponseDTO<T> error() {
+		return error(ResponseEnums.SYSTEM_ERROR.getCode(), ResponseEnums.SYSTEM_ERROR.getMsg());
 	}
 
-	public static <T> ResponseDTO<T> createError(String errorMessage) {
-		return createError(ResponseEnums.SYSTEM_ERROR.getCode(), errorMessage);
+	public static <T> ResponseDTO<T> error(String errorMessage) {
+		return error(ResponseEnums.SYSTEM_ERROR.getCode(), errorMessage);
 	}
 
-	public static <T> ResponseDTO<T> createError(int errorCode, String errorMessage) {
+	public static <T> ResponseDTO<T> error(int errorCode, String errorMessage) {
 		return new ResponseDTO<>(errorCode, errorMessage);
 	}
 	
-	public static <T> ResponseDTO<T> createError(ResponseEnums responseEnums) {
+	public static <T> ResponseDTO<T> error(ResponseEnums responseEnums) {
 		return new ResponseDTO<>(responseEnums.getCode(), responseEnums.getMsg());
 	}
 

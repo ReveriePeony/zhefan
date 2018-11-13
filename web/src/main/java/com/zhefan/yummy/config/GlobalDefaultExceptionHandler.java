@@ -30,7 +30,7 @@ public class GlobalDefaultExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ResponseDTO defaultErrorHandler(HttpServletRequest request, Exception e) {
 		log.error("请求地址：{} , 系统异常详细：", request.getRequestURL(), e);
-		return ResponseDTO.createError(ResponseEnums.SYSTEM_ERROR.getCode(),
+		return ResponseDTO.error(ResponseEnums.SYSTEM_ERROR.getCode(),
 				ResponseEnums.SYSTEM_ERROR.getMsg());
 	}
 
@@ -47,9 +47,9 @@ public class GlobalDefaultExceptionHandler {
 	public ResponseDTO defaultCustomErrorHandler(HttpServletRequest request, BaseException e) {
 		log.error("异常原因：{} , 异常信息：{} , 请求地址：{}", e.getCause(), e.getMessage(), request.getRequestURL(), e);
 		if (e instanceof ResponseEntityException || e instanceof BusinessException) {
-			return ResponseDTO.createSuccess(e.getCode(), e.getMessage(), e.getRedirectUrl());
+			return ResponseDTO.success(e.getCode(), e.getMessage(), e.getRedirectUrl());
 		} else {
-			return ResponseDTO.createSuccess(e.getCode(), e.getMessage(), e.getRedirectUrl());
+			return ResponseDTO.success(e.getCode(), e.getMessage(), e.getRedirectUrl());
 		}
 	}
 }

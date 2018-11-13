@@ -63,9 +63,9 @@ public class GerentController extends BaseController {
 		if(gerent != null) {
 			log.debug(gerent.toString());
 			SessionUtil.setLoginInfo(request, gerent);
-			return ResponseDTO.createSuccess("success");
+			return ResponseDTO.success("success");
 		}
-		return ResponseDTO.createError(ResponseEnums.LOGIN_ERROR);
+		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
 	}
 	
 	@ApiOperation(value = "二维码", notes = "二维码")
