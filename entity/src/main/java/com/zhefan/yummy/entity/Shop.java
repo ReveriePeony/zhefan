@@ -26,67 +26,70 @@ import lombok.experimental.Accessors;
 @TableName("t_shop")
 public class Shop extends Model<Shop> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	
+	public static final int STATUS_UP = 1;
+	
+	public static final int STATUS_DOWN = 0;
 
-	@TableId(value="id", type= IdType.AUTO)
+	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
-    /**
-     * 商家(后台)账号ID
-     */
+	/**
+	 * 商家(后台)账号ID
+	 */
 	@ApiModelProperty("商家(后台)账号ID")
 	private Integer gerentId;
-    /**
-     * 店铺名称
-     */
+	/**
+	 * 店铺名称
+	 */
 	@ApiModelProperty("店铺名称")
 	private String shopName;
-    /**
-     * 地址
-     */
+	/**
+	 * 地址
+	 */
 	@ApiModelProperty("地址")
 	private String address;
-    /**
-     * 经度
-     */
+	/**
+	 * 经度
+	 */
 	@ApiModelProperty("经度")
 	private Double longitude;
-    /**
-     * 纬度
-     */
+	/**
+	 * 纬度
+	 */
 	@ApiModelProperty("纬度")
 	private Double latitude;
-    /**
-     * 图片
-     */
+	/**
+	 * 图片
+	 */
 	@ApiModelProperty("图片")
 	private String shopImg;
-    /**
-     * 创建时间
-     */
+	/**
+	 * 创建时间
+	 */
 	private String creationTime;
-    /**
-     * 创建者名称
-     */
+	/**
+	 * 创建者名称
+	 */
 	private String creator;
-    /**
-     * 创建者ID
-     */
+	/**
+	 * 创建者ID
+	 */
 	private Integer creatorId;
-    /**
-     * 使用状态 0-注销 1-正常
-     */
+	/**
+	 * 使用状态 0-注销 1-正常
+	 */
 	@ApiModelProperty("使用状态 0-注销 1-正常")
-	private Integer status;
-    /**
-     * 序号
-     */
+	private Integer status = STATUS_UP;
+	/**
+	 * 序号
+	 */
 	@ApiModelProperty("序号")
 	private Integer serialNo;
-    /**
-     * 描述
-     */
+	/**
+	 * 描述
+	 */
 	private String remark;
-
 
 	@Override
 	protected Serializable pkVal() {

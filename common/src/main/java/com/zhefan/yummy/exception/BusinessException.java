@@ -4,7 +4,12 @@ import com.zhefan.yummy.enums.ResponseEnums;
 
 public class BusinessException extends BaseException {
 
-    public BusinessException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7213501605261147050L;
+
+	public BusinessException(String message) {
         super(message);
     }
 

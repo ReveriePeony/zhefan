@@ -1,6 +1,7 @@
 package com.zhefan.yummy.param;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +16,7 @@ import lombok.Data;
 @Api("Page参数")
 @SuppressWarnings("rawtypes")
 @Data
-public class ParamPage extends Page{
+public class ParamPage extends Pagination{
 	
 	private static final long serialVersionUID = 4953570822783975651L;
 

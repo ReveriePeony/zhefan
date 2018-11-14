@@ -1,6 +1,9 @@
 package com.zhefan.yummy.service;
 
 import com.zhefan.yummy.entity.Role;
+
+import java.util.List;
+
 import com.zhefan.yummy.base.BaseService;
 
 /**
@@ -12,5 +15,7 @@ import com.zhefan.yummy.base.BaseService;
  * @since 2018-11-12
  */
 public interface RoleService extends BaseService<Role> {
+
+	boolean delRole(List<Integer> ids);
 	
 }

@@ -45,15 +45,15 @@ public class OrderController extends BaseController {
 		Wrapper<Order> wrapper = new EntityWrapper<>();
 		wrapper.eq("gerent_id", order.getGerentId()).eq("shop_id", order.getShopId()).eq("being", Order.BEING);
 		if(order.getOrderId() != null) wrapper.eq("id", order.getOrderId());
-		if(order.getOrderNumber() != null) wrapper.like("order_number", order.getOrderNumber());
-		if(order.getPrice() != null) wrapper.like("price", order.getPrice());
-		if(order.getStatus() != null) wrapper.like("creation_time", order.getStatus());
+		wrapper.andNew().eq("1", "1");
+		if(order.getOrderNumber() != null) wrapper.or().like("order_number", order.getOrderNumber());
+		if(order.getPrice() != null) wrapper.or().like("price", order.getPrice());
+		if(order.getCreationTime() != null) wrapper.like("creation_time", order.getCreationTime());
 		if(order.getProcessTime() != null) wrapper.like("process_time", order.getProcessTime());
 		if(order.getBook() != null) wrapper.like("book", order.getBook());
 		if(order.getStatus() != null) wrapper.like("status", order.getStatus());
 		if(order.getAreaName() != null) wrapper.like("area_name", order.getAreaName());
 		if(order.getTableName() != null) wrapper.like("table_name", order.getTableName());
-		
 		orderService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);
 	}
