@@ -1,22 +1,14 @@
 package com.zhefan.yummy.controller;
 
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URLEncoder;
+import java.io.File;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +23,7 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestGerent;
 import com.zhefan.yummy.service.GerentService;
-import com.zhefan.yummy.util.QrCodeUtil;
+import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -67,6 +59,9 @@ public class GerentController extends BaseController {
 		if(gerent != null) {
 			log.debug(gerent.toString());
 			SessionUtil.setLoginInfo(request, gerent);
+			String realPath = getRealPath("upload/" + gerent.getId() + "/temp/", request);
+			File targetFile = new File(realPath);
+			FileUtil.deleteFile(targetFile);
 			return ResponseDTO.success("success");
 		}
 		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
@@ -103,21 +98,4 @@ public class GerentController extends BaseController {
 		return ResponseDTO.success();
 	}
 	
-	@ApiOperation(value = "二维码", notes = "二维码")
-    @GetMapping(value = "/qrcode", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void qrcode(String url, HttpServletResponse response) {
-    	OutputStream outputStream;
-		try {
-			outputStream = new BufferedOutputStream(response.getOutputStream());
-			BufferedImage bi = QrCodeUtil.encode(url, null, "H", null, outputStream, 500, 500, 1);
-			response.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode("二维码.jpg", "UTF-8") + "\"");  
-			response.setContentType("application/octet-stream");
-			outputStream = new BufferedOutputStream(response.getOutputStream());
-			ImageIO.write(bi, "jpg", outputStream);
-			outputStream.flush();  
-			outputStream.close();
-		} catch (IOException e) {
-			log.error(e.getMessage(), e.getCause());
-		}
-    }
 }

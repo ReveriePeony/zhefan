@@ -49,6 +49,10 @@ public abstract class BaseController {
 		return SessionUtil.getLoginBean(request);
 	}
 	
+	protected String getRealPath(String path, HttpServletRequest request) {
+		return request.getSession().getServletContext().getRealPath(path);
+	}
+	
 	/**
 	 * 判断浏览器
 	 *

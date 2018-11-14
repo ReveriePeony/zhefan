@@ -22,6 +22,7 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.param.RequestDishes;
 import com.zhefan.yummy.param.RequestDishesList;
 import com.zhefan.yummy.service.DishesService;
+import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -52,9 +53,10 @@ public class DishesController extends BaseController {
 		wrapper.eq("shop_id", desh.getShopId());
 		if(desh.getDishesId() != null) wrapper.eq("id", desh.getDishesId());
 		if(desh.getDishesClassId() != null) wrapper.eq("dishes_class_id", desh.getDishesClassId());
-		if(desh.getDishesName() != null) wrapper.eq("dishes_name", desh.getDishesName());
 		if(desh.getStatus() != null) wrapper.eq("status", desh.getStatus());
 		if(desh.getSoldOut() != null) wrapper.eq("sold_out", desh.getSoldOut());
+		wrapper.andNew().eq("1", "1");
+		if(desh.getDishesName() != null) wrapper.or().like("dishes_name", desh.getDishesName());
 		dishesService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);
 	}
@@ -66,6 +68,10 @@ public class DishesController extends BaseController {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		Dishes entity = new Dishes();
 		BeanUtils.copyProperties(clas, entity);
+		String dishesImg = entity.getDishesImg().replace("temp/", "");
+		String realPath = getRealPath("", request);
+		FileUtil.renameToFile(realPath + entity.getDishesImg(), realPath + dishesImg);
+		entity.setDishesImg(dishesImg);
 		if(clas.getId() == null) {
 			entity.setCreatorId(gerent.getId());
 			entity.setCreationTime(getCurrentTime());

@@ -213,7 +213,7 @@ CREATE TABLE `t_shop` (
   `address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '地址',
   `longitude` double(6,3) DEFAULT NULL COMMENT '经度',
   `latitude` double(6,3) DEFAULT NULL COMMENT '纬度',
-  `shop_img` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图片',
+  `shop_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图片',
   `creation_time` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '创建时间',
   `creator` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '创建者名称',
   `creator_id` int(11) NOT NULL COMMENT '创建者ID',

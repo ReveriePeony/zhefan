@@ -1,6 +1,5 @@
 package com.zhefan.yummy.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,7 @@ import com.zhefan.yummy.entity.Shop;
 import com.zhefan.yummy.param.RequestShop;
 import com.zhefan.yummy.param.RequestShopList;
 import com.zhefan.yummy.service.ShopService;
+import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -39,10 +39,10 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/shop")
 public class ShopController extends BaseController {
-	
+
 	@Autowired
 	private ShopService shopService;
-	
+
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
 	@PostMapping("list")
@@ -51,17 +51,23 @@ public class ShopController extends BaseController {
 		Page<Shop> page = shop.initPage();
 		Wrapper<Shop> wrapper = new EntityWrapper<>();
 		wrapper.eq("status", Shop.STATUS_UP).eq("gerent_id", gerent.getId());
-		if(shop.getId() != null) wrapper.eq("id", shop.getId());
+		if (shop.getId() != null)
+			wrapper.eq("id", shop.getId());
 		wrapper.andNew().eq("1", "1");
-		if(shop.getShopName() != null) wrapper.or().like("shop_name", shop.getShopName());
-		if(shop.getAddress() != null) wrapper.or().like("price", shop.getAddress());
-		if(shop.getCreationTime() != null) wrapper.like("creation_time", shop.getCreationTime());
-		if(shop.getStatus() != null) wrapper.like("status", shop.getStatus());
-		if(shop.getRemark() != null) wrapper.like("remark", shop.getRemark());
+		if (shop.getShopName() != null)
+			wrapper.or().like("shop_name", shop.getShopName());
+		if (shop.getAddress() != null)
+			wrapper.or().like("price", shop.getAddress());
+		if (shop.getCreationTime() != null)
+			wrapper.like("creation_time", shop.getCreationTime());
+		if (shop.getStatus() != null)
+			wrapper.like("status", shop.getStatus());
+		if (shop.getRemark() != null)
+			wrapper.like("remark", shop.getRemark());
 		shopService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
@@ -69,17 +75,22 @@ public class ShopController extends BaseController {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		Shop entity = new Shop();
 		BeanUtils.copyProperties(shop, entity);
-		if(shop.getId() == null) {
+		String shopImg = entity.getShopImg().replace("temp/", "");
+		String realPath = getRealPath("", request);
+		FileUtil.renameToFile(realPath + entity.getShopImg(), realPath + shopImg);
+		entity.setShopImg(shopImg);
+		if (shop.getId() == null) {
 			entity.setGerentId(gerent.getId());
 			entity.setCreatorId(gerent.getId());
 			entity.setCreationTime(getCurrentTime());
 			entity.setCreator(gerent.getNick());
 		}
 		boolean b = shopService.insertOrUpdate(entity);
-		if(!b) return ResponseDTO.error();
+		if (!b)
+			return ResponseDTO.error();
 		return ResponseDTO.success();
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
 	@PostMapping("del")
@@ -89,8 +100,9 @@ public class ShopController extends BaseController {
 		Shop entity = new Shop();
 		entity.setStatus(Shop.STATUS_DOWN);
 		boolean b = shopService.update(entity, wrapper);
-		if(!b) return ResponseDTO.error();
+		if (!b)
+			return ResponseDTO.error();
 		return ResponseDTO.success();
 	}
-	
+
 }

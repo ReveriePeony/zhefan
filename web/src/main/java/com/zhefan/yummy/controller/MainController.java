@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
  *
  *
  */
-@Api(tags = "公共")
+@Api(tags = "Main")
 @Controller
 public class MainController implements ErrorController {
 
