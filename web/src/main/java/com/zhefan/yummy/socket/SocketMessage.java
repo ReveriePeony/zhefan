@@ -1,10 +1,15 @@
 package com.zhefan.yummy.socket;
 
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class SocketMessage {
+public class SocketMessage implements Serializable {
+
+	private static final long serialVersionUID = 8084783288500935480L;
+
 //
 //	@ApiModelProperty("源客户端id")
 //	private String sourceClientId;
@@ -17,5 +22,14 @@ public class SocketMessage {
 
 	@ApiModelProperty("消息内容")
 	private String msgContent;
+
+	public SocketMessage() {
+	}
+
+	public SocketMessage(String targetClientId, String msgContent) {
+		super();
+		this.targetClientId = targetClientId;
+		this.msgContent = msgContent;
+	}
 
 }

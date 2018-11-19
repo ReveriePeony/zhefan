@@ -58,4 +58,20 @@ public class MessageEventHandler {
 			client.sendEvent("event", ResponseDTO.error("发送目标不存在"));
 		}
 	}
+	
+	@OnEvent(value = "clientEvent")
+	public void onEvent(SocketIOClient client, AckRequest request, String data) {
+		String arr[] = data.split("@smsg@");
+		String targetClientId = arr[0];
+		Object target = redisCacheUtil.get(targetClientId);
+		if (target != null) {
+			String[] targetSession = target.toString().split("SSK");
+			client.sendEvent("clientEvent", ResponseDTO.success("success", arr[1]));
+			server.getClient(new UUID(Long.valueOf(targetSession[0]), Long.valueOf(targetSession[1])))
+					.sendEvent("event", ResponseDTO.success("success", arr[1]));
+		} else {
+			client.sendEvent("clientEvent", ResponseDTO.error("发送目标不存在"));
+		}
+	}
+	
 }
