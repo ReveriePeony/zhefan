@@ -13,6 +13,7 @@
 		<module>service</module>
 		<module>entity</module>
 		<module>generator</module>
+		<module>socket</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>parent</name>

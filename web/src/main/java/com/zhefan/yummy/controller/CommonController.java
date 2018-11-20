@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/common")
 public class CommonController extends BaseController {
 
-	@PostMapping("/testuploadimg")
+	@PostMapping("/uploadimg")
 	public ResponseDTO<String> uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		Integer id = getGerent(request).getId();
 		String filePath = getRealPath("upload/" + id + "/temp/", request);

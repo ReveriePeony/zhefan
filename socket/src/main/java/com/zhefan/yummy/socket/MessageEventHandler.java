@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -51,9 +52,9 @@ public class MessageEventHandler {
 		Object target = redisCacheUtil.get(targetClientId);
 		if (target != null) {
 			String[] targetSession = target.toString().split("SSK");
-			client.sendEvent("event", ResponseDTO.success("success", data.getMsgContent()));
+			client.sendEvent("event", ResponseDTO.success("success", data));
 			server.getClient(new UUID(Long.valueOf(targetSession[0]), Long.valueOf(targetSession[1])))
-					.sendEvent("event", ResponseDTO.success("success", data.getMsgContent()));
+					.sendEvent("event", ResponseDTO.success("success", data));
 		} else {
 			client.sendEvent("event", ResponseDTO.error("发送目标不存在"));
 		}
@@ -61,14 +62,14 @@ public class MessageEventHandler {
 	
 	@OnEvent(value = "clientEvent")
 	public void onEvent(SocketIOClient client, AckRequest request, String data) {
-		String arr[] = data.split("@smsg@");
-		String targetClientId = arr[0];
+		SocketMessage socketMessage = JSONObject.parseObject(data, SocketMessage.class);
+		String targetClientId = socketMessage.getTargetClientId();
 		Object target = redisCacheUtil.get(targetClientId);
 		if (target != null) {
 			String[] targetSession = target.toString().split("SSK");
-			client.sendEvent("clientEvent", ResponseDTO.success("success", arr[1]));
+			client.sendEvent("clientEvent", ResponseDTO.success("success", data));
 			server.getClient(new UUID(Long.valueOf(targetSession[0]), Long.valueOf(targetSession[1])))
-					.sendEvent("event", ResponseDTO.success("success", arr[1]));
+					.sendEvent("event", ResponseDTO.success("success", socketMessage));
 		} else {
 			client.sendEvent("clientEvent", ResponseDTO.error("发送目标不存在"));
 		}

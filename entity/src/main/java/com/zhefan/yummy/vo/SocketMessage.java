@@ -1,4 +1,4 @@
-package com.zhefan.yummy.socket;
+package com.zhefan.yummy.vo;
 
 import java.io.Serializable;
 
@@ -10,9 +10,8 @@ public class SocketMessage implements Serializable {
 
 	private static final long serialVersionUID = 8084783288500935480L;
 
-//
-//	@ApiModelProperty("源客户端id")
-//	private String sourceClientId;
+	@ApiModelProperty("源客户端id")
+	private String sourceClientId;
 
 	@ApiModelProperty("目标客户端id")
 	private String targetClientId;
@@ -26,8 +25,9 @@ public class SocketMessage implements Serializable {
 	public SocketMessage() {
 	}
 
-	public SocketMessage(String targetClientId, String msgContent) {
+	public SocketMessage(String sourceClientId, String targetClientId, String msgContent) {
 		super();
+		this.sourceClientId = sourceClientId;
 		this.targetClientId = targetClientId;
 		this.msgContent = msgContent;
 	}

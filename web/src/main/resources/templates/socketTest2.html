@@ -5,7 +5,7 @@
 	<title>Demo Chat ZWEI</title>
 	<script src="md5.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+	<script src="/socket.io-1.2.1.js"></script>
 	<script>
 		var clientid = 'testclient2';
 		var targetClientId = 'testclient1';
@@ -39,6 +39,7 @@
 			$('#msg').val('');
 
 			var jsonObject = {
+				sourceClientId: clientid,
 				targetClientId : targetClientId,
 				msgContent : message
 			};
