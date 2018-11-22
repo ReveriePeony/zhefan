@@ -17,7 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
 	// 扫描包
-	private static final String APPLET_PACKAGE = "com.zhefan.yummy.controller";
+	private static final String WEB_PACKAGE = "com.zhefan.yummy.controller";
+	private static final String MOBILE_PACKAGE = "com.zhefan.yummy.mobileController";
 	// 标题
 	private static final String TITLE = "YUMMY - API";
 	// 描述
@@ -31,13 +32,21 @@ public class SwaggerConfig {
 	//
 	private static final String LICENSE = "swagger-ui";
 	//
-	private static final String LICENSE_URL = "/swagger/index.html";
+	private static final String LICENSE_URL = "https://github.com/ReveriePeony/ZheFan";
+	
+	@Bean
+	public Docket mobileRestApi() {
+		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("mobile")
+				.genericModelSubstitutes(DeferredResult.class).useDefaultResponseMessages(false).forCodeGeneration(true)
+				.apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage(MOBILE_PACKAGE))
+				.paths(PathSelectors.any()).build();
+	}
 
 	@Bean
-	public Docket appletRestApi() {
-		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("applet")
+	public Docket webRestApi() {
+		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("web")
 				.genericModelSubstitutes(DeferredResult.class).useDefaultResponseMessages(false).forCodeGeneration(true)
-				.apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage(APPLET_PACKAGE))
+				.apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage(WEB_PACKAGE))
 				.paths(PathSelectors.any()).build();
 	}
 
