@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,12 @@ public class SocketClient {
 
 	@Autowired
 	private Socket socket;
+	
+	@Value("${socket.server.host}")
+	private String host;
+	
+	@Value("${socket.server.port}")
+	private String port;
 
 	public void sendMessage(String targetClientId, String content) {
 		socket.emit("clientEvent", JSON.toJSONString(new SocketMessage(CLIENT_ID, targetClientId, content)));
@@ -36,7 +43,7 @@ public class SocketClient {
 
 	@Bean()
 	private Socket initSocket() throws URISyntaxException {
-		socket = IO.socket("http://localhost:8888?clientid=" + CLIENT_ID + "&token="
+		socket = IO.socket(host + ":" + port + "?clientid=" + CLIENT_ID + "&token="
 				+ DigestUtils.md5Hex("yummy" + new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis())));
 		socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 			@Override

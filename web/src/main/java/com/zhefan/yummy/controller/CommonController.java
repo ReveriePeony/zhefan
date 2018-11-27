@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,11 @@ import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.QrCodeUtil;
+import com.zhefan.yummy.vo.SocketMessage;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -72,6 +75,12 @@ public class CommonController extends BaseController {
 		} catch (IOException e) {
 			log.error(e.getMessage(), e.getCause());
 		}
+	}
+	
+	@ApiOperation(value = "socket.io说明(非请求路径)", 
+			notes = "端口: 8888, 参数: clientid-(发送者ID), token-(字符串yummy加上时间按“yyyyMMdd”格式化后MD5加密)")
+	@GetMapping(value = "/socket")
+	public void socket(@ApiParam("发送消息对象") @RequestBody SocketMessage message) {
 	}
 
 }

@@ -3,6 +3,7 @@ package com.zhefan.yummy.config.redis;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -10,14 +11,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
+	
+	@Value("{redis.password}")
+	private String password;
 
     @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory cf) {
@@ -31,6 +34,13 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
+    
+//    @Bean
+//    public JedisConnectionFactory jedisConnectionFactory() {
+//        JedisConnectionFactory factory = new JedisConnectionFactory();
+//        factory.setPassword(password);
+//        return factory;
+//    }
 
     @SuppressWarnings("rawtypes")
 	@Bean

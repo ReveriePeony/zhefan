@@ -17,7 +17,7 @@
         id, menu_name, menu_type, creation_time, creator, creator_id
     </sql>
     
-    <select id="queryHotelHome" resultMap="BaseResultMap">
+    <select id="selectMenuList" resultMap="BaseResultMap">
 		SELECT a.id, menu_name, menu_type, a.creation_time 
 		FROM t_menu a 
 		LEFT JOIN t_role_menu b ON a.id = b.menu_id 

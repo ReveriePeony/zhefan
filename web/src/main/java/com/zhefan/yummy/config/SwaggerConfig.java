@@ -36,7 +36,7 @@ public class SwaggerConfig {
 	
 	@Bean
 	public Docket mobileRestApi() {
-		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("mobile")
+		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("2mobile")
 				.genericModelSubstitutes(DeferredResult.class).useDefaultResponseMessages(false).forCodeGeneration(true)
 				.apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage(MOBILE_PACKAGE))
 				.paths(PathSelectors.any()).build();
@@ -44,7 +44,7 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket webRestApi() {
-		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("web")
+		return new Docket(DocumentationType.SWAGGER_2).enable(true).groupName("1web")
 				.genericModelSubstitutes(DeferredResult.class).useDefaultResponseMessages(false).forCodeGeneration(true)
 				.apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage(WEB_PACKAGE))
 				.paths(PathSelectors.any()).build();

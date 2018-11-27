@@ -10,10 +10,10 @@ public class SocketMessage implements Serializable {
 
 	private static final long serialVersionUID = 8084783288500935480L;
 
-	@ApiModelProperty("源客户端id")
+	@ApiModelProperty("发送者id")
 	private String sourceClientId;
 
-	@ApiModelProperty("目标客户端id")
+	@ApiModelProperty("接受者id")
 	private String targetClientId;
 
 //	@ApiModelProperty("消息类型")

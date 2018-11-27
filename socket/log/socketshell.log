@@ -1036,3 +1036,45 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:145) [netty-common-4.1.1.Final.jar:4.1.1.Final]
 	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
 
+2018-11-27 14:30:26.428  INFO 7428 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 7428 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-27 14:30:26.478 DEBUG 7428 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-27 14:30:26.479  INFO 7428 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-27 14:30:26.574  INFO 7428 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@a72a871: startup date [Tue Nov 27 14:30:26 CST 2018]; root of context hierarchy
+2018-11-27 14:30:28.745  INFO 7428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-27 14:30:29.744  INFO 7428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bc40dfee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-27 14:30:29.813  INFO 7428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$47a5db45] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-27 14:30:29.827  INFO 7428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$553160c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-27 14:30:29.894  INFO 7428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-27 14:30:29.971  INFO 7428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-27 14:30:30.670  INFO 7428 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-27 14:30:30.690  INFO 7428 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-27 14:30:30.699  INFO 7428 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-27 14:30:30.977  INFO 7428 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-27 14:30:30.989  INFO 7428 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-27 14:30:30.989  INFO 7428 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4419 ms
+2018-11-27 14:30:31.371  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-27 14:30:31.373  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-27 14:30:31.381  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-27 14:30:31.382  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-27 14:30:31.391  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-27 14:30:31.392  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-27 14:30:31.392  INFO 7428 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-27 14:30:31.616  INFO 7428 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-27 14:30:32.658  INFO 7428 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-27 14:30:34.584  INFO 7428 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@a72a871: startup date [Tue Nov 27 14:30:26 CST 2018]; root of context hierarchy
+2018-11-27 14:30:34.704  INFO 7428 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-27 14:30:34.713  INFO 7428 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-27 14:30:34.756  INFO 7428 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-27 14:30:34.757  INFO 7428 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-27 14:30:34.794  INFO 7428 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-27 14:30:34.829  INFO 7428 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-27 14:30:35.358  INFO 7428 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-11-27 14:30:35.427  INFO 7428 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-27 14:30:35.430  INFO 7428 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-27 14:30:35.430  INFO 7428 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-27 14:30:35.437  INFO 7428 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-27 14:30:35.438  INFO 7428 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2018-11-27 14:30:35.547  INFO 7428 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-27 14:30:35.558  INFO 7428 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-27 14:30:36.023  INFO 7428 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
+2018-11-27 14:30:36.026  INFO 7428 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 10.301 seconds (JVM running for 11.044)
