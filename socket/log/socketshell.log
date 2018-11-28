@@ -1078,3 +1078,358 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 2018-11-27 14:30:35.558  INFO 7428 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
 2018-11-27 14:30:36.023  INFO 7428 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
 2018-11-27 14:30:36.026  INFO 7428 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 10.301 seconds (JVM running for 11.044)
+2018-11-28 10:02:17.570  INFO 15088 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 15088 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-28 10:02:17.591 DEBUG 15088 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-28 10:02:17.592  INFO 15088 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-28 10:02:17.694  INFO 15088 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@61ecc3a2: startup date [Wed Nov 28 10:02:17 CST 2018]; root of context hierarchy
+2018-11-28 10:02:19.803  INFO 15088 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-28 10:02:20.840  INFO 15088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$52a4aee6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:02:20.922  INFO 15088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$de09aa3d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:02:20.932  INFO 15088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$9bb6e504] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:02:20.991  INFO 15088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:02:21.177  INFO 15088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:02:22.026  INFO 15088 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-28 10:02:22.046  INFO 15088 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-28 10:02:22.053  INFO 15088 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-28 10:02:22.353  INFO 15088 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-28 10:02:22.369  INFO 15088 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-28 10:02:22.369  INFO 15088 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4678 ms
+2018-11-28 10:02:22.757  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-28 10:02:22.760  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-28 10:02:22.764  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-28 10:02:22.764  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-28 10:02:22.770  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-28 10:02:22.771  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-28 10:02:22.771  INFO 15088 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-28 10:02:23.011  INFO 15088 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-28 10:02:24.185  INFO 15088 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-28 10:02:26.256  INFO 15088 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@61ecc3a2: startup date [Wed Nov 28 10:02:17 CST 2018]; root of context hierarchy
+2018-11-28 10:02:26.391  INFO 15088 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-28 10:02:26.402  INFO 15088 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-28 10:02:26.478  INFO 15088 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:02:26.478  INFO 15088 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:02:26.520  INFO 15088 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-28 10:02:26.562  INFO 15088 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:02:27.206  WARN 15088 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-11-28 10:02:27.290  INFO 15088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-28 10:02:27.293  INFO 15088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-28 10:02:27.293  INFO 15088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-28 10:02:27.300  INFO 15088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-28 10:02:27.302  INFO 15088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2018-11-28 10:02:27.395  INFO 15088 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-28 10:02:27.409  INFO 15088 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-28 10:02:28.009  INFO 15088 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
+2018-11-28 10:02:28.014  INFO 15088 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 11.105 seconds (JVM running for 12.028)
+2018-11-28 10:02:29.475 ERROR 15088 --- [nioEventLoopGroup-3-1] c.c.s.listener.DefaultExceptionListener  : org.springframework.data.redis.RedisConnectionFailureException: Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool
+
+com.corundumstudio.socketio.handler.SocketIOException: org.springframework.data.redis.RedisConnectionFailureException: Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool
+	at com.corundumstudio.socketio.annotation.OnConnectScanner$1.onConnect(OnConnectScanner.java:42) ~[netty-socketio-1.7.11.jar:na]
+	at com.corundumstudio.socketio.namespace.Namespace.onConnect(Namespace.java:198) ~[netty-socketio-1.7.11.jar:na]
+	at com.corundumstudio.socketio.handler.AuthorizeHandler.connect(AuthorizeHandler.java:239) [netty-socketio-1.7.11.jar:na]
+	at com.corundumstudio.socketio.transport.PollingTransport.onGet(PollingTransport.java:175) [netty-socketio-1.7.11.jar:na]
+	at com.corundumstudio.socketio.transport.PollingTransport.handleMessage(PollingTransport.java:123) [netty-socketio-1.7.11.jar:na]
+	at com.corundumstudio.socketio.transport.PollingTransport.channelRead(PollingTransport.java:102) [netty-socketio-1.7.11.jar:na]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at com.corundumstudio.socketio.handler.AuthorizeHandler.channelRead(AuthorizeHandler.java:134) [netty-socketio-1.7.11.jar:na]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:108) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:102) [netty-codec-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.handler.codec.MessageToMessageCodec.channelRead(MessageToMessageCodec.java:111) [netty-codec-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:102) [netty-codec-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:293) [netty-codec-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:267) [netty-codec-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:326) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1320) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:334) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:905) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:563) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:504) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:418) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:390) [netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:742) [netty-common-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:145) [netty-common-4.1.1.Final.jar:4.1.1.Final]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_162]
+Caused by: org.springframework.data.redis.RedisConnectionFailureException: Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool
+	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.fetchJedisConnector(JedisConnectionFactory.java:204) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.getConnection(JedisConnectionFactory.java:348) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:129) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:92) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:79) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:194) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:169) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:91) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:169) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	at com.zhefan.yummy.util.RedisCacheUtil.set(RedisCacheUtil.java:93) ~[classes/:na]
+	at com.zhefan.yummy.socket.MessageEventHandler.onConnect(MessageEventHandler.java:38) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_162]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_162]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_162]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_162]
+	at com.corundumstudio.socketio.annotation.OnConnectScanner$1.onConnect(OnConnectScanner.java:40) ~[netty-socketio-1.7.11.jar:na]
+	... 42 common frames omitted
+Caused by: redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:53) ~[jedis-2.9.0.jar:na]
+	at redis.clients.jedis.JedisPool.getResource(JedisPool.java:226) ~[jedis-2.9.0.jar:na]
+	at redis.clients.jedis.JedisPool.getResource(JedisPool.java:16) ~[jedis-2.9.0.jar:na]
+	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.fetchJedisConnector(JedisConnectionFactory.java:194) ~[spring-data-redis-1.8.5.RELEASE.jar:na]
+	... 57 common frames omitted
+Caused by: redis.clients.jedis.exceptions.JedisConnectionException: java.net.ConnectException: Connection refused: connect
+	at redis.clients.jedis.Connection.connect(Connection.java:207) ~[jedis-2.9.0.jar:na]
+	at redis.clients.jedis.BinaryClient.connect(BinaryClient.java:93) ~[jedis-2.9.0.jar:na]
+	at redis.clients.jedis.BinaryJedis.connect(BinaryJedis.java:1767) ~[jedis-2.9.0.jar:na]
+	at redis.clients.jedis.JedisFactory.makeObject(JedisFactory.java:106) ~[jedis-2.9.0.jar:na]
+	at org.apache.commons.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:868) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:435) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:na]
+	... 60 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_162]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_162]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_162]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_162]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_162]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_162]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_162]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_162]
+	at redis.clients.jedis.Connection.connect(Connection.java:184) ~[jedis-2.9.0.jar:na]
+	... 67 common frames omitted
+
+2018-11-28 10:03:51.614  INFO 7044 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 7044 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-28 10:03:51.616 DEBUG 7044 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-28 10:03:51.617  INFO 7044 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-28 10:03:51.705  INFO 7044 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37810159: startup date [Wed Nov 28 10:03:51 CST 2018]; root of context hierarchy
+2018-11-28 10:03:53.689  INFO 7044 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-28 10:03:54.751  INFO 7044 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$89704912] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:03:54.836  INFO 7044 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$14d54469] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:03:54.844  INFO 7044 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$d2827f30] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:03:54.898  INFO 7044 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:03:54.975  INFO 7044 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 10:03:56.053  INFO 7044 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-28 10:03:56.083  INFO 7044 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-28 10:03:56.097  INFO 7044 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-28 10:03:56.578  INFO 7044 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-28 10:03:56.588  INFO 7044 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-28 10:03:56.589  INFO 7044 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4888 ms
+2018-11-28 10:03:56.987  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-28 10:03:56.990  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-28 10:03:57.000  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-28 10:03:57.001  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-28 10:03:57.009  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-28 10:03:57.009  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-28 10:03:57.010  INFO 7044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-28 10:03:57.296  INFO 7044 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-28 10:03:59.072  INFO 7044 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-28 10:04:01.406  INFO 7044 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37810159: startup date [Wed Nov 28 10:03:51 CST 2018]; root of context hierarchy
+2018-11-28 10:04:01.529  INFO 7044 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-28 10:04:01.542  INFO 7044 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-28 10:04:01.604  INFO 7044 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:04:01.604  INFO 7044 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:04:01.643  INFO 7044 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-28 10:04:01.708  INFO 7044 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 10:04:02.383  WARN 7044 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-11-28 10:04:02.477  INFO 7044 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-28 10:04:02.480  INFO 7044 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-28 10:04:02.481  INFO 7044 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-28 10:04:02.498  INFO 7044 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-28 10:04:02.499  INFO 7044 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2018-11-28 10:04:02.594  INFO 7044 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-28 10:04:02.606  INFO 7044 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-28 10:04:03.113  INFO 7044 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
+2018-11-28 10:04:03.116  INFO 7044 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 12.363 seconds (JVM running for 13.554)
+2018-11-28 13:38:45.859  INFO 2476 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 2476 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-28 13:38:45.872 DEBUG 2476 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-28 13:38:45.873  INFO 2476 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-28 13:38:45.983  INFO 2476 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5480f818: startup date [Wed Nov 28 13:38:45 CST 2018]; root of context hierarchy
+2018-11-28 13:38:48.072  INFO 2476 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-28 13:38:49.079  INFO 2476 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2e6cfba7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:38:49.166  INFO 2476 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$b9d1f6fe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:38:49.177  INFO 2476 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$777f31c5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:38:49.232  INFO 2476 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:38:49.323  INFO 2476 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:38:50.128  INFO 2476 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-28 13:38:50.150  INFO 2476 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-28 13:38:50.160  INFO 2476 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-28 13:38:50.461  INFO 2476 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-28 13:38:50.476  INFO 2476 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-28 13:38:50.476  INFO 2476 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4496 ms
+2018-11-28 13:38:50.870  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-28 13:38:50.872  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-28 13:38:50.878  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-28 13:38:50.879  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-28 13:38:50.887  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-28 13:38:50.887  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-28 13:38:50.887  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-28 13:38:50.887  INFO 2476 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsFilter' to: [/*]
+2018-11-28 13:38:51.142  INFO 2476 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-28 13:38:52.248  INFO 2476 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-28 13:38:54.202  INFO 2476 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5480f818: startup date [Wed Nov 28 13:38:45 CST 2018]; root of context hierarchy
+2018-11-28 13:38:54.322  INFO 2476 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-28 13:38:54.333  INFO 2476 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-28 13:38:54.368  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:38:54.380  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:38:54.398  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:38:54.407  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/swagger-ui.html] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:38:54.407  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:38:54.434  INFO 2476 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-28 13:38:54.484  INFO 2476 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:38:55.043  INFO 2476 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-11-28 13:38:55.111  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-28 13:38:55.113  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-28 13:38:55.114  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-28 13:38:55.128  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [socket8888:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-28 13:38:55.130  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [socket8888:name=statFilter,type=StatFilter]
+2018-11-28 13:38:55.222  INFO 2476 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-28 13:38:55.228  INFO 2476 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-28 13:38:55.716 ERROR 2476 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server start failed at port: 8888!
+2018-11-28 13:38:55.721  INFO 2476 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-11-28 13:38:55.731 ERROR 2476 --- [restartedMain] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:735) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:716) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:703) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:304) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+	at com.zhefan.yummy.YummyApplication.main(YummyApplication.java:19) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_162]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_162]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_162]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_162]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-1.5.5.RELEASE.jar:1.5.5.RELEASE]
+Caused by: java.net.BindException: Cannot assign requested address: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_162]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_162]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_162]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_162]
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:125) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:543) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1238) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:487) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:472) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:959) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:243) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:360) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:339) ~[netty-common-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:393) ~[netty-transport-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:742) ~[netty-common-4.1.1.Final.jar:4.1.1.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:145) ~[netty-common-4.1.1.Final.jar:4.1.1.Final]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_162]
+
+2018-11-28 13:38:55.733  INFO 2476 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5480f818: startup date [Wed Nov 28 13:38:45 CST 2018]; root of context hierarchy
+2018-11-28 13:38:55.759  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-11-28 13:38:55.760  INFO 2476 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2018-11-28 13:38:55.766  INFO 2476 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2018-11-28 13:43:19.224  INFO 12252 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 12252 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-28 13:43:19.226 DEBUG 12252 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-28 13:43:19.227  INFO 12252 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-28 13:43:19.342  INFO 12252 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@23f7bf25: startup date [Wed Nov 28 13:43:19 CST 2018]; root of context hierarchy
+2018-11-28 13:43:21.606  INFO 12252 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-28 13:43:22.629  INFO 12252 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$83b2e309] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:43:22.714  INFO 12252 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$f17de60] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:43:22.727  INFO 12252 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$ccc51927] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:43:22.816  INFO 12252 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:43:22.944  INFO 12252 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:43:23.697  INFO 12252 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-28 13:43:23.719  INFO 12252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-28 13:43:23.726  INFO 12252 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-28 13:43:24.034  INFO 12252 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-28 13:43:24.048  INFO 12252 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-28 13:43:24.048  INFO 12252 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4709 ms
+2018-11-28 13:43:24.466  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-28 13:43:24.468  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-28 13:43:24.474  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-28 13:43:24.476  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-28 13:43:24.484  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-28 13:43:24.485  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-28 13:43:24.485  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-28 13:43:24.485  INFO 12252 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsFilter' to: [/*]
+2018-11-28 13:43:24.771  INFO 12252 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-28 13:43:25.759  INFO 12252 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-28 13:43:27.639  INFO 12252 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@23f7bf25: startup date [Wed Nov 28 13:43:19 CST 2018]; root of context hierarchy
+2018-11-28 13:43:27.756  INFO 12252 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-28 13:43:27.764  INFO 12252 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-28 13:43:27.802  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:43:27.812  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:43:27.830  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:43:27.840  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/swagger-ui.html] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:43:27.840  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:43:27.873  INFO 12252 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-28 13:43:27.905  INFO 12252 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:43:28.484  WARN 12252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-11-28 13:43:28.574  INFO 12252 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-28 13:43:28.576  INFO 12252 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-28 13:43:28.576  INFO 12252 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-28 13:43:28.592  INFO 12252 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [socket8888:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-28 13:43:28.594  INFO 12252 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [socket8888:name=statFilter,type=StatFilter]
+2018-11-28 13:43:28.701  INFO 12252 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-28 13:43:28.706  INFO 12252 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-28 13:43:29.217  INFO 12252 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
+2018-11-28 13:43:29.220  INFO 12252 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 10.66 seconds (JVM running for 11.458)
+2018-11-28 13:45:08.005  INFO 5992 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Starting YummyApplication on LAPTOP-5F6OV8VB with PID 5992 (started by 刘伟军 in C:\Users\刘伟军\Desktop\ZheFan\socket)
+2018-11-28 13:45:08.007 DEBUG 5992 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-11-28 13:45:08.007  INFO 5992 --- [restartedMain] com.zhefan.yummy.YummyApplication        : No active profile set, falling back to default profiles: default
+2018-11-28 13:45:08.096  INFO 5992 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@23f7bf25: startup date [Wed Nov 28 13:45:08 CST 2018]; root of context hierarchy
+2018-11-28 13:45:09.997  INFO 5992 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-28 13:45:10.985  INFO 5992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9cf3cfd4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:45:11.065  INFO 5992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisCacheConfig' of type [com.zhefan.yummy.config.redis.RedisCacheConfig$$EnhancerBySpringCGLIB$$2858cb2b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:45:11.077  INFO 5992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$e60605f2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:45:11.139  INFO 5992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketConfig' of type [com.zhefan.yummy.socket.SocketConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:45:11.266  INFO 5992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-28 13:45:12.009  INFO 5992 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8887 (http)
+2018-11-28 13:45:12.032  INFO 5992 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-11-28 13:45:12.039  INFO 5992 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2018-11-28 13:45:12.343  INFO 5992 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-11-28 13:45:12.356  INFO 5992 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-11-28 13:45:12.357  INFO 5992 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4263 ms
+2018-11-28 13:45:12.749  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-11-28 13:45:12.751  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-11-28 13:45:12.759  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-28 13:45:12.760  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-28 13:45:12.769  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-28 13:45:12.770  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-28 13:45:12.770  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2018-11-28 13:45:12.770  INFO 5992 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsFilter' to: [/*]
+2018-11-28 13:45:13.067  INFO 5992 --- [restartedMain] c.c.s.a.SpringAnnotationScanner          : messageEventHandler bean listeners added
+2018-11-28 13:45:14.041  INFO 5992 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2018-11-28 13:45:15.993  INFO 5992 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@23f7bf25: startup date [Wed Nov 28 13:45:08 CST 2018]; root of context hierarchy
+2018-11-28 13:45:16.104  INFO 5992 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-28 13:45:16.111  INFO 5992 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-28 13:45:16.141  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:45:16.148  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-11-28 13:45:16.166  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:45:16.173  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/swagger-ui.html] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:45:16.173  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:45:16.203  INFO 5992 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalDefaultExceptionHandler
+2018-11-28 13:45:16.245  INFO 5992 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-28 13:45:16.797  INFO 5992 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-11-28 13:45:16.877  INFO 5992 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-11-28 13:45:16.879  INFO 5992 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2018-11-28 13:45:16.879  INFO 5992 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-28 13:45:16.895  INFO 5992 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [socket8888:name=dataSource,type=DruidDataSourceWrapper]
+2018-11-28 13:45:16.896  INFO 5992 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [socket8888:name=statFilter,type=StatFilter]
+2018-11-28 13:45:16.988  INFO 5992 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8887 (http)
+2018-11-28 13:45:16.995  INFO 5992 --- [restartedMain] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2018-11-28 13:45:17.518  INFO 5992 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 8888
+2018-11-28 13:45:17.524  INFO 5992 --- [restartedMain] com.zhefan.yummy.YummyApplication        : Started YummyApplication in 10.181 seconds (JVM running for 10.901)

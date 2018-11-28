@@ -11,7 +11,7 @@
 		var targetClientId = 'testclient1';
 
 		var token = hex_md5("yummy" + new Date().getFullYear() + (new Date().getMonth() + 1) + new Date().getDate());
-		var socket = io.connect('http://localhost:8888?clientid='+clientid+'&token=' + token);
+		var socket = io.connect('http://47.107.248.96:8888?clientid='+clientid+'&token=' + token);
 		socket.on('connect',
 			function() {
 				output('<span class="connect-msg">Client has connected to the server!</span>');

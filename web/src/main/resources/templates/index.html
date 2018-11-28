@@ -14,7 +14,7 @@
 				console.log(name);
 				console.log(password);
 				$.ajax({
-					url: '/gerent/login',
+					url: 'http://47.107.248.96/gerent/login',
 					type: 'POST',
 					async: false,
 					data: {name: name, password: password},
@@ -27,7 +27,26 @@
 					}
 				});
 			});
+			$('#ccc').on('click', function(){
+				cornTest();
+			});
 		});
+		
+		var cornTest = function() {
+			$.ajax({
+				url: 'http://47.107.248.96/mobile/dishesClass/list',
+				type: 'POST',
+				async: false,
+				data: {shopId: 1},
+				dataType: 'JSON',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(xmlhq, status, thr){
+					console.log(xmlhq);
+				}
+			});
+		}
 	</script>
 </head>
 <body>
@@ -35,6 +54,7 @@
 		<input type="text" id="name">
 		<input type="password" id="password">
 		<input type="button" value="aaaa" id="submit">
+		<input type="button" value="ccc" id="ccc">
 	</div>
 </body>
 </html>
