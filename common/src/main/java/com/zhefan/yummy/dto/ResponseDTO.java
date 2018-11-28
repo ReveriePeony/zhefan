@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zhefan.yummy.enums.ResponseEnums;
 
+import lombok.Data;
+
 @SuppressWarnings("serial")
 @JsonSerialize(typing = DEFAULT_TYPING)
 public class ResponseDTO<T> implements Serializable {

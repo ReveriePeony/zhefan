@@ -58,7 +58,7 @@ public abstract class BaseController {
 	 *
 	 * @return 1:微信浏览器,0:其他浏览器
 	 */
-	public static Integer judgeBrowser(HttpServletRequest request) {
+	public Integer judgeBrowser(HttpServletRequest request) {
 		Integer result = null;
 		String ua = request.getHeader("user-agent").toLowerCase();
 		if (ua.indexOf("micromessenger") > 0) {
@@ -69,7 +69,7 @@ public abstract class BaseController {
 		return result;
 	}
 
-	public static String getHost(HttpServletRequest request) {
+	public String getHost(HttpServletRequest request) {
 		String path = request.getContextPath();
 		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	}

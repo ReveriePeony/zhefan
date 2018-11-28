@@ -7,11 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -22,7 +26,6 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.param.RequestDishes;
 import com.zhefan.yummy.param.RequestDishesList;
 import com.zhefan.yummy.service.DishesService;
-import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -43,6 +46,12 @@ public class DishesController extends BaseController {
 	
 	@Autowired
 	private DishesService dishesService;
+
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Value("${file.url.change}")
+	private String changeUrl;
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
@@ -69,8 +78,12 @@ public class DishesController extends BaseController {
 		Dishes entity = new Dishes();
 		BeanUtils.copyProperties(clas, entity);
 		String dishesImg = entity.getDishesImg().replace("temp/", "");
-		String realPath = getRealPath("", request);
-		FileUtil.renameToFile(realPath + entity.getDishesImg(), realPath + dishesImg);
+		
+		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+		param.add("startFilePath", entity.getDishesImg());
+		param.add("endFilePath", dishesImg);
+		restTemplate.postForObject(changeUrl, param, JSONObject.class);
+		
 		entity.setDishesImg(dishesImg);
 		if(clas.getId() == null) {
 			entity.setCreatorId(gerent.getId());

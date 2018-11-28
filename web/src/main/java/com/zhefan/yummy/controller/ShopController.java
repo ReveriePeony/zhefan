@@ -6,11 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -21,7 +25,6 @@ import com.zhefan.yummy.entity.Shop;
 import com.zhefan.yummy.param.RequestShop;
 import com.zhefan.yummy.param.RequestShopList;
 import com.zhefan.yummy.service.ShopService;
-import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -42,6 +45,12 @@ public class ShopController extends BaseController {
 
 	@Autowired
 	private ShopService shopService;
+
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Value("${file.url.change}")
+	private String changeUrl;
 
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
@@ -76,8 +85,12 @@ public class ShopController extends BaseController {
 		Shop entity = new Shop();
 		BeanUtils.copyProperties(shop, entity);
 		String shopImg = entity.getShopImg().replace("temp/", "");
-		String realPath = getRealPath("", request);
-		FileUtil.renameToFile(realPath + entity.getShopImg(), realPath + shopImg);
+		
+		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+		param.add("startFilePath", entity.getShopImg());
+		param.add("endFilePath", shopImg);
+		restTemplate.postForObject(changeUrl, param, JSONObject.class);
+		
 		entity.setShopImg(shopImg);
 		if (shop.getId() == null) {
 			entity.setGerentId(gerent.getId());

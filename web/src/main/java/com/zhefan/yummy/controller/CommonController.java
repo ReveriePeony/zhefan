@@ -10,15 +10,21 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.util.FileUtil;
@@ -42,20 +48,24 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/common")
 public class CommonController extends BaseController {
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
+	@Value("${file.url.upload}")
+	private String uploadUrl;
+
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/uploadimg")
-	public ResponseDTO<String> uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-		Integer id = getGerent(request).getId();
-		String filePath = getRealPath("upload/" + id + "/temp/", request);
-		String newFileName = System.currentTimeMillis() + ".jpg";
-		try {
-			FileUtil.saveFile(file.getBytes(), filePath, newFileName);
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-			e.printStackTrace();
-			return ResponseDTO.error("文件保存失败");
-		}
-		return ResponseDTO.success("成功", "upload/" + id + "/temp/" + newFileName);
+	public ResponseDTO uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		FileSystemResource resource = new FileSystemResource(FileUtil.multipartFileToFile(file));
+		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+		param.add("file", resource);
+		param.add("id", getGerent(request).getId());
+		JSONObject result = restTemplate.postForObject(uploadUrl, param, JSONObject.class);
+		if(result != null)
+			return ResponseDTO.success("文件保存成功", result.get("data"));
+		return ResponseDTO.error("文件保存失败");
 	}
 
 	@ApiOperation(value = "二维码", notes = "二维码")

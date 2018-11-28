@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,6 +65,24 @@ public class FileUtil {
 		File tmpFile = new File(endFilePath);
 		if(!startFile.exists()) return false;
 		return startFile.renameTo(tmpFile);
+	}
+	
+	public static File multipartFileToFile(MultipartFile mfile) {
+		String originalFilename = mfile.getOriginalFilename();
+		String prefix = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+		String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+		File file = null;
+		try {
+			file = File.createTempFile(prefix, suffix);
+			mfile.transferTo(file);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			log.error("文件转换失败", e);
+		} catch (IOException e) {
+			e.printStackTrace();
+			log.error("文件转换失败", e);
+		}
+		return file;
 	}
 
 }

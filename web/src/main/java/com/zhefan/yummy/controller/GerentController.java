@@ -1,7 +1,6 @@
 package com.zhefan.yummy.controller;
 
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseController;
@@ -23,7 +26,6 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestGerent;
 import com.zhefan.yummy.service.GerentService;
-import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -48,6 +50,12 @@ public class GerentController extends BaseController {
 	@Autowired
 	private GerentService gerentService;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Value("${file.url.del}")
+	private String delUrl;
+	
 	@ApiOperation(value = "登录", notes = "登录")
 	@SuppressWarnings("rawtypes")
 	@PostMapping("login")
@@ -59,9 +67,9 @@ public class GerentController extends BaseController {
 		if(gerent != null) {
 			log.debug(gerent.toString());
 			SessionUtil.setLoginInfo(request, gerent);
-			String realPath = getRealPath("upload/" + gerent.getId() + "/temp/", request);
-			File targetFile = new File(realPath);
-			FileUtil.deleteFile(targetFile);
+			LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+			param.add("id", gerent.getId());
+			restTemplate.postForObject(delUrl, param, JSONObject.class);
 			return ResponseDTO.success("success");
 		}
 		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
