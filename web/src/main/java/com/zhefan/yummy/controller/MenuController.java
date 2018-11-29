@@ -6,9 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zhefan.yummy.base.BaseController;
@@ -37,8 +36,8 @@ public class MenuController extends BaseController {
 	private MenuService menuService;
 	
 	@ApiOperation(value = "列表", notes = "列表")
-	@PostMapping("list")
-	public ResponseDTO<List<Menu>> list(@ApiParam("角色ID") @RequestParam Integer roleId, 
+	@GetMapping("list")
+	public ResponseDTO<List<Menu>> list(@ApiParam(value = "角色ID") Integer roleId, 
 			HttpServletRequest request) {
 		if(roleId == null) roleId = getGerent(request).getRoleId();
 		return ResponseDTO.success(menuService.selectMenuList(roleId));

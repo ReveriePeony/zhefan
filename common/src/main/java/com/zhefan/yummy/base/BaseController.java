@@ -53,6 +53,16 @@ public abstract class BaseController {
 		return request.getSession().getServletContext().getRealPath(path);
 	}
 	
+	protected String checkBindingResult(BindingResult result) {
+		if (result.hasErrors()) {
+			List<ObjectError> errorList = result.getAllErrors();
+			for (ObjectError error : errorList) {
+				return error.getDefaultMessage();
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * 判断浏览器
 	 *

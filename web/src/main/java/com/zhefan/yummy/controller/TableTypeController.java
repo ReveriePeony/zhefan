@@ -4,9 +4,13 @@ package com.zhefan.yummy.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,7 @@ import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.entity.TableType;
+import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestTableType;
 import com.zhefan.yummy.service.TableTypeService;
 import com.zhefan.yummy.util.SessionUtil;
@@ -43,9 +48,10 @@ public class TableTypeController extends BaseController {
 	private TableTypeService tableTypeService;
 	
 	@ApiOperation(value = "列表", notes = "列表")
-	@PostMapping("list")
-	public ResponseDTO<List<TableType>> list(@ApiParam("商店ID") Integer shopId, 
+	@GetMapping("list")
+	public ResponseDTO<List<TableType>> list(@ApiParam(value = "商店ID", required = true) Integer shopId, 
 			@ApiParam("ID") Integer id, @ApiParam("名") Integer tableName) {
+		if(shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
 		Wrapper<TableType> wrapper = new EntityWrapper<>();
 		wrapper.eq("shop_id", shopId);
 		if(id != null) wrapper.eq("id", id);
@@ -56,7 +62,8 @@ public class TableTypeController extends BaseController {
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
-	public ResponseDTO save(@RequestBody RequestTableType tableType, HttpServletRequest request) {
+	public ResponseDTO save(@Valid @RequestBody RequestTableType tableType, 
+			HttpServletRequest request, BindingResult result) {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		TableType entity = new TableType();
 		BeanUtils.copyProperties(tableType, entity);
@@ -65,16 +72,17 @@ public class TableTypeController extends BaseController {
 			entity.setCreationTime(getCurrentTime());
 		}
 		boolean b = tableTypeService.insertOrUpdate(entity);
-		if(!b) return ResponseDTO.error();
+		if(!b) return ResponseDTO.error(ResponseEnums.SAVE_ERROR);
 		return ResponseDTO.success();
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
-	@PostMapping("del")
+	@DeleteMapping("del")
 	public ResponseDTO del(@RequestBody List<Integer> ids) {
+		if(ids == null || ids.size() == 0) return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		boolean b = tableTypeService.deleteBatchIds(ids);
-		if(!b) return ResponseDTO.error();
+		if(!b) return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		return ResponseDTO.success();
 	}
 	

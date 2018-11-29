@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
+import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.util.FileUtil;
 import com.zhefan.yummy.util.QrCodeUtil;
 import com.zhefan.yummy.vo.SocketMessage;
@@ -65,7 +66,7 @@ public class CommonController extends BaseController {
 		JSONObject result = restTemplate.postForObject(uploadUrl, param, JSONObject.class);
 		if(result != null)
 			return ResponseDTO.success("文件保存成功", result.get("data"));
-		return ResponseDTO.error("文件保存失败");
+		return ResponseDTO.error(ResponseEnums.FILE_SAVE_ERROR);
 	}
 
 	@ApiOperation(value = "二维码", notes = "二维码")

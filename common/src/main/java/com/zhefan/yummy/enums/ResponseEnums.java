@@ -19,8 +19,13 @@ public enum ResponseEnums {
     REFUNDS_ERROR(1008, "退款失败"),
     FAILED_TO_OBTAIN_MEMBER_INFORMATION(1007, "获取会员信息失败"),
     BOOK_FAILED(1008, "下单失败"),
+    SHOP_ID_NULL(1009, "shopId不能为空"),
+    ORDER_ID_NULL(1010, "orderId不能为空"),
+    NAME_ID_NULL(1011, "名称(账号)不能为空"),
+    PWD_ID_NULL(1012, "密码不能为空"),
+    ID_NULL(1013, "ID不能为空"),
+    FILE_SAVE_ERROR(1014, "文件保存失败"),
 
-    INFRASTRUCTRUE_ERROR(1998, "设施保存失败"),
     IMAGE_ERROR(1999, "图片保存失败"),
 
     SIGNATURE_ERROR(3001, "签名错误"),

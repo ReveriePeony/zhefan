@@ -1,5 +1,7 @@
 package com.zhefan.yummy.param;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,6 +25,7 @@ public class RequestTableList extends ParamPage {
 	/**
 	 * 商家(后台)店铺ID
 	 */
+	@NotNull(message = "shopId不能为空")
 	@ApiModelProperty(value = "商家(后台)店铺ID", required = true)
 	private Integer shopId;
 	/**

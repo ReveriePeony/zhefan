@@ -1,5 +1,7 @@
 package com.zhefan.yummy.param;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class RequestShop {
 	/**
 	 * 店铺名称
 	 */
+	@NotBlank(message = "shopName不能为空")
 	@ApiModelProperty(value = "店铺名称", required = true)
 	private String shopName;
 	/**

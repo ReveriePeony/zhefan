@@ -22,7 +22,7 @@ public class SwaggerConfig {
 	// 标题
 	private static final String TITLE = "YUMMY - API";
 	// 描述
-	private static final String DESC = "母鸡";
+	private static final String DESC = "母鸡 \n 保存方法 带ID为更新 不带为新增";
 	// 版本
 	private static final String VERSION = "1.0.0";
 	//

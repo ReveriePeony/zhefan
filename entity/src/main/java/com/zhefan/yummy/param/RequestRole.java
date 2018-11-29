@@ -1,5 +1,7 @@
 package com.zhefan.yummy.param;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class RequestRole {
 	/**
 	 * 角色名
 	 */
+	@NotBlank(message = "roleName不能为空")
 	@ApiModelProperty("角色名")
 	private String roleName;
 

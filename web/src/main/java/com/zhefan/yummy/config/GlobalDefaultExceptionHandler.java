@@ -1,7 +1,13 @@
 package com.zhefan.yummy.config;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,4 +58,35 @@ public class GlobalDefaultExceptionHandler {
 			return ResponseDTO.success(e.getCode(), e.getMessage(), e.getRedirectUrl());
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@ResponseBody
+	@ExceptionHandler(value = BindException.class)
+	public ResponseDTO bindingResultErrorHandler(HttpServletRequest request, BindException e) {
+		log.error("请求地址：{} , BindingResult异常详细：", request.getRequestURL(), e);
+		BindingResult result = e.getBindingResult();
+		if (result.hasErrors()) {
+			List<ObjectError> errorList = result.getAllErrors();
+			for (ObjectError error : errorList) {
+				return ResponseDTO.error(error.getDefaultMessage());
+			}
+		}
+		return ResponseDTO.error(ResponseEnums.UNKNOWN_ERROR);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ResponseBody
+	@ExceptionHandler(value = MethodArgumentNotValidException.class)
+	public ResponseDTO bindingResultErrorHandler(HttpServletRequest request, MethodArgumentNotValidException e) {
+		log.error("请求地址：{} , BindingResult异常详细：", request.getRequestURL(), e);
+		BindingResult result = e.getBindingResult();
+		if (result.hasErrors()) {
+			List<ObjectError> errorList = result.getAllErrors();
+			for (ObjectError error : errorList) {
+				return ResponseDTO.error(error.getDefaultMessage());
+			}
+		}
+		return ResponseDTO.error(ResponseEnums.UNKNOWN_ERROR);
+	}
+	
 }

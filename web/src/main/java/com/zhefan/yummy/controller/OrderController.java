@@ -3,8 +3,11 @@ package com.zhefan.yummy.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +18,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Order;
+import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestOrderList;
 import com.zhefan.yummy.service.OrderService;
 
@@ -39,11 +43,14 @@ public class OrderController extends BaseController {
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
-	@PostMapping("list")
-	public ResponseDTO<Page<Order>> list(@RequestBody RequestOrderList order) {
+	@GetMapping("list")
+	public ResponseDTO<Page<Order>> list(RequestOrderList order, HttpServletRequest request) {
+		if (order.getShopId() == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
+		Integer gerentId = order.getGerentId();
+		if(gerentId == null) gerentId = getGerent(request).getId();
 		Page<Order> page = order.initPage();
 		Wrapper<Order> wrapper = new EntityWrapper<>();
-		wrapper.eq("gerent_id", order.getGerentId()).eq("shop_id", order.getShopId()).eq("being", Order.BEING);
+		wrapper.eq("gerent_id", gerentId).eq("shop_id", order.getShopId()).eq("being", Order.BEING);
 		if(order.getOrderId() != null) wrapper.eq("id", order.getOrderId());
 		wrapper.andNew().eq("1", "1");
 		if(order.getOrderNumber() != null) wrapper.or().like("order_number", order.getOrderNumber());
@@ -77,14 +84,16 @@ public class OrderController extends BaseController {
 	
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
-	@PostMapping("del")
+	@DeleteMapping("del")
 	public ResponseDTO del(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		Wrapper<Order> wrapper = new EntityWrapper<>();
 		wrapper.in("id", ids);
 		Order entity = new Order();
 		entity.setBeing(Order.NON_BEING);
 		boolean b = orderService.update(entity, wrapper);
-		if(!b) return ResponseDTO.error();
+		if(!b) return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		return ResponseDTO.success();
 	}
 	

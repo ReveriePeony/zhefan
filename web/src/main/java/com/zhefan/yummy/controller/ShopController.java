@@ -3,11 +3,15 @@ package com.zhefan.yummy.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,7 @@ import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.entity.Shop;
+import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestShop;
 import com.zhefan.yummy.param.RequestShopList;
 import com.zhefan.yummy.service.ShopService;
@@ -48,14 +53,14 @@ public class ShopController extends BaseController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Value("${file.url.change}")
 	private String changeUrl;
 
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
-	@PostMapping("list")
-	public ResponseDTO<Page<Shop>> list(@RequestBody RequestShopList shop, HttpServletRequest request) {
+	@GetMapping("list")
+	public ResponseDTO<Page<Shop>> list(RequestShopList shop, HttpServletRequest request) {
 		Gerent gerent = getGerent(request);
 		Page<Shop> page = shop.initPage();
 		Wrapper<Shop> wrapper = new EntityWrapper<>();
@@ -80,17 +85,17 @@ public class ShopController extends BaseController {
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
-	public ResponseDTO save(@RequestBody RequestShop shop, HttpServletRequest request) {
+	public ResponseDTO save(@Valid @RequestBody RequestShop shop, BindingResult result, HttpServletRequest request) {
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		Shop entity = new Shop();
 		BeanUtils.copyProperties(shop, entity);
 		String shopImg = entity.getShopImg().replace("temp/", "");
-		
+
 		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 		param.add("startFilePath", entity.getShopImg());
 		param.add("endFilePath", shopImg);
 		restTemplate.postForObject(changeUrl, param, JSONObject.class);
-		
+
 		entity.setShopImg(shopImg);
 		if (shop.getId() == null) {
 			entity.setGerentId(gerent.getId());
@@ -100,21 +105,23 @@ public class ShopController extends BaseController {
 		}
 		boolean b = shopService.insertOrUpdate(entity);
 		if (!b)
-			return ResponseDTO.error();
+			return ResponseDTO.error(ResponseEnums.SAVE_ERROR);
 		return ResponseDTO.success();
 	}
 
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
-	@PostMapping("del")
+	@DeleteMapping("del")
 	public ResponseDTO del(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		Wrapper<Shop> wrapper = new EntityWrapper<>();
 		wrapper.in("id", ids);
 		Shop entity = new Shop();
 		entity.setStatus(Shop.STATUS_DOWN);
 		boolean b = shopService.update(entity, wrapper);
 		if (!b)
-			return ResponseDTO.error();
+			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
 		return ResponseDTO.success();
 	}
 
