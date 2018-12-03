@@ -24,4 +24,16 @@
         id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark
     </sql>
 
+	<select id="selectPageFull" resultType="com.zhefan.yummy.vo.DishesVo">
+		SELECT d.id, d.gerent_id gerentId, d.shop_id shopId, d.dishes_class_id dishesClassId, 
+			d.dishes_name dishesName, d.dishes_img dishesImg, d.creation_time creationTime, d.creator, 
+			d.creator_id creatorId, d.`status`, d.sold_out soldOut, d.serial_no serialNo, d.remark, 
+			dc.dishes_class_name dishesClassName, dc.serial_no dishesClassSerialNo, dc.remark dishesClassRemark 
+		FROM t_dishes d 
+		JOIN t_dishes_class dc ON d.dishes_class_id = dc.id 
+		WHERE dc.`status` = 1 AND d.`status` = 1 AND d.shop_id = #{shopId} 
+			AND (d.dishes_name = #{keyword} OR dc.dishes_class_name = #{keyword}) 
+		ORDER BY dc.serial_no, d.serial_no 
+	</select>
+
 </mapper>

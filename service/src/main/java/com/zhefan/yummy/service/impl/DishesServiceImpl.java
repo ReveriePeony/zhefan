@@ -1,10 +1,15 @@
 package com.zhefan.yummy.service.impl;
 
-import com.zhefan.yummy.entity.Dishes;
-import com.zhefan.yummy.dao.DishesDAO;
-import com.zhefan.yummy.service.DishesService;
-import com.zhefan.yummy.base.BaseServiceImpl;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.zhefan.yummy.base.BaseServiceImpl;
+import com.zhefan.yummy.dao.DishesDAO;
+import com.zhefan.yummy.entity.Dishes;
+import com.zhefan.yummy.service.DishesService;
+import com.zhefan.yummy.vo.DishesVo;
 
 /**
  * <p>
@@ -16,5 +21,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DishesServiceImpl extends BaseServiceImpl<DishesDAO, Dishes> implements DishesService {
+
+	@Autowired
+	private DishesDAO dishesDAO;
+	
+	@Override
+	public List<DishesVo> selectPageFull(Integer shopId, String keyword) {
+		return dishesDAO.selectPageFull(shopId, keyword);
+	}
 	
 }

@@ -1,7 +1,10 @@
 package com.zhefan.yummy.service;
 
-import com.zhefan.yummy.entity.Dishes;
+import java.util.List;
+
 import com.zhefan.yummy.base.BaseService;
+import com.zhefan.yummy.entity.Dishes;
+import com.zhefan.yummy.vo.DishesVo;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.zhefan.yummy.base.BaseService;
  * @since 2018-11-12
  */
 public interface DishesService extends BaseService<Dishes> {
+
+	List<DishesVo> selectPageFull(Integer shopId, String keyword);
 	
 }
