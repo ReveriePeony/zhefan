@@ -15,7 +15,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSONObject;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -25,7 +24,6 @@ import io.swagger.annotations.ApiOperation;
  *
  *
  */
-@Api(tags = "Main")
 @Controller
 public class MainController implements ErrorController {
 
@@ -46,7 +44,7 @@ public class MainController implements ErrorController {
 //		return view;
 //	}
 
-	@ApiOperation(hidden = true, value = "")
+	@ApiOperation(hidden = true, value = "NON")
 	@RequestMapping(PATH)
 	@ResponseBody
 	public JSONObject doHandleError(HttpServletRequest request) {

@@ -45,7 +45,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		InterceptorRegistration addInterceptor = registry.addInterceptor(new AuthInterceptor());
 		addInterceptor.excludePathPatterns("/", "/login", "/gerent/login", "/error", "/v2/**", "/webjars/**",
-				"/swagger-resources/**", "/mobile/**");
+				"/swagger-resources/**", "/mobile/**", "/examples/**");
 		super.addInterceptors(registry);
 	}
 

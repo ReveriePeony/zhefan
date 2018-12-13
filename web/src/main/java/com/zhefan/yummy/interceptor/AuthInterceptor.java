@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.zhefan.yummy.entity.Gerent;
+import com.zhefan.yummy.enums.ResponseEnums;
+import com.zhefan.yummy.exception.BaseException;
 import com.zhefan.yummy.util.RedisCacheUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
@@ -42,8 +44,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		log.debug(request.getLocalAddr() + " " + request.getRequestURL());
 		Gerent gerent = SessionUtil.getLoginBean(request);
 		if (gerent == null) {
-			response.sendRedirect("/login");
-			return false;
+//			response.sendRedirect("/login");
+			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
+//			return false;
 		}
 		return true;
 

@@ -1,5 +1,7 @@
 package com.zhefan.yummy.config;
 
+import java.util.ArrayList;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -8,6 +10,7 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -50,13 +53,15 @@ public class SwaggerConfig {
 				.paths(PathSelectors.any()).build();
 	}
 
+	@SuppressWarnings("rawtypes")
 	private ApiInfo apiInfo() {
 		return new ApiInfo(TITLE, // 大标题
 				DESC, // 小标题
 				VERSION, // 版本
 				TERMS_OF_SERVICEURL, CONTACT, // 作者
 				LICENSE, // 链接显示文字
-				LICENSE_URL// 网站链接
+				LICENSE_URL,// 网站链接
+				new ArrayList<VendorExtension>()
 		);
 	}
 
