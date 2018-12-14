@@ -9,10 +9,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.zhefan.yummy.interceptor.AuthInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -40,6 +43,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		InterceptorRegistration addInterceptor = registry.addInterceptor(new AuthInterceptor());
+		addInterceptor.excludePathPatterns("/", "/upload/**", "/gerent/login", "/error", "/v2/**", "/webjars/**",
+				"/swagger-resources/**", "/mobile/**", "/examples/**");
 		super.addInterceptors(registry);
 	}
 

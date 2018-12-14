@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/file")
 public class CommonController extends BaseController {
+	
+	@Value("${sever-param.host}")
+	private String host;
+	
+	@Value("${sever-param.port}")
+	private String port;
 
 	@PostMapping("/uploadimg")
 	public ResponseDTO<JSONObject> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam("id") String id,
@@ -44,7 +51,7 @@ public class CommonController extends BaseController {
 			return ResponseDTO.error("文件保存失败");
 		}
 		JSONObject json = new JSONObject();
-		json.put("host", getHost(request));
+		json.put("host", host + ":" + port + "/");
 		json.put("addr", "upload/" + id + "/temp/" + newFileName);
 		return ResponseDTO.success("成功", json);
 	}
