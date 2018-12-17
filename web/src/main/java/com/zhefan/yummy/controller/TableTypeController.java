@@ -64,7 +64,7 @@ public class TableTypeController extends BaseController {
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestTableType tableType, 
 			HttpServletRequest request, BindingResult result) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		TableType entity = new TableType();
 		BeanUtils.copyProperties(tableType, entity);
 		if(tableType.getId() == null) {

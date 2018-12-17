@@ -1,5 +1,8 @@
 package com.zhefan.yummy.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +31,7 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestGerent;
 import com.zhefan.yummy.service.GerentService;
+import com.zhefan.yummy.util.RedisCacheUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
@@ -54,6 +58,9 @@ public class GerentController extends BaseController {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private RedisCacheUtil redisUtil;
 
 	@Value("${file.url.del}")
 	private String delUrl;
@@ -73,13 +80,21 @@ public class GerentController extends BaseController {
 		Wrapper<Gerent> wrapper = new EntityWrapper<>();
 		wrapper.eq("name", name).eq("password", DigestUtils.md5Hex(password).toUpperCase());
 		Gerent gerent = gerentService.selectOne(wrapper);
+		String token = DigestUtils.md5Hex((Math.random() * 10000) + new SimpleDateFormat("yyyyMMdd$HH").format(new Date()));
 		if (gerent != null) {
 			log.debug(gerent.toString());
 			SessionUtil.setLoginInfo(request, gerent);
+			redisUtil.set(token, JSONObject.toJSONString(gerent), 3600l);
 			LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 			param.add("id", gerent.getId());
-			restTemplate.postForObject(delUrl, param, JSONObject.class);
-			return ResponseDTO.success("success");
+			param.add("img", "");
+			param.add("token", getFileProjectToken());
+			try {
+				restTemplate.postForObject(delUrl, param, JSONObject.class);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+			return ResponseDTO.success("success", token);
 		}
 		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
 	}
@@ -89,7 +104,7 @@ public class GerentController extends BaseController {
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestGerent requestGerent, BindingResult result,
 			HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Gerent entity = new Gerent();
 		BeanUtils.copyProperties(requestGerent, entity);
 		String aImg = entity.getAvatar().replace("temp/", "");
@@ -97,8 +112,9 @@ public class GerentController extends BaseController {
 		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 		param.add("startFilePath", entity.getAvatar());
 		param.add("endFilePath", aImg);
+		param.add("token", getFileProjectToken());
 		restTemplate.postForObject(changeUrl, param, JSONObject.class);
-		
+		entity.setAvatar(aImg);
 		if (requestGerent.getId() == null) {
 			entity.setCreatorId(gerent.getId());
 			entity.setCreationTime(getCurrentTime());
@@ -116,14 +132,25 @@ public class GerentController extends BaseController {
 	public ResponseDTO del(@RequestBody List<Integer> ids, HttpServletRequest request) {
 		if (ids == null || ids.size() == 0)
 			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
-		Gerent gerent = SessionUtil.getLoginBean(request);
-		Gerent gerent2 = gerentService.selectById(ids.get(0));
-		if (!"admin".equals(gerent.getName()) && gerent2.getCreatorId().equals(gerent.getId())) {
-			return ResponseDTO.error("只有管理员和创建本人可操作");
+		Gerent gerent = getGerent(request);
+		List<Gerent> gs = new ArrayList<Gerent>();
+		for(Integer i : ids) {
+			Gerent gerent2 = gerentService.selectById(i);
+			if (!"admin".equals(gerent.getName()) && gerent2.getCreatorId().equals(gerent.getId())) {
+				return ResponseDTO.error("只有管理员和创建本人可操作");
+			}
+			gs.add(gerent2);
 		}
 		boolean b = gerentService.deleteBatchIds(ids);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
+		for(Gerent g : gs) {
+			LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+			param.add("id", g.getId());
+			param.add("img", g.getAvatar());
+			param.add("token", getFileProjectToken());
+			restTemplate.postForObject(delUrl, param, JSONObject.class);
+		}
 		return ResponseDTO.success();
 	}
 

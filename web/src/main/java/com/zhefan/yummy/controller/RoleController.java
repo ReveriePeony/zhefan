@@ -26,7 +26,6 @@ import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestRole;
 import com.zhefan.yummy.param.RequestRoleList;
 import com.zhefan.yummy.service.RoleService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -65,7 +64,7 @@ public class RoleController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestRole role, BindingResult result, HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Role entity = new Role();
 		BeanUtils.copyProperties(role, entity);
 		if (role.getId() == null) {

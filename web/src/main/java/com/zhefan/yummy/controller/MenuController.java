@@ -47,7 +47,7 @@ public class MenuController extends BaseController {
 //	@ApiOperation(value = "删除", notes = "删除")
 //	@PostMapping("del")
 //	public ResponseDTO del(@RequestBody List<Integer> ids, HttpServletRequest request) {
-//		Gerent gerent = SessionUtil.getLoginBean(request);
+//		Gerent gerent = getGerent(request);
 //		Menu menu2 = menuService.selectById(ids.get(0));
 //		if(!"admin".equals(gerent.getName()) && menu2.getCreatorId().equals(gerent.getId())) {
 //			return ResponseDTO.error("只有管理员和创建本人可操作");

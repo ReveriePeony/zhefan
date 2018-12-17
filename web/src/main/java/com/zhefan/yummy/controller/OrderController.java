@@ -69,7 +69,7 @@ public class OrderController extends BaseController {
 //	@ApiOperation(value = "保存", notes = "保存")
 //	@PostMapping("save")
 //	public ResponseDTO save(@RequestBody RequestDishesClass clas, HttpServletRequest request) {
-//		Gerent gerent = SessionUtil.getLoginBean(request);
+//		Gerent gerent = getGerent(request);
 //		DishesClass entity = new DishesClass();
 //		BeanUtils.copyProperties(clas, entity);
 //		if(clas.getId() == null) {

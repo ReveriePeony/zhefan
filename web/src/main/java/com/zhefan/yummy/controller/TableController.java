@@ -76,7 +76,7 @@ public class TableController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestTable table, BindingResult result, HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Table entity = new Table();
 		BeanUtils.copyProperties(table, entity);
 		if (table.getId() == null) {

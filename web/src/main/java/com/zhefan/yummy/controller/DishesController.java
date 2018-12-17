@@ -30,7 +30,6 @@ import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestDishes;
 import com.zhefan.yummy.param.RequestDishesList;
 import com.zhefan.yummy.service.DishesService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -85,7 +84,7 @@ public class DishesController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestDishes clas, BindingResult result, HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Dishes entity = new Dishes();
 		BeanUtils.copyProperties(clas, entity);
 		String dishesImg = entity.getDishesImg().replace("temp/", "");
@@ -93,6 +92,7 @@ public class DishesController extends BaseController {
 		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 		param.add("startFilePath", entity.getDishesImg());
 		param.add("endFilePath", dishesImg);
+		param.add("token", getFileProjectToken());
 		restTemplate.postForObject(changeUrl, param, JSONObject.class);
 
 		entity.setDishesImg(dishesImg);

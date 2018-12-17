@@ -24,7 +24,6 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestArea;
 import com.zhefan.yummy.service.AreaService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,7 +60,7 @@ public class AreaController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestArea area, BindingResult result, HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Area entity = new Area();
 		BeanUtils.copyProperties(area, entity);
 		if (area.getId() == null) {

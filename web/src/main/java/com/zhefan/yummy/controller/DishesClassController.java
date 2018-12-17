@@ -24,7 +24,6 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestDishesClass;
 import com.zhefan.yummy.service.DishesClassService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -65,7 +64,7 @@ public class DishesClassController extends BaseController {
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestDishesClass clas, BindingResult result,
 			HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		DishesClass entity = new DishesClass();
 		BeanUtils.copyProperties(clas, entity);
 		if (clas.getId() == null) {

@@ -41,8 +41,8 @@ public class CommonController extends BaseController {
 	@PostMapping("/uploadimg")
 	public ResponseDTO<JSONObject> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam("id") String id,
 			HttpServletRequest request) {
-		String filePath = getRealPath("upload/" + id + "/temp/", request);
-		String newFileName = System.currentTimeMillis() + ".jpg";
+		String filePath = getResourcePath(this) + "upload/" + id + "/temp/";
+		String newFileName = System.currentTimeMillis() + "_y.jpg";
 		try {
 			FileUtil.saveFile(file.getBytes(), filePath, newFileName);
 		} catch (IOException e) {
@@ -59,15 +59,17 @@ public class CommonController extends BaseController {
 	@PostMapping("/saveimg")
 	public ResponseDTO<String> saveImg(@RequestParam("startFilePath") String startFilePath,
 			@RequestParam("endFilePath") String endFilePath, HttpServletRequest request) {
-		String realPath = getRealPath("", request);
+		String realPath = getResourcePath(this);
 		boolean renameToFile = FileUtil.renameToFile(realPath + startFilePath, realPath + endFilePath);
 		if(!renameToFile) return ResponseDTO.error("移动文件失败");
 		return ResponseDTO.success("成功");
 	}
 	
 	@PostMapping("/delimg")
-	public ResponseDTO<String> delImg(@RequestParam("id") String id, HttpServletRequest request) {
-		String realPath = getRealPath("upload/" + id + "/temp/", request);
+	public ResponseDTO<String> delImg(@RequestParam("id") String id, 
+			@RequestParam("img") String img, HttpServletRequest request) {
+		String realPath = getResourcePath(this) + "upload/" + id + "/temp/";
+		if(img != null && !"".equals(img)) realPath = getRealPath(img, request);
 		File targetFile = new File(realPath);
 		FileUtil.deleteFile(targetFile);
 		return ResponseDTO.success("成功");

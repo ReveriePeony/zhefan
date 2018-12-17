@@ -63,8 +63,9 @@ public class CommonController extends BaseController {
 		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 		param.add("file", resource);
 		param.add("id", getGerent(request).getId());
+		param.add("token", getFileProjectToken());
 		JSONObject result = restTemplate.postForObject(uploadUrl, param, JSONObject.class);
-		if(result != null)
+		if(result != null && result.getInteger("code").equals(0))
 			return ResponseDTO.success("文件保存成功", result.get("data"));
 		return ResponseDTO.error(ResponseEnums.FILE_SAVE_ERROR);
 	}

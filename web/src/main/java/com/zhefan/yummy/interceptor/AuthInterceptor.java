@@ -7,15 +7,8 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.zhefan.yummy.entity.Gerent;
-import com.zhefan.yummy.enums.ResponseEnums;
-import com.zhefan.yummy.exception.BaseException;
-import com.zhefan.yummy.util.RedisCacheUtil;
-import com.zhefan.yummy.util.SessionUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,9 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
-	@Autowired
-	RedisCacheUtil redisCacheUtil;
-
 	private List<String> patterns;
 
 	{
@@ -42,12 +32,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		log.debug(request.getLocalAddr() + " " + request.getRequestURL());
-		Gerent gerent = SessionUtil.getLoginBean(request);
-		if (gerent == null) {
-//			response.sendRedirect("/login");
-			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
-//			return false;
-		}
+//		Gerent gerent = SessionUtil.getLoginBean(request);
+//		if (gerent == null) {
+////			response.sendRedirect("/login");
+//			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
+////			return false;
+//		}
 		return true;
 
 	}

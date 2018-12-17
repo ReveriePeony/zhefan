@@ -30,7 +30,6 @@ import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestShop;
 import com.zhefan.yummy.param.RequestShopList;
 import com.zhefan.yummy.service.ShopService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +52,7 @@ public class ShopController extends BaseController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-
+	
 	@Value("${file.url.change}")
 	private String changeUrl;
 
@@ -86,7 +85,7 @@ public class ShopController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestShop shop, BindingResult result, HttpServletRequest request) {
-		Gerent gerent = SessionUtil.getLoginBean(request);
+		Gerent gerent = getGerent(request);
 		Shop entity = new Shop();
 		BeanUtils.copyProperties(shop, entity);
 		String shopImg = entity.getShopImg().replace("temp/", "");
@@ -94,6 +93,7 @@ public class ShopController extends BaseController {
 		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 		param.add("startFilePath", entity.getShopImg());
 		param.add("endFilePath", shopImg);
+		param.add("token", getFileProjectToken());
 		restTemplate.postForObject(changeUrl, param, JSONObject.class);
 
 		entity.setShopImg(shopImg);
