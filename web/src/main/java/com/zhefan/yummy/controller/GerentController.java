@@ -28,9 +28,11 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Gerent;
+import com.zhefan.yummy.entity.Shop;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestGerent;
 import com.zhefan.yummy.service.GerentService;
+import com.zhefan.yummy.service.ShopService;
 import com.zhefan.yummy.util.RedisCacheUtil;
 import com.zhefan.yummy.util.SessionUtil;
 
@@ -55,6 +57,9 @@ public class GerentController extends BaseController {
 
 	@Autowired
 	private GerentService gerentService;
+
+	@Autowired
+	private ShopService shopService;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -94,7 +99,13 @@ public class GerentController extends BaseController {
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
-			return ResponseDTO.success("success", token);
+			Wrapper<Shop> shopWrapper = new EntityWrapper<>();
+			shopWrapper.eq("gerent_id", gerent.getId());
+			List<Shop> shops = shopService.selectList(shopWrapper);
+			JSONObject json = new JSONObject();
+			json.put("token", token);
+			json.put("shops", shops);
+			return ResponseDTO.success("success", json);
 		}
 		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
 	}
@@ -144,13 +155,13 @@ public class GerentController extends BaseController {
 		boolean b = gerentService.deleteBatchIds(ids);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
-		for(Gerent g : gs) {
+		gs.forEach(g -> {
 			LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
 			param.add("id", g.getId());
 			param.add("img", g.getAvatar());
 			param.add("token", getFileProjectToken());
 			restTemplate.postForObject(delUrl, param, JSONObject.class);
-		}
+		});
 		return ResponseDTO.success();
 	}
 

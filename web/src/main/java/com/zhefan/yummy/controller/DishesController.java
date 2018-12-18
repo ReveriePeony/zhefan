@@ -33,6 +33,7 @@ import com.zhefan.yummy.service.DishesService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -42,6 +43,7 @@ import io.swagger.annotations.ApiOperation;
  * @author ReverirNight@Foxmail.com
  * @since 2018-11-12
  */
+@Slf4j
 @Api(tags = "菜品")
 @RestController
 @RequestMapping("/dishes")
@@ -55,6 +57,9 @@ public class DishesController extends BaseController {
 
 	@Value("${file.url.change}")
 	private String changeUrl;
+
+	@Value("${file.url.del}")
+	private String delUrl;
 
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
@@ -113,9 +118,23 @@ public class DishesController extends BaseController {
 	public ResponseDTO del(@RequestBody List<Integer> ids) {
 		if (ids == null || ids.size() == 0)
 			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		List<Dishes> Dishess = dishesService.selectList(wrapper);
 		boolean b = dishesService.deleteBatchIds(ids);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
+		try {
+			Dishess.forEach(d -> {
+				LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
+				param.add("id", d.getGerentId());
+				param.add("img", d.getDishesImg());
+				param.add("token", getFileProjectToken());
+				restTemplate.postForObject(delUrl, param, JSONObject.class);
+			});
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 		return ResponseDTO.success();
 	}
 
