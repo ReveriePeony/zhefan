@@ -106,7 +106,9 @@ public class ShopController extends BaseController {
 		boolean b = shopService.insertOrUpdate(entity);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.SAVE_ERROR);
-		return ResponseDTO.success();
+		Wrapper<Shop> wrapper = new EntityWrapper<>();
+		wrapper.eq("gerent_id", gerent.getId()).eq("status", Shop.STATUS_UP);
+		return ResponseDTO.success(shopService.selectList(wrapper));
 	}
 
 	@SuppressWarnings("rawtypes")

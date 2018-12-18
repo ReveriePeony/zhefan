@@ -42,6 +42,7 @@ public class FileUtil {
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
 		}
+		System.err.println(targetFile.exists());
 		FileOutputStream out;
 		try {
 			out = new FileOutputStream(filePath + fileName);

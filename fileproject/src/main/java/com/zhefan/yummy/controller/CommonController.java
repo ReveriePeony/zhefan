@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,8 @@ public class CommonController extends BaseController {
 	@PostMapping("/uploadimg")
 	public ResponseDTO<JSONObject> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam("id") String id,
 			HttpServletRequest request) {
-		String filePath = getResourcePath(this) + "upload/" + id + "/temp/";
+		String hexName = DigestUtils.md5Hex(id);
+		String filePath = getResourcePath(this) + "upload/" + hexName + "/temp/";
 		String newFileName = System.currentTimeMillis() + "_y.jpg";
 		try {
 			FileUtil.saveFile(file.getBytes(), filePath, newFileName);
@@ -52,7 +54,7 @@ public class CommonController extends BaseController {
 		}
 		JSONObject json = new JSONObject();
 		json.put("host", host + ":" + port + "/");
-		json.put("addr", "upload/" + id + "/temp/" + newFileName);
+		json.put("addr", "upload/" + hexName + "/temp/" + newFileName);
 		return ResponseDTO.success("成功", json);
 	}
 	
@@ -68,7 +70,7 @@ public class CommonController extends BaseController {
 	@PostMapping("/delimg")
 	public ResponseDTO<String> delImg(@RequestParam("id") String id, 
 			@RequestParam("img") String img, HttpServletRequest request) {
-		String realPath = getResourcePath(this) + "upload/" + id + "/temp/";
+		String realPath = getResourcePath(this) + "upload/" + DigestUtils.md5Hex(id) + "/temp/";
 		if(img != null && !"".equals(img)) realPath = getRealPath(img, request);
 		File targetFile = new File(realPath);
 		FileUtil.deleteFile(targetFile);

@@ -34,7 +34,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		String token = request.getParameter("token");
 		log.debug(request.getLocalAddr() + " " + request.getRequestURL() + " " + token);
 		String md5Hex = DigestUtils
-				.md5Hex("fi" + new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()) + "le");
+				.md5Hex("fi" + new SimpleDateFormat("yyyyMMddHHmm").format(System.currentTimeMillis()) + "le");
 		if (!md5Hex.equals(token)) {
 			throw new BaseException(ResponseEnums.JWT_TOKEN_EXPIRED);
 		}

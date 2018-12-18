@@ -81,7 +81,7 @@ public abstract class BaseController {
 	
 	protected String getFileProjectToken() {
 		return DigestUtils
-				.md5Hex("fi" + new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()) + "le");
+				.md5Hex("fi" + new SimpleDateFormat("yyyyMMddHHmm").format(System.currentTimeMillis()) + "le");
 	}
 	
 	/**

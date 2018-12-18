@@ -25,7 +25,6 @@ import com.zhefan.yummy.entity.TableType;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestTableType;
 import com.zhefan.yummy.service.TableTypeService;
-import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
