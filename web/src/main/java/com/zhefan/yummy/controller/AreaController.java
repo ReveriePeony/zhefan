@@ -60,6 +60,7 @@ public class AreaController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestArea area, BindingResult result, HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
 		Area entity = new Area();
 		BeanUtils.copyProperties(area, entity);

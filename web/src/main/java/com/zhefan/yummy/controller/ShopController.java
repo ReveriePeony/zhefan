@@ -5,10 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -50,12 +45,6 @@ public class ShopController extends BaseController {
 	@Autowired
 	private ShopService shopService;
 
-	@Autowired
-	private RestTemplate restTemplate;
-	
-	@Value("${file.url.change}")
-	private String changeUrl;
-
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
 	@GetMapping("list")
@@ -75,8 +64,8 @@ public class ShopController extends BaseController {
 			wrapper.like("creation_time", shop.getCreationTime());
 		if (shop.getStatus() != null)
 			wrapper.like("status", shop.getStatus());
-		if (shop.getRemark() != null)
-			wrapper.like("remark", shop.getRemark());
+		if (shop.getShopTel() != null)
+			wrapper.like("shop_tel", shop.getShopTel());
 		shopService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);
 	}
@@ -85,25 +74,9 @@ public class ShopController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestShop shop, BindingResult result, HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
-		Shop entity = new Shop();
-		BeanUtils.copyProperties(shop, entity);
-		String shopImg = entity.getShopImg().replace("temp/", "");
-
-		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
-		param.add("startFilePath", entity.getShopImg());
-		param.add("endFilePath", shopImg);
-		param.add("token", getFileProjectToken());
-		restTemplate.postForObject(changeUrl, param, JSONObject.class);
-
-		entity.setShopImg(shopImg);
-		if (shop.getId() == null) {
-			entity.setGerentId(gerent.getId());
-			entity.setCreatorId(gerent.getId());
-			entity.setCreationTime(getCurrentTime());
-			entity.setCreator(gerent.getNick());
-		}
-		boolean b = shopService.insertOrUpdate(entity);
+		boolean b = shopService.save(shop, gerent, getFileProjectToken());
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.SAVE_ERROR);
 		Wrapper<Shop> wrapper = new EntityWrapper<>();

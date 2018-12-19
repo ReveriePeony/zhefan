@@ -90,6 +90,10 @@ public class Shop extends Model<Shop> {
 	 * 描述
 	 */
 	private String remark;
+	/**
+	 * 店铺手机
+	 */
+	private String shopTel;
 
 	@Override
 	protected Serializable pkVal() {

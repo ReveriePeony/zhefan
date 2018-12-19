@@ -39,36 +39,36 @@ public abstract class BaseController {
 			List<ObjectError> errorList = result.getAllErrors();
 			for (ObjectError error : errorList) {
 				log.warn(error.getDefaultMessage());
-				throw new ResponseEntityException(error.getDefaultMessage());
+				throw new ResponseEntityException(ResponseEnums.SAVE_ERROR.getCode(), error.getDefaultMessage());
 			}
 		}
 	}
-	
+
 	protected String getCurrentTime() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
 	}
-	
+
 	protected Gerent getGerent(HttpServletRequest request) {
 		String token = request.getHeader("token");
-		if(token == null) {
+		if (token == null) {
 			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
 		}
 		Object object = redisCacheUtil.get(token);
-		if(object == null) {
+		if (object == null) {
 			throw new BaseException(ResponseEnums.JWT_TOKEN_EXPIRED, "/login");
 		}
 		return JSONObject.parseObject(object.toString(), Gerent.class);
 //		return SessionUtil.getLoginBean(request);
 	}
-	
+
 	protected String getRealPath(String path, HttpServletRequest request) {
 		return request.getSession().getServletContext().getRealPath("/WEB-INF/classes/" + path);
 	}
-	
+
 	protected String getResourcePath(Object obj) {
 		return obj.getClass().getResource("/").getPath();
 	}
-	
+
 	protected String checkBindingResult(BindingResult result) {
 		if (result.hasErrors()) {
 			List<ObjectError> errorList = result.getAllErrors();
@@ -78,12 +78,12 @@ public abstract class BaseController {
 		}
 		return null;
 	}
-	
+
 	protected String getFileProjectToken() {
 		return DigestUtils
 				.md5Hex("fi" + new SimpleDateFormat("yyyyMMddHHmm").format(System.currentTimeMillis()) + "le");
 	}
-	
+
 	/**
 	 * 判断浏览器
 	 *
@@ -93,7 +93,7 @@ public abstract class BaseController {
 		Integer result = null;
 		String ua = request.getHeader("user-agent").toLowerCase();
 		if (ua.indexOf("micromessenger") > 0) {
-			result = 1;	//weixin
+			result = 1; // weixin
 		} else {
 			result = 0;
 		}

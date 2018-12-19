@@ -43,8 +43,9 @@ public class RequestShopList extends ParamPage {
 	@ApiModelProperty("使用状态 0-注销 1-正常")
 	private String status;
 	/**
-	 * 描述
+	 * 店铺手机
 	 */
-	private String remark;
+	@ApiModelProperty("店铺手机正常")
+	private String shopTel;
 
 }

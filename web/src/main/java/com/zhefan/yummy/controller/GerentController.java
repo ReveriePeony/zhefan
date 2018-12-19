@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +30,7 @@ import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.entity.Shop;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestGerent;
+import com.zhefan.yummy.param.RequestLogin;
 import com.zhefan.yummy.service.GerentService;
 import com.zhefan.yummy.service.ShopService;
 import com.zhefan.yummy.util.RedisCacheUtil;
@@ -38,7 +38,6 @@ import com.zhefan.yummy.util.SessionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -76,14 +75,11 @@ public class GerentController extends BaseController {
 	@ApiOperation(value = "登录", notes = "登录")
 	@SuppressWarnings("rawtypes")
 	@PostMapping("login")
-	public ResponseDTO login(@ApiParam("账号") @RequestParam String name, @ApiParam("密码") @RequestParam String password,
+	public ResponseDTO login(@Valid @RequestBody RequestLogin lo, BindingResult result, 
 			HttpServletRequest request) {
-		if (name == null)
-			ResponseDTO.error(ResponseEnums.NAME_ID_NULL);
-		if (password == null)
-			ResponseDTO.error(ResponseEnums.PWD_ID_NULL);
+		InvalidParameter(result);
 		Wrapper<Gerent> wrapper = new EntityWrapper<>();
-		wrapper.eq("name", name).eq("password", DigestUtils.md5Hex(password).toUpperCase());
+		wrapper.eq("name", lo.getName()).eq("password", DigestUtils.md5Hex(lo.getPassword()).toUpperCase());
 		Gerent gerent = gerentService.selectOne(wrapper);
 		String token = DigestUtils.md5Hex((Math.random() * 10000) + new SimpleDateFormat("yyyyMMdd$HH").format(new Date()));
 		if (gerent != null) {
@@ -115,6 +111,7 @@ public class GerentController extends BaseController {
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestGerent requestGerent, BindingResult result,
 			HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
 		Gerent entity = new Gerent();
 		BeanUtils.copyProperties(requestGerent, entity);

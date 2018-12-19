@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.DishesClass;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestDishesClass;
+import com.zhefan.yummy.param.RequestDishesClassList;
 import com.zhefan.yummy.service.DishesClassService;
 
 import io.swagger.annotations.Api;
@@ -45,9 +47,24 @@ public class DishesClassController extends BaseController {
 	@Autowired
 	private DishesClassService dishesClassService;
 
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
 	@GetMapping("list")
-	public ResponseDTO<List<DishesClass>> list(@ApiParam("商店ID") Integer shopId, @ApiParam("菜品类型ID") Integer classId,
+	public ResponseDTO<Page<DishesClass>> list(RequestDishesClassList classList) {
+		if (classList.getShopId() == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
+		Page<DishesClass> page = classList.initPage();
+		Wrapper<DishesClass> wrapper = new EntityWrapper<>();
+		wrapper.eq("shop_id", classList.getShopId());
+		if (classList.getClassId() != null)
+			wrapper.eq("id", classList.getClassId());
+		if (classList.getClassName() != null)
+			wrapper.eq("dishes_class_name", classList.getClassName());
+		return ResponseDTO.success(dishesClassService.selectPage(page, wrapper));
+	}
+	
+	@ApiOperation(value = "列表Full", notes = "列表Full")
+	@GetMapping("listFull")
+	public ResponseDTO<List<DishesClass>> listFull(@ApiParam("商店ID") Integer shopId, @ApiParam("菜品类型ID") Integer classId,
 			@ApiParam("类型名") Integer className) {
 		if (shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
 		Wrapper<DishesClass> wrapper = new EntityWrapper<>();
@@ -64,6 +81,7 @@ public class DishesClassController extends BaseController {
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestDishesClass clas, BindingResult result,
 			HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
 		DishesClass entity = new DishesClass();
 		BeanUtils.copyProperties(clas, entity);

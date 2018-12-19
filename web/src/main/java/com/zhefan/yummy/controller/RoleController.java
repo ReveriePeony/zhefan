@@ -64,6 +64,7 @@ public class RoleController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestRole role, BindingResult result, HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
 		Role entity = new Role();
 		BeanUtils.copyProperties(role, entity);

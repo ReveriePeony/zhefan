@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.LinkedMultiValueMap;
@@ -89,24 +88,9 @@ public class DishesController extends BaseController {
 	@ApiOperation(value = "保存", notes = "保存")
 	@PostMapping("save")
 	public ResponseDTO save(@Valid @RequestBody RequestDishes clas, BindingResult result, HttpServletRequest request) {
+		InvalidParameter(result);
 		Gerent gerent = getGerent(request);
-		Dishes entity = new Dishes();
-		BeanUtils.copyProperties(clas, entity);
-		String dishesImg = entity.getDishesImg().replace("temp/", "");
-
-		LinkedMultiValueMap<Object, Object> param = new LinkedMultiValueMap<>();
-		param.add("startFilePath", entity.getDishesImg());
-		param.add("endFilePath", dishesImg);
-		param.add("token", getFileProjectToken());
-		restTemplate.postForObject(changeUrl, param, JSONObject.class);
-
-		entity.setDishesImg(dishesImg);
-		if (clas.getId() == null) {
-			entity.setCreatorId(gerent.getId());
-			entity.setCreationTime(getCurrentTime());
-			entity.setCreator(gerent.getNick());
-		}
-		boolean b = dishesService.insertOrUpdate(entity);
+		boolean b = dishesService.save(clas, gerent, getFileProjectToken());
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.SAVE_ERROR);
 		return ResponseDTO.success();

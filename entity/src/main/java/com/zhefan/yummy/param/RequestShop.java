@@ -54,5 +54,9 @@ public class RequestShop {
 	 * 描述
 	 */
 	private String remark;
-
+	/**
+	 * 店铺手机
+	 */
+	@ApiModelProperty("店铺手机")
+	private String shopTel;
 }

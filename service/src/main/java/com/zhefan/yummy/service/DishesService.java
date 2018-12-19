@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.zhefan.yummy.base.BaseService;
 import com.zhefan.yummy.entity.Dishes;
+import com.zhefan.yummy.entity.Gerent;
+import com.zhefan.yummy.param.RequestDishes;
 import com.zhefan.yummy.vo.DishesVo;
 
 /**
@@ -17,5 +19,14 @@ import com.zhefan.yummy.vo.DishesVo;
 public interface DishesService extends BaseService<Dishes> {
 
 	List<DishesVo> selectPageFull(Integer shopId, String keyword);
+
+	/**
+	 * 
+	 * @param clas
+	 * @param gerent 登录者
+	 * @param fileToken
+	 * @return
+	 */
+	boolean save(RequestDishes clas, Gerent gerent, Object fileToken);
 	
 }
