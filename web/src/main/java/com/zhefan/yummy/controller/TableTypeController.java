@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.entity.TableType;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestTableType;
+import com.zhefan.yummy.param.RequestTableTypeList;
 import com.zhefan.yummy.service.TableTypeService;
 
 import io.swagger.annotations.Api;
@@ -46,15 +49,28 @@ public class TableTypeController extends BaseController {
 	@Autowired
 	private TableTypeService tableTypeService;
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "列表", notes = "列表")
 	@GetMapping("list")
-	public ResponseDTO<List<TableType>> list(@ApiParam(value = "商店ID", required = true) Integer shopId, 
-			@ApiParam("ID") Integer id, @ApiParam("名") Integer tableName) {
+	public ResponseDTO<Page<TableType>> list(RequestTableTypeList ttl) {
+		if(ttl.getShopId() == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
+		Page<TableType> page = ttl.initPage();
+		Wrapper<TableType> wrapper = new EntityWrapper<>();
+		wrapper.eq("shop_id", ttl.getShopId());
+		if(ttl.getId() != null) wrapper.eq("id", ttl.getId());
+		if(StringUtils.isNotBlank(ttl.getTableName())) wrapper.eq("table_name", ttl.getTableName());
+		return ResponseDTO.success(tableTypeService.selectPage(page, wrapper));
+	}
+	
+	@ApiOperation(value = "列表Full", notes = "列表Full")
+	@GetMapping("listFull")
+	public ResponseDTO<List<TableType>> listFull(@ApiParam(value = "商店ID", required = true) Integer shopId, 
+			@ApiParam("ID") Integer id, @ApiParam("名") String tableName) {
 		if(shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
 		Wrapper<TableType> wrapper = new EntityWrapper<>();
 		wrapper.eq("shop_id", shopId);
 		if(id != null) wrapper.eq("id", id);
-		if(tableName != null) wrapper.eq("table_name", tableName);
+		if(StringUtils.isNotBlank(tableName)) wrapper.eq("table_name", tableName);
 		return ResponseDTO.success(tableTypeService.selectList(wrapper));
 	}
 	

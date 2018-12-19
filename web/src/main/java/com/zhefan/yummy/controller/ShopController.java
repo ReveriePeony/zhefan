@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,15 +57,15 @@ public class ShopController extends BaseController {
 		if (shop.getId() != null)
 			wrapper.eq("id", shop.getId());
 		wrapper.andNew().eq("1", "1");
-		if (shop.getShopName() != null)
+		if (StringUtils.isNotBlank(shop.getShopName()))
 			wrapper.or().like("shop_name", shop.getShopName());
-		if (shop.getAddress() != null)
+		if (StringUtils.isNotBlank(shop.getAddress()))
 			wrapper.or().like("price", shop.getAddress());
 		if (shop.getCreationTime() != null)
 			wrapper.like("creation_time", shop.getCreationTime());
 		if (shop.getStatus() != null)
 			wrapper.like("status", shop.getStatus());
-		if (shop.getShopTel() != null)
+		if (StringUtils.isNotBlank(shop.getShopTel()))
 			wrapper.like("shop_tel", shop.getShopTel());
 		shopService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);

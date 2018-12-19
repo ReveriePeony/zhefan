@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -54,7 +55,7 @@ public class RoleController extends BaseController {
 		Wrapper<Role> wrapper = new EntityWrapper<>();
 		if (role.getId() != null)
 			wrapper.eq("id", role.getId());
-		if (role.getRoleName() != null)
+		if (StringUtils.isNotBlank(role.getRoleName()))
 			wrapper.like("role_name", role.getRoleName());
 		roleService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);

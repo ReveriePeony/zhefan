@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -57,7 +58,7 @@ public class DishesClassController extends BaseController {
 		wrapper.eq("shop_id", classList.getShopId());
 		if (classList.getClassId() != null)
 			wrapper.eq("id", classList.getClassId());
-		if (classList.getClassName() != null)
+		if (StringUtils.isNotBlank(classList.getClassName()))
 			wrapper.eq("dishes_class_name", classList.getClassName());
 		return ResponseDTO.success(dishesClassService.selectPage(page, wrapper));
 	}

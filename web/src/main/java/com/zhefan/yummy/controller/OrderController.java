@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,14 +54,14 @@ public class OrderController extends BaseController {
 		wrapper.eq("gerent_id", gerentId).eq("shop_id", order.getShopId()).eq("being", Order.BEING);
 		if(order.getOrderId() != null) wrapper.eq("id", order.getOrderId());
 		wrapper.andNew().eq("1", "1");
-		if(order.getOrderNumber() != null) wrapper.or().like("order_number", order.getOrderNumber());
+		if(StringUtils.isNotBlank(order.getOrderNumber())) wrapper.or().like("order_number", order.getOrderNumber());
 		if(order.getPrice() != null) wrapper.or().like("price", order.getPrice());
 		if(order.getCreationTime() != null) wrapper.like("creation_time", order.getCreationTime());
 		if(order.getProcessTime() != null) wrapper.like("process_time", order.getProcessTime());
 		if(order.getBook() != null) wrapper.like("book", order.getBook());
 		if(order.getStatus() != null) wrapper.like("status", order.getStatus());
-		if(order.getAreaName() != null) wrapper.like("area_name", order.getAreaName());
-		if(order.getTableName() != null) wrapper.like("table_name", order.getTableName());
+		if(StringUtils.isNotBlank(order.getAreaName())) wrapper.like("area_name", order.getAreaName());
+		if(StringUtils.isNotBlank(order.getTableName())) wrapper.like("table_name", order.getTableName());
 		orderService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);
 	}

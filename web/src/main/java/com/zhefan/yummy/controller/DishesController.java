@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.LinkedMultiValueMap;
@@ -78,7 +79,7 @@ public class DishesController extends BaseController {
 		if (desh.getSoldOut() != null)
 			wrapper.eq("sold_out", desh.getSoldOut());
 		wrapper.andNew().eq("1", "1");
-		if (desh.getDishesName() != null)
+		if (StringUtils.isNotBlank(desh.getDishesName()))
 			wrapper.or().like("dishes_name", desh.getDishesName());
 		dishesService.selectPage(page, wrapper);
 		return ResponseDTO.success(page);

@@ -18,5 +18,25 @@
     <sql id="Base_Column_List">
         id, shop_id, table_type_id, area_id, table_name, creator_id, creation_time, remark
     </sql>
+    
+    <select id="selectPageVo" resultType="com.zhefan.yummy.vo.TableVo">
+    	SELECT a.id, a.shop_id shopId, a.table_type_id tableTypeId, b.table_type_name tableTypeName, 
+    		a.area_id areaId, a.table_name tableName, a.creator_id creatorId, a.creation_time creationTime, a.remark 
+		FROM t_table a 
+		LEFT JOIN t_table_type b ON a.table_type_id = b.id 
+		WHERE a.shop_id = #{table.shopId} 
+		<if test="table.id != null">
+			AND a.id = #{table.id} 
+		</if>
+		<if test="table.tableTypeId != null">
+			AND a.table_type_id = #{table.tableTypeId} 
+		</if>
+		<if test="table.creationTime != null">
+			AND a.creation_time = #{table.creationTime} 
+		</if>
+		<if test="table.tableName != null">
+			AND a.table_name LIKE #{table.tableName} 
+		</if>
+    </select>
 
 </mapper>
