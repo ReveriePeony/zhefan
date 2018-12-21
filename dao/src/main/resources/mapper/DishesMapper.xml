@@ -17,17 +17,18 @@
 		<result column="sold_out" property="soldOut" />
 		<result column="serial_no" property="serialNo" />
 		<result column="remark" property="remark" />
+		<result column="dishes_price" property="dishesPrice" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark
+        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark, dishes_price
     </sql>
 
 	<select id="selectPageFull" resultType="com.zhefan.yummy.vo.DishesVo">
 		SELECT d.id, d.gerent_id gerentId, d.shop_id shopId, d.dishes_class_id dishesClassId, 
 			d.dishes_name dishesName, d.dishes_img dishesImg, d.creation_time creationTime, d.creator, 
-			d.creator_id creatorId, d.`status`, d.sold_out soldOut, d.serial_no serialNo, d.remark, 
+			d.creator_id creatorId, d.`status`, d.sold_out soldOut, d.serial_no serialNo, d.remark, d.dishes_price dishesPrice, 
 			dc.dishes_class_name dishesClassName, dc.serial_no dishesClassSerialNo, dc.remark dishesClassRemark 
 		FROM t_dishes d 
 		JOIN t_dishes_class dc ON d.dishes_class_id = dc.id 

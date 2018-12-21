@@ -97,6 +97,11 @@ public class Dishes extends Model<Dishes> {
      */
 	@ApiModelProperty(value = "描述")
 	private String remark;
+	/**
+	 * 菜价格(分)
+	 */
+	@ApiModelProperty(value = "菜价格(分)")
+	private Integer dishesPrice;
 
 
 	@Override

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100137
 File Encoding         : 65001
 
-Date: 2018-12-19 14:49:57
+Date: 2018-12-21 15:34:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,6 +50,7 @@ CREATE TABLE `t_dishes` (
   `sold_out` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否售罄 0-false 1-true',
   `serial_no` int(3) NOT NULL DEFAULT '0' COMMENT '序号',
   `remark` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
+  `dishes_price` int(11) NOT NULL DEFAULT '0' COMMENT '菜价格(分)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='菜品';
 
@@ -73,11 +74,19 @@ CREATE TABLE `t_dishes_class` (
   `serial_no` int(3) NOT NULL DEFAULT '0' COMMENT '序号',
   `remark` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='菜品类型';
+) ENGINE=InnoDB AUTO_INCREMENT=1015 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='菜品类型';
 
 -- ----------------------------
 -- Records of t_dishes_class
 -- ----------------------------
+INSERT INTO `t_dishes_class` VALUES ('1007', '1000', '1000', '川菜', '2018-12-19 17:09:34', '管理员', '1000', '1', '1', null);
+INSERT INTO `t_dishes_class` VALUES ('1008', '1000', '1000', '湘菜', '2018-12-19 17:09:43', '管理员', '1000', '1', '2', null);
+INSERT INTO `t_dishes_class` VALUES ('1009', '1000', '1000', '粤菜', '2018-12-19 17:09:51', '管理员', '1000', '1', '3', null);
+INSERT INTO `t_dishes_class` VALUES ('1010', '1000', '1000', '东北菜', '2018-12-19 17:10:02', '管理员', '1000', '1', '4', null);
+INSERT INTO `t_dishes_class` VALUES ('1011', '1000', '1000', '小胖买的菜', '2018-12-19 17:10:10', '管理员', '1000', '1', '5', null);
+INSERT INTO `t_dishes_class` VALUES ('1012', '1000', '1000', '曾总的菜', '2018-12-19 17:10:21', '管理员', '1000', '1', '6', null);
+INSERT INTO `t_dishes_class` VALUES ('1013', '1000', '1000', '女生菜', '2018-12-19 17:10:43', '管理员', '1000', '1', '7', null);
+INSERT INTO `t_dishes_class` VALUES ('1014', '1000', '1000', '好菜', '2018-12-19 17:51:40', '管理员', '1000', '1', '8', null);
 
 -- ----------------------------
 -- Table structure for t_gerent
@@ -214,7 +223,7 @@ CREATE TABLE `t_shop` (
   `address` varchar(50) COLLATE utf8mb4_bin NOT NULL COMMENT '地址',
   `longitude` double(6,3) DEFAULT NULL COMMENT '经度',
   `latitude` double(6,3) DEFAULT NULL COMMENT '纬度',
-  `shop_img` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图片',
+  `shop_img` varchar(500) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图片',
   `creation_time` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '创建时间',
   `creator` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '创建者名称',
   `creator_id` int(11) NOT NULL COMMENT '创建者ID',
@@ -223,8 +232,18 @@ CREATE TABLE `t_shop` (
   `remark` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
   `shop_tel` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '店铺手机',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='店铺';
+) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='店铺';
 
+-- ----------------------------
+-- Records of t_shop
+-- ----------------------------
+INSERT INTO `t_shop` VALUES ('1000', '1000', '测试店', '地狱', '0.000', '0.000', 'upload/a9b7ba70783b617e9998dc4dd82eb3c5/1545121157072_y.jpg', '2018-12-18 16:20:39', '管理员', '1000', '1', '0', '备注', null);
+INSERT INTO `t_shop` VALUES ('1001', '1000', '测试店2', '地狱', '0.000', '0.000', 'upload/a9b7ba70783b617e9998dc4dd82eb3c5/1545121497106_y.jpg', '2018-12-18 16:25:13', '管理员', '1000', '1', '0', '备注', null);
+INSERT INTO `t_shop` VALUES ('1002', '1000', '测试店1', '地狱', '0.000', '0.000', 'uploadupload/a9b7ba70783b617e9998dc4dd82eb3c5/1545122377427_y.jpg', '2018-12-18 16:40:44', '管理员', '1000', '1', '1', '备注', null);
+INSERT INTO `t_shop` VALUES ('1003', '1000', '测试店1', '地狱', '0.000', '0.000', 'uploadupload/a9b7ba70783b617e9998dc4dd82eb3c5/1545122797778_y.jpg', '2018-12-18 16:47:47', '管理员', '1000', '1', '1', '备注', null);
+INSERT INTO `t_shop` VALUES ('1004', '1000', '测试店5', '地狱', '0.000', '0.000', 'upload/a9b7ba70783b617e9998dc4dd82eb3c5/1545122797778_y.jpg', '2018-12-18 16:48:05', '管理员', '1000', '1', '1', '备注', null);
+INSERT INTO `t_shop` VALUES ('1005', '1000', '测试店6', '地狱', '0.000', '0.000', 'upload/a9b7ba70783b617e9998dc4dd82eb3c5/1545122377427_y.jpg', '2018-12-18 16:48:35', '管理员', '1000', '1', '1', '备注', null);
+INSERT INTO `t_shop` VALUES ('1006', '1000', '测试店6', '地狱', '0.000', '0.000', 'upload/a9b7ba70783b617e9998dc4dd82eb3c5/1545122377427_y.jpg', '2018-12-18 16:48:52', '管理员', '1000', '1', '1', '备注', null);
 
 -- ----------------------------
 -- Table structure for t_table
@@ -234,17 +253,18 @@ CREATE TABLE `t_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_id` int(11) NOT NULL COMMENT '商家(后台)店铺ID',
   `table_type_id` int(11) NOT NULL COMMENT '餐桌类型ID',
-  `area_id` int(11) NOT NULL COMMENT '区域ID',
+  `area_id` int(11) DEFAULT NULL COMMENT '区域ID',
   `table_name` varchar(20) COLLATE utf8mb4_bin NOT NULL DEFAULT 'NON' COMMENT '餐桌名称(桌号)',
   `creator_id` int(11) NOT NULL COMMENT '创建者ID',
   `creation_time` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '创建时间',
   `remark` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='餐桌';
+) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='餐桌';
 
 -- ----------------------------
 -- Records of t_table
 -- ----------------------------
+INSERT INTO `t_table` VALUES ('1000', '1000', '1000', null, '1', '1000', '2018-12-19 17:28:52', null);
 
 -- ----------------------------
 -- Table structure for t_table_type
