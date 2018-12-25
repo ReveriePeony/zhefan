@@ -96,7 +96,7 @@ public class GerentController extends BaseController {
 				log.error(e.getMessage());
 			}
 			Wrapper<Shop> shopWrapper = new EntityWrapper<>();
-			shopWrapper.eq("gerent_id", gerent.getId());
+			shopWrapper.eq("status", Shop.STATUS_UP).eq("gerent_id", gerent.getId());
 			List<Shop> shops = shopService.selectList(shopWrapper);
 			JSONObject json = new JSONObject();
 			json.put("token", token);

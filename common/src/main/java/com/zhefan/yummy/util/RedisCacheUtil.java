@@ -31,6 +31,7 @@ public class RedisCacheUtil {
 	 *
 	 * @param pattern pattern
 	 */
+	@SuppressWarnings("unchecked")
 	public void removePattern(final String pattern) {
 		Set<String> keys = redisTemplate.keys(pattern);
 		if (keys.size() > 0)
@@ -42,6 +43,7 @@ public class RedisCacheUtil {
 	 *
 	 * @param key key
 	 */
+	@SuppressWarnings("unchecked")
 	public void remove(final String key) {
 		if (exists(key)) {
 			redisTemplate.delete(key);
@@ -54,6 +56,7 @@ public class RedisCacheUtil {
 	 * @param key key
 	 * @return boolean
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean exists(final String key) {
 		return redisTemplate.hasKey(key);
 	}
@@ -64,6 +67,7 @@ public class RedisCacheUtil {
 	 * @param key key
 	 * @return Object
 	 */
+	@SuppressWarnings("unchecked")
 	public Object get(final String key) {
 		ValueOperations<String, Object> operations = redisTemplate.opsForValue();
 		return operations.get(key);
@@ -88,6 +92,7 @@ public class RedisCacheUtil {
 	 * @param expireTime 过期时间
 	 * @return boolean
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean set(final String key, Object value, Long expireTime) {
 		ValueOperations<String, Object> operations = redisTemplate.opsForValue();
 		operations.set(key, value);

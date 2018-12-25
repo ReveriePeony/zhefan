@@ -1,6 +1,7 @@
 package com.zhefan.yummy.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -101,4 +102,10 @@ public class Order extends Model<Order> {
 		return this.id;
 	}
 
+	public static String createOrderNubmber() {
+		StringBuilder number = new StringBuilder("YM");
+		number.append(new SimpleDateFormat("yyyyMMddssmmHH").format(System.currentTimeMillis()));
+		number.append(Math.random() * 100);
+		return number.toString();
+	}
 }

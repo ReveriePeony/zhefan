@@ -39,7 +39,7 @@ import io.swagger.annotations.ApiOperation;
  * @author ReverirNight@Foxmail.com
  * @since 2018-11-12
  */
-@Api(tags = "菜品")
+@Api(tags = "角色")
 @RestController
 @RequestMapping("/role")
 public class RoleController extends BaseController {

@@ -1,5 +1,9 @@
 package com.zhefan.yummy.param;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,22 +24,26 @@ public class RequestDishes {
     /**
      * 商家(后台)账号ID
      */
-	@ApiModelProperty(value = "商家(后台)账号ID")
+	@ApiModelProperty(value = "商家(后台)账号ID", required = true)
+	@NotNull(message = "gerentId不能为空")
 	private Integer gerentId;
     /**
      * 商家(后台)店铺ID
      */
-	@ApiModelProperty(value = "商家(后台)店铺ID")
+	@ApiModelProperty(value = "商家(后台)店铺ID", required = true)
+	@NotNull(message = "shopId不能为空")
 	private Integer shopId;
     /**
      * 菜品类型ID
      */
-	@ApiModelProperty(value = "菜品类型ID")
+	@ApiModelProperty(value = "菜品类型ID", required = true)
+	@NotNull(message = "dishesClassId不能为空")
 	private Integer dishesClassId;
     /**
      * 菜品名称
      */
-	@ApiModelProperty(value = "菜品名称")
+	@ApiModelProperty(value = "菜品名称", required = true)
+	@NotBlank(message = "dishesName不能为空")
 	private String dishesName;
     /**
      * 菜品图片
@@ -52,5 +60,10 @@ public class RequestDishes {
      */
 	@ApiModelProperty(value = "描述")
 	private String remark;
-
+	/**
+	 * 菜价格(分)
+	 */
+	@ApiModelProperty(value = "菜价格(分)", required = true)
+	@NotNull(message = "dishesPrice不能为空")
+	private Integer dishesPrice;
 }

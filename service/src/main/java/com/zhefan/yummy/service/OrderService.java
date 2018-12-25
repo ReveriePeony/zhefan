@@ -1,6 +1,7 @@
 package com.zhefan.yummy.service;
 
 import com.zhefan.yummy.entity.Order;
+import com.zhefan.yummy.param.RequestOrderBook;
 import com.zhefan.yummy.base.BaseService;
 
 /**
@@ -12,5 +13,13 @@ import com.zhefan.yummy.base.BaseService;
  * @since 2018-11-12
  */
 public interface OrderService extends BaseService<Order> {
+
+	/**
+	 * 保存
+	 * @param bo
+	 * @param currentTime
+	 * @return
+	 */
+	boolean save(RequestOrderBook bo, String currentTime);
 	
 }

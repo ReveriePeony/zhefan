@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,23 +67,6 @@ public class OrderController extends BaseController {
 		return ResponseDTO.success(page);
 	}
 	
-//	@SuppressWarnings("rawtypes")
-//	@ApiOperation(value = "保存", notes = "保存")
-//	@PostMapping("save")
-//	public ResponseDTO save(@RequestBody RequestDishesClass clas, HttpServletRequest request) {
-//		Gerent gerent = getGerent(request);
-//		DishesClass entity = new DishesClass();
-//		BeanUtils.copyProperties(clas, entity);
-//		if(clas.getId() == null) {
-//			entity.setCreatorId(gerent.getId());
-//			entity.setCreationTime(getCurrentTime());
-//			entity.setCreator(gerent.getNick());
-//		}
-//		boolean b = dishesClassService.insertOrUpdate(entity);
-//		if(!b) return ResponseDTO.error();
-//		return ResponseDTO.success();
-//	}
-	
 	@SuppressWarnings("rawtypes")
 	@ApiOperation(value = "删除", notes = "删除")
 	@DeleteMapping("del")
@@ -95,6 +79,36 @@ public class OrderController extends BaseController {
 		entity.setBeing(Order.NON_BEING);
 		boolean b = orderService.update(entity, wrapper);
 		if(!b) return ResponseDTO.error(ResponseEnums.DELETE_ERROR);
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "取消", notes = "取消")
+	@PostMapping("cancel")
+	public ResponseDTO cancel(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.CANCEL_ERROR);
+		Wrapper<Order> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Order entity = new Order();
+		entity.setBeing(Order.STATUS_CANCEL);
+		boolean b = orderService.update(entity, wrapper);
+		if(!b) return ResponseDTO.error(ResponseEnums.CANCEL_ERROR);
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "完成", notes = "完成")
+	@PostMapping("wend")
+	public ResponseDTO wend(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.UPDATE_ERROR);
+		Wrapper<Order> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Order entity = new Order();
+		entity.setBeing(Order.STATUS_WEND);
+		boolean b = orderService.update(entity, wrapper);
+		if(!b) return ResponseDTO.error(ResponseEnums.UPDATE_ERROR);
 		return ResponseDTO.success();
 	}
 	
