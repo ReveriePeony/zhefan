@@ -97,4 +97,9 @@ public class DishesVo {
 	 */
 	@ApiModelProperty(value = "菜价格(分)")
 	private Integer dishesPrice;
+	/**
+	 * 推荐(1 = true，0 = false)
+	 */
+	@ApiModelProperty(value = "推荐(1 = true，0 = false)")
+	private Integer recommend;
 }

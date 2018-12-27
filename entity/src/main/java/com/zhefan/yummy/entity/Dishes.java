@@ -35,6 +35,10 @@ public class Dishes extends Model<Dishes> {
     public static final Integer SOLD_IN = 0;
     
     public static final Integer SOLD_OUT = 1;
+    
+    public static final Integer NOT_RECOMMEND = 0;
+    
+    public static final Integer RECOMMEND = 1;
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
@@ -81,12 +85,12 @@ public class Dishes extends Model<Dishes> {
      * 使用状态 0-下架 1-上架
      */
 	@ApiModelProperty(value = "使用状态 0-下架 1-上架")
-	private Integer status = 1;
+	private Integer status = STATUS_UP;
     /**
      * 是否售罄 0-false 1-true
      */
 	@ApiModelProperty(value = "是否售罄 0-false 1-true")
-	private Integer soldOut = 0;
+	private Integer soldOut = SOLD_IN;
     /**
      * 序号
      */
@@ -102,6 +106,11 @@ public class Dishes extends Model<Dishes> {
 	 */
 	@ApiModelProperty(value = "菜价格(分)")
 	private Integer dishesPrice;
+	/**
+	 * 推荐(1 = true，0 = false)
+	 */
+	@ApiModelProperty(value = "推荐(1 = true，0 = false)")
+	private Integer recommend = NOT_RECOMMEND;
 
 
 	@Override

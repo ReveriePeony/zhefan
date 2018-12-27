@@ -78,6 +78,8 @@ public class DishesController extends BaseController {
 			wrapper.eq("status", desh.getStatus());
 		if (desh.getSoldOut() != null)
 			wrapper.eq("sold_out", desh.getSoldOut());
+		if (desh.getRecommend() != null)
+			wrapper.eq("recommend", desh.getRecommend());
 		wrapper.andNew().eq("1", "1");
 		if (StringUtils.isNotBlank(desh.getDishesName()))
 			wrapper.or().like("dishes_name", desh.getDishesName());
@@ -132,7 +134,7 @@ public class DishesController extends BaseController {
 		Wrapper<Dishes> wrapper = new EntityWrapper<>();
 		wrapper.in("id", ids);
 		Dishes entity = new Dishes();
-		entity.setSoldOut(Dishes.STATUS_UP);
+		entity.setStatus(Dishes.STATUS_UP);
 		boolean b = dishesService.update(entity, wrapper);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.OPERATING_ERROR);
@@ -148,7 +150,7 @@ public class DishesController extends BaseController {
 		Wrapper<Dishes> wrapper = new EntityWrapper<>();
 		wrapper.in("id", ids);
 		Dishes entity = new Dishes();
-		entity.setSoldOut(Dishes.STATUS_DOWN);
+		entity.setStatus(Dishes.STATUS_DOWN);
 		boolean b = dishesService.update(entity, wrapper);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.OPERATING_ERROR);
@@ -181,6 +183,38 @@ public class DishesController extends BaseController {
 		wrapper.in("id", ids);
 		Dishes entity = new Dishes();
 		entity.setSoldOut(Dishes.SOLD_IN);
+		boolean b = dishesService.update(entity, wrapper);
+		if (!b)
+			return ResponseDTO.error(ResponseEnums.OPERATING_ERROR);
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "设为推荐", notes = "设为推荐")
+	@PostMapping("recommend")
+	public ResponseDTO recommend(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.ID_NULL);
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setRecommend(Dishes.RECOMMEND);
+		boolean b = dishesService.update(entity, wrapper);
+		if (!b)
+			return ResponseDTO.error(ResponseEnums.OPERATING_ERROR);
+		return ResponseDTO.success();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "取消推荐", notes = "取消推荐")
+	@PostMapping("cancelRecommend")
+	public ResponseDTO cancelRecommend(@RequestBody List<Integer> ids) {
+		if (ids == null || ids.size() == 0)
+			return ResponseDTO.error(ResponseEnums.ID_NULL);
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.in("id", ids);
+		Dishes entity = new Dishes();
+		entity.setRecommend(Dishes.NOT_RECOMMEND);
 		boolean b = dishesService.update(entity, wrapper);
 		if (!b)
 			return ResponseDTO.error(ResponseEnums.OPERATING_ERROR);

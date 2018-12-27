@@ -18,18 +18,19 @@
 		<result column="serial_no" property="serialNo" />
 		<result column="remark" property="remark" />
 		<result column="dishes_price" property="dishesPrice" />
+		<result column="recommend" property="recommend" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark, dishes_price
+        id, gerent_id, shop_id, dishes_class_id, dishes_name, dishes_img, creation_time, creator, creator_id, status, sold_out, serial_no, remark, dishes_price, recommend
     </sql>
 
 	<select id="selectPageFull" resultType="com.zhefan.yummy.vo.DishesVo">
 		SELECT d.id, d.gerent_id gerentId, d.shop_id shopId, d.dishes_class_id dishesClassId, 
 			d.dishes_name dishesName, d.dishes_img dishesImg, d.creation_time creationTime, d.creator, 
 			d.creator_id creatorId, d.`status`, d.sold_out soldOut, d.serial_no serialNo, d.remark, d.dishes_price dishesPrice, 
-			dc.dishes_class_name dishesClassName, dc.serial_no dishesClassSerialNo, dc.remark dishesClassRemark 
+			dc.dishes_class_name dishesClassName, dc.serial_no dishesClassSerialNo, dc.remark dishesClassRemark, d.recommend 
 		FROM t_dishes d 
 		JOIN t_dishes_class dc ON d.dishes_class_id = dc.id 
 		WHERE dc.`status` = 1 AND d.`status` = 1 AND d.shop_id = #{shopId} 

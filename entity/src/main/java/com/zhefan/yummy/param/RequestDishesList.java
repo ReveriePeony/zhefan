@@ -19,6 +19,7 @@ import lombok.NonNull;
 @Data
 public class RequestDishesList extends ParamPage{
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = -2819172618238908781L;
 
 	@ApiModelProperty(value = "菜品ID")
@@ -39,4 +40,7 @@ public class RequestDishesList extends ParamPage{
 
 	@ApiModelProperty(value = "是否售罄 0-false 1-true")
 	private Integer soldOut;
+	
+	@ApiModelProperty(value = "推荐(1 = true，0 = false)")
+	private Integer recommend;
 }
