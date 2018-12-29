@@ -27,6 +27,10 @@ import lombok.experimental.Accessors;
 public class DishesClass extends Model<DishesClass> {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final int STATUS_UP = 1;
+
+	public static final int STATUS_DOWN = 0;
 
 	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
@@ -61,7 +65,7 @@ public class DishesClass extends Model<DishesClass> {
 	 * 使用状态 0-注销 1-正常
 	 */
 	@ApiModelProperty("使用状态 0-注销 1-正常")
-	private Integer status = 1;
+	private Integer status = STATUS_UP;
 	/**
 	 * 序号
 	 */

@@ -89,7 +89,7 @@ public class Dishes extends Model<Dishes> {
     /**
      * 是否售罄 0-false 1-true
      */
-	@ApiModelProperty(value = "是否售罄 0-false 1-true")
+	@ApiModelProperty(value = "售罄 0-false 1-true")
 	private Integer soldOut = SOLD_IN;
     /**
      * 序号

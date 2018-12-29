@@ -55,7 +55,7 @@ public class DishesClassController extends BaseController {
 		if (classList.getShopId() == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
 		Page<DishesClass> page = classList.initPage();
 		Wrapper<DishesClass> wrapper = new EntityWrapper<>();
-		wrapper.eq("shop_id", classList.getShopId());
+		wrapper.eq("shop_id", classList.getShopId()).eq("status", DishesClass.STATUS_UP);
 		if (classList.getClassId() != null)
 			wrapper.eq("id", classList.getClassId());
 		if (StringUtils.isNotBlank(classList.getClassName()))
