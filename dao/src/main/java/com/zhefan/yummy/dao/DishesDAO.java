@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.zhefan.yummy.entity.Dishes;
+import com.zhefan.yummy.vo.DishesClassVO;
 import com.zhefan.yummy.vo.DishesVo;
 
 /**
@@ -20,4 +21,5 @@ public interface DishesDAO extends BaseMapper<Dishes> {
 
 	List<DishesVo> selectPageFull(@Param("shopId") Integer shopId, @Param("keyword") String keyword);
 
+	List<DishesClassVO> selectAllForMobile(@Param("shopId") Integer shopId, @Param("keyword") String keyword);
 }

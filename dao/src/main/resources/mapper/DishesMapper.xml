@@ -38,4 +38,35 @@
 		ORDER BY dc.serial_no, d.serial_no 
 	</select>
 
+	<select id="selectFull" resultType="com.zhefan.yummy.vo.DishesVo">
+		SELECT 
+			d.id, d.id dishesId, d.gerent_id gerentId, d.shop_id shopId, d.dishes_class_id dishesClassId, 
+			d.dishes_name dishesName, d.dishes_img dishesImg, d.creation_time creationTime, d.creator, 
+			d.creator_id creatorId, d.`status`, d.sold_out soldOut, d.serial_no serialNo, 
+			d.remark, d.dishes_price dishesPrice  
+		FROM t_dishes d 
+		WHERE d.dishes_class_id = #{id} 
+			AND d.`status` = 1 
+		ORDER BY d.serial_no 
+	</select>
+	
+	<resultMap type="com.zhefan.yummy.vo.DishesClassVO" id="DishesClassVOID">
+		<association property="dishes" select="selectFull" column="id"></association>
+	</resultMap>
+	<select id="selectAllForMobile" resultMap="DishesClassVOID">
+		SELECT 
+		id, 
+		id dishesClassId, 
+		gerent_id gerentId, 
+		shop_id shopId, 
+		dishes_class_name dishesClassName, 
+		creation_time creationTime, 
+		creator, 
+		`status`, 
+		remark 
+		FROM t_dishes_class 
+		WHERE shop_id = #{shopId} AND `status` = 1 AND dishes_class_name LIKE #{keyword} 
+		ORDER BY serial_no 
+	</select>
+	
 </mapper>

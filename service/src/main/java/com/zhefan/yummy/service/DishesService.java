@@ -6,6 +6,7 @@ import com.zhefan.yummy.base.BaseService;
 import com.zhefan.yummy.entity.Dishes;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.param.RequestDishes;
+import com.zhefan.yummy.vo.DishesClassVO;
 import com.zhefan.yummy.vo.DishesVo;
 
 /**
@@ -28,5 +29,21 @@ public interface DishesService extends BaseService<Dishes> {
 	 * @return
 	 */
 	boolean save(RequestDishes clas, Gerent gerent, Object fileToken);
+
+	/**
+	 * 全菜品 mobile
+	 * @param shopId
+	 * @param keyword
+	 * @return
+	 */
+	List<DishesClassVO> queryAllDishesForClass(Integer shopId, String keyword);
+
+	/**
+	 * 全菜品 mobile
+	 * @param shopId
+	 * @param keyword
+	 * @return
+	 */
+	List<DishesClassVO> selectAllForMobile(Integer shopId, String keyword);
 	
 }

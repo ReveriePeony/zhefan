@@ -32,7 +32,7 @@ public class DishesVo {
 	@ApiModelProperty(value = "菜品类型描述")
 	private String dishesClassRemark;
 
-	private Integer id;
+	private Integer dishesId;
     /**
      * 商家(后台)账号ID
      */

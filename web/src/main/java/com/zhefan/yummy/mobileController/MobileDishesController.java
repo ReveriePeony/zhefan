@@ -17,6 +17,7 @@ import com.zhefan.yummy.entity.Dishes;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.param.RequestDishesList;
 import com.zhefan.yummy.service.DishesService;
+import com.zhefan.yummy.vo.DishesClassVO;
 import com.zhefan.yummy.vo.DishesVo;
 
 import io.swagger.annotations.Api;
@@ -62,6 +63,14 @@ public class MobileDishesController extends BaseController {
 	public ResponseDTO<List<DishesVo>> listFull(@ApiParam("商铺ID") Integer shopId, @ApiParam("关键字") String keyword) {
 		if (shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
 		return ResponseDTO.success(dishesService.selectPageFull(shopId, keyword));
+	}
+	
+	@ApiOperation(value = "列表 All", notes = "列表 All")
+	@GetMapping("listAll")
+	public ResponseDTO<List<DishesClassVO>> listAll(@ApiParam("商铺ID") Integer shopId, @ApiParam("关键字") String keyword) {
+		if (shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
+//		return ResponseDTO.success(dishesService.queryAllDishesForClass(shopId, keyword));
+		return ResponseDTO.success(dishesService.selectAllForMobile(shopId, keyword));
 	}
 	
 }

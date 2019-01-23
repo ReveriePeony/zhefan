@@ -1,6 +1,7 @@
 package com.zhefan.yummy.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseServiceImpl;
 import com.zhefan.yummy.dao.DishesDAO;
 import com.zhefan.yummy.entity.Dishes;
+import com.zhefan.yummy.entity.DishesClass;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.param.RequestDishes;
+import com.zhefan.yummy.service.DishesClassService;
 import com.zhefan.yummy.service.DishesService;
+import com.zhefan.yummy.vo.DishesClassVO;
 import com.zhefan.yummy.vo.DishesVo;
 
 /**
@@ -38,6 +42,9 @@ public class DishesServiceImpl extends BaseServiceImpl<DishesDAO, Dishes> implem
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private DishesClassService dishesClassService;
 
 	@Value("${file.url.change}")
 	private String changeUrl;
@@ -47,7 +54,7 @@ public class DishesServiceImpl extends BaseServiceImpl<DishesDAO, Dishes> implem
 	
 	@Override
 	public List<DishesVo> selectPageFull(Integer shopId, String keyword) {
-		return dishesDAO.selectPageFull(shopId, keyword);
+		return dishesDAO.selectPageFull(shopId, "%" + keyword + "%");
 	}
 
 	@Override
@@ -92,6 +99,44 @@ public class DishesServiceImpl extends BaseServiceImpl<DishesDAO, Dishes> implem
 			}
 		}
 		return insertOrUpdate(entity);
+	}
+
+	@Override
+	public List<DishesClassVO> queryAllDishesForClass(Integer shopId, String keyword) {
+		Wrapper<DishesClass> classWrapper = new EntityWrapper<>();
+		classWrapper.eq("shop_id", shopId);
+		classWrapper.andNew().eq("1", "1");
+		if(keyword != null) classWrapper.or().like("dishes_class_name", keyword);
+		List<DishesClass> classes = dishesClassService.selectList(classWrapper);
+		
+		Wrapper<Dishes> wrapper = new EntityWrapper<>();
+		wrapper.eq("shop_id", shopId);
+		wrapper.andNew().eq("1", "1");
+		if(keyword != null) wrapper.or().like("dishes_name", keyword);
+		List<Dishes> dishes = selectList(wrapper);
+		
+		List<DishesClassVO> classVOs = new ArrayList<>();
+		for(DishesClass dc : classes) {
+			DishesClassVO classVO = new DishesClassVO();
+			BeanUtils.copyProperties(dc, classVO);
+			List<DishesVo> dishesVos = new ArrayList<>();
+			for(Dishes d : dishes) {
+				if(d.getDishesClassId().equals(dc.getId())) {
+					DishesVo dishesVo = new DishesVo();
+					BeanUtils.copyProperties(d, dishesVo);
+					dishesVos.add(dishesVo);
+				}
+				classVO.setDishes(dishesVos);
+			}
+			classVOs.add(classVO);
+		}
+		return classVOs;
+	}
+
+	@Override
+	public List<DishesClassVO> selectAllForMobile(Integer shopId, String keyword) {
+		keyword = keyword == null ? "" : keyword; 
+		return dishesDAO.selectAllForMobile(shopId, "%" + keyword + "%");
 	}
 
 }
