@@ -21,7 +21,44 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, gerent_id, shop_id, order_number, price, creation_time, process_time, book, book_id, status, area_name, table_name
+        id, gerent_id, shop_id, order_number, price, creation_time, process_time, book, book_id, status, area_name, table_name, being
     </sql>
+    
+    <select id="selectDetailFull" resultType="com.zhefan.yummy.vo.OrderDetailVO">
+    	SELECT id, 
+			order_id orderId, 
+			count, 
+			price, 
+			dishes_type_name dishesTypeName, 
+			dishes_name dishesName, 
+			creation_time creationTime 
+		FROM `t_order_detail` 
+		WHERE order_id = #{id} 
+    </select>
 
+	<resultMap type="com.zhefan.yummy.vo.OrderVO" id="OrderVOID">
+		<association property="orderDetails" select="selectDetailFull" column="id"></association>
+	</resultMap>
+	<select id="queryMobileListAll" resultMap="OrderVOID">
+		SELECT 
+			id, 
+			gerent_id gerentId, 
+			shop_id shopId, 
+			order_number orderNumber, 
+			price, 
+			creation_time creationTime, 
+			process_time processTime, 
+			book, 
+			book_id bookId, 
+			status, 
+			area_name areaName, 
+			table_name tableName
+		FROM `t_order` 
+		WHERE being = 1 
+		AND shop_id = #{shopId} 
+		AND table_name = #{tableName} 
+		AND order_number like #{keyword} 
+		ORDER BY id DESC 
+	</select>
+	
 </mapper>

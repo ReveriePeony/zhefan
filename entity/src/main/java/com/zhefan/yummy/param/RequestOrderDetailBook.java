@@ -17,8 +17,8 @@ public class RequestOrderDetailBook {
 	@ApiModelProperty(value = "数量", required = true)
 	private Integer count;
 	
-	@ApiModelProperty(value = "单价(分)", required = true)
-	private Integer price;
+	@ApiModelProperty(value = "单价()", required = true)
+	private Double price;
 	
 	@ApiModelProperty(value = "菜品类型名称", required = true)
 	private String dishesTypeName;

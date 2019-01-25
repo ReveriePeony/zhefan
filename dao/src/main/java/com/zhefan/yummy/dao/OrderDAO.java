@@ -1,7 +1,12 @@
 package com.zhefan.yummy.dao;
 
-import com.zhefan.yummy.entity.Order;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.zhefan.yummy.entity.Order;
+import com.zhefan.yummy.vo.OrderVO;
 
 /**
  * <p>
@@ -12,5 +17,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-11-12
  */
 public interface OrderDAO extends BaseMapper<Order> {
+
+	List<OrderVO> queryMobileListAll(@Param("shopId") Integer shopId, @Param("tableName") String tableName,
+			@Param("keyword") String keyword);
 
 }

@@ -27,6 +27,7 @@ public enum ResponseEnums {
     FILE_SAVE_ERROR(1014, "文件保存失败"),
     CANCEL_ERROR(1015, "取消失败"),
     UPDATE_ERROR(1016, "更新失败"),
+    TABLENAME_NULL(1017, "桌号不能为空"),
 
     IMAGE_ERROR(1999, "图片保存失败"),
 

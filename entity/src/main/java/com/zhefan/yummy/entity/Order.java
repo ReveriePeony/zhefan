@@ -59,8 +59,8 @@ public class Order extends Model<Order> {
 	/**
 	 * 价格
 	 */
-	@ApiModelProperty("价格(分)")
-	private Integer price;
+	@ApiModelProperty("价格()")
+	private Double price;
 	/**
 	 * (下单)创建时间
 	 */

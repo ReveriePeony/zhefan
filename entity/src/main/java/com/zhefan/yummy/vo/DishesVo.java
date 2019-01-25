@@ -93,10 +93,10 @@ public class DishesVo {
 	@ApiModelProperty(value = "描述")
 	private String remark;
 	/**
-	 * 菜价格(分)
+	 * 菜价格()
 	 */
-	@ApiModelProperty(value = "菜价格(分)")
-	private Integer dishesPrice;
+	@ApiModelProperty(value = "菜价格()")
+	private Double dishesPrice;
 	/**
 	 * 推荐(1 = true，0 = false)
 	 */

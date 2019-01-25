@@ -61,9 +61,9 @@ public class RequestDishes {
 	@ApiModelProperty(value = "描述")
 	private String remark;
 	/**
-	 * 菜价格(分)
+	 * 菜价格()
 	 */
-	@ApiModelProperty(value = "菜价格(分)", required = true)
+	@ApiModelProperty(value = "菜价格()", required = true)
 	@NotNull(message = "dishesPrice不能为空")
-	private Integer dishesPrice;
+	private Double dishesPrice;
 }
