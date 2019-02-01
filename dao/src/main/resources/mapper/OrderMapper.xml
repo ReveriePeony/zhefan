@@ -56,7 +56,7 @@
 		FROM `t_order` 
 		WHERE being = 1 
 		AND shop_id = #{shopId} 
-		AND table_name = #{tableName} 
+		AND book_id = #{bookId} 
 		AND order_number like #{keyword} 
 		ORDER BY id DESC 
 	</select>

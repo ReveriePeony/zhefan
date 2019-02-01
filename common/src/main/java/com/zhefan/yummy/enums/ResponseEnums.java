@@ -28,6 +28,8 @@ public enum ResponseEnums {
     CANCEL_ERROR(1015, "取消失败"),
     UPDATE_ERROR(1016, "更新失败"),
     TABLENAME_NULL(1017, "桌号不能为空"),
+    USER_ID_IS_NULL(1017, "用户ID不能为空"),
+    WX_REQUET_ERROR(1018, "访问微信服务器失败"),
 
     IMAGE_ERROR(1999, "图片保存失败"),
 

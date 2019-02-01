@@ -1,7 +1,9 @@
 package com.zhefan.yummy.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -53,12 +55,17 @@ public class User extends Model<User> {
 	 * 状态 0-注销 1-正常
 	 */
 	@ApiModelProperty("状态 0-注销 1-正常")
-	private Integer status;
+	private Integer status = 1;
 	/**
 	 * 微信授权信息 用户的唯一标识
 	 */
 	@ApiModelProperty("微信授权信息 用户的唯一标识")
 	private String openid;
+	/**
+	 * 微信授权信息 用户在开放平台的唯一标识符
+	 */
+	@ApiModelProperty("微信授权信息 用户在开放平台的唯一标识符")
+	private String unionid;
 	/**
 	 * 微信授权信息 用户昵称
 	 */
@@ -100,4 +107,18 @@ public class User extends Model<User> {
 		return this.id;
 	}
 
+	public void copyUserInfo(JSONObject userInfo) {
+		this.name = userInfo.getString("nickName");
+		this.avatar = userInfo.getString("avatarUrl");
+		this.creationTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+		this.openid = userInfo.getString("openId");
+		this.unionid = userInfo.getString("unionId");
+		this.nickname = userInfo.getString("nickName");
+		this.sex = userInfo.getInteger("gender");
+		this.province = userInfo.getString("province");
+		this.city = userInfo.getString("city");
+		this.country = userInfo.getString("country");
+		this.headimgurl = userInfo.getString("avatarUrl");
+	}
+	
 }

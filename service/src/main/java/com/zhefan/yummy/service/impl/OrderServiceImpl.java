@@ -43,8 +43,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDAO, Order> implement
 		final Order order = new Order();
 		BeanUtils.copyProperties(bo, order);
 		//保留字段
-		order.setBookId(0);
-		order.setBook("暂无");
+//		order.setBookId(0);
+//		order.setBook("暂无");
 		//
 		order.setOrderNumber(Order.createOrderNubmber());
 		order.setCreationTime(currentTime);
@@ -64,9 +64,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDAO, Order> implement
 	}
 
 	@Override
-	public List<OrderVO> queryMobileListAll(Integer shopId, String tableName, String keyword) {
+	public List<OrderVO> queryMobileListAll(Integer shopId, Integer bookId, String keyword) {
 		keyword = keyword == null ? "" : keyword; 
-		return orderDAO.queryMobileListAll(shopId, tableName, "%" + keyword + "%");
+		return orderDAO.queryMobileListAll(shopId, bookId, "%" + keyword + "%");
 	}
 	
 }

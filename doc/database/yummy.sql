@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100137
 File Encoding         : 65001
 
-Date: 2019-01-25 10:18:33
+Date: 2019-01-30 16:04:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -150,7 +150,7 @@ CREATE TABLE `t_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gerent_id` int(11) NOT NULL COMMENT '商家(后台)账号ID',
   `shop_id` int(11) NOT NULL COMMENT '商家(后台)店铺ID',
-  `order_number` varchar(30) COLLATE utf8mb4_bin NOT NULL DEFAULT 'NON' COMMENT '订单号',
+  `order_number` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT 'NON' COMMENT '订单号',
   `price` double(10,2) DEFAULT '0.00' COMMENT '价格',
   `creation_time` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '(下单)创建时间',
   `process_time` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '状态时间',
@@ -161,11 +161,13 @@ CREATE TABLE `t_order` (
   `table_name` varchar(20) COLLATE utf8mb4_bin NOT NULL DEFAULT '无名' COMMENT '桌号',
   `being` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-false，1-true',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=1003 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='订单';
 
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
+INSERT INTO `t_order` VALUES ('1001', '1000', '1000', 'YM2019012544341656.5117038964482', '0.13', '2019-01-25 16:34:13', null, '暂无', '0', '0', '没', '⑥', '1');
+INSERT INTO `t_order` VALUES ('1002', '1000', '1000', 'YM2019012803041460.26841438337607', '275.00', '2019-01-28 14:04:03', null, '暂无', '0', '0', '无名', '3', '1');
 
 -- ----------------------------
 -- Table structure for t_order_detail
@@ -180,11 +182,15 @@ CREATE TABLE `t_order_detail` (
   `dishes_name` varchar(20) COLLATE utf8mb4_bin NOT NULL DEFAULT '无名' COMMENT '菜品名称',
   `creation_time` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '(下单)创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='订单详情';
+) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='订单详情';
 
 -- ----------------------------
 -- Records of t_order_detail
 -- ----------------------------
+INSERT INTO `t_order_detail` VALUES ('1000', '1001', '12', '0.01', '炒菜', '爆炒老板', '2019-01-25 16:34:13');
+INSERT INTO `t_order_detail` VALUES ('1001', '1001', '1', '0.01', '炖菜', '姜葱炖老板', '2019-01-25 16:34:13');
+INSERT INTO `t_order_detail` VALUES ('1002', '1002', '1', '120.00', '川菜', '辣子鸡', '2019-01-28 14:04:03');
+INSERT INTO `t_order_detail` VALUES ('1003', '1002', '1', '155.00', '川菜', '麻婆豆腐', '2019-01-28 14:04:03');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -305,19 +311,20 @@ INSERT INTO `t_table_type` VALUES ('1000', '1000', '母鸡', '1000', '2018-11-29
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) COLLATE utf8mb4_bin NOT NULL DEFAULT '无名' COMMENT '名称',
+  `name` varchar(20) COLLATE utf8mb4_bin DEFAULT '无名' COMMENT '名称',
   `avatar` varchar(500) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
   `password` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT 'E10ADC3949BA59ABBE56E057F20F883E' COMMENT '密码',
   `creation_time` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '创建时间',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态 0-注销 1-正常',
-  `openid` varchar(100) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户的唯一标识',
-  `nickname` varchar(50) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户昵称',
-  `sex` tinyint(1) NOT NULL COMMENT '微信授权信息 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
-  `province` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户填写的省份',
-  `city` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户填写的城市',
-  `country` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 国家',
-  `headimgurl` varchar(500) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户头像',
-  `privilege` varchar(500) COLLATE utf8mb4_bin NOT NULL COMMENT '微信授权信息 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）',
+  `openid` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户的唯一标识',
+  `unionid` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户在开放平台的唯一标识符',
+  `nickname` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户昵称',
+  `sex` tinyint(1) DEFAULT NULL COMMENT '微信授权信息 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
+  `province` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户填写的省份',
+  `city` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户填写的城市',
+  `country` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 国家',
+  `headimgurl` varchar(500) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户头像',
+  `privilege` varchar(500) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信授权信息 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）',
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户';

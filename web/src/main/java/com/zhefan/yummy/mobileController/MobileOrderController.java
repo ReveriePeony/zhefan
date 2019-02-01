@@ -51,11 +51,11 @@ public class MobileOrderController extends BaseController {
 
 	@ApiOperation(value = "列表", notes = "列表")
 	@GetMapping("listAll")
-	public ResponseDTO<List<OrderVO>> listAll(@ApiParam("商铺ID") Integer shopId, @ApiParam("桌号") String tableName, 
+	public ResponseDTO<List<OrderVO>> listAll(@ApiParam("商铺ID") Integer shopId, @ApiParam("用户ID") Integer bookId, 
 			@ApiParam("关键字") String keyword) {
 		if (shopId == null) return ResponseDTO.error(ResponseEnums.SHOP_ID_NULL);
-		if (tableName == null) return ResponseDTO.error(ResponseEnums.TABLENAME_NULL);
-		return ResponseDTO.success(orderService.queryMobileListAll(shopId, tableName, keyword));
+		if (bookId == null) return ResponseDTO.error(ResponseEnums.USER_ID_IS_NULL);
+		return ResponseDTO.success(orderService.queryMobileListAll(shopId, bookId, keyword));
 	}
 	
 }

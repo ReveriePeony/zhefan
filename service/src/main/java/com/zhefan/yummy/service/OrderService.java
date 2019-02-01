@@ -25,6 +25,6 @@ public interface OrderService extends BaseService<Order> {
 	 */
 	boolean save(RequestOrderBook bo, String currentTime);
 
-	List<OrderVO> queryMobileListAll(Integer shopId, String tableName, String keyword);
+	List<OrderVO> queryMobileListAll(Integer shopId, Integer bookId, String keyword);
 	
 }

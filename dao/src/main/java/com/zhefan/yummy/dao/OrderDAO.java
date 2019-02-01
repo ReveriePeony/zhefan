@@ -18,7 +18,7 @@ import com.zhefan.yummy.vo.OrderVO;
  */
 public interface OrderDAO extends BaseMapper<Order> {
 
-	List<OrderVO> queryMobileListAll(@Param("shopId") Integer shopId, @Param("tableName") String tableName,
+	List<OrderVO> queryMobileListAll(@Param("shopId") Integer shopId, @Param("bookId") Integer bookId,
 			@Param("keyword") String keyword);
 
 }

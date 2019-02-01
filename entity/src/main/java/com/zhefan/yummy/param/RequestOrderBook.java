@@ -39,10 +39,10 @@ public class RequestOrderBook{
 	@NotBlank(message = "桌号不能为空")
 	private String tableName;
 	
-//	@ApiModelProperty(value = "下单者名称", required = true)
+	@ApiModelProperty(value = "下单者名称", required = true)
 	private String book;
 
-//	@ApiModelProperty(value = "下单者ID", required = true)
+	@ApiModelProperty(value = "下单者ID", required = true)
 	private Integer bookId;
 	
 	@ApiModelProperty(value = "详细")
