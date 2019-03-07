@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import com.alibaba.fastjson.JSONObject;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.enums.ResponseEnums;
-import com.zhefan.yummy.exception.BaseException;
 import com.zhefan.yummy.exception.ResponseEntityException;
 import com.zhefan.yummy.util.RedisCacheUtil;
+import com.zhefan.yummy.util.SessionUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,16 +48,16 @@ public abstract class BaseController {
 	}
 
 	protected Gerent getGerent(HttpServletRequest request) {
-		String token = request.getHeader("token");
-		if (token == null) {
-			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
-		}
-		Object object = redisCacheUtil.get(token);
-		if (object == null) {
-			throw new BaseException(ResponseEnums.JWT_TOKEN_EXPIRED, "/login");
-		}
-		return JSONObject.parseObject(object.toString(), Gerent.class);
-//		return SessionUtil.getLoginBean(request);
+//		String token = request.getHeader("token");
+//		if (token == null) {
+//			throw new BaseException(ResponseEnums.NEED_LOGIN, "/login");
+//		}
+//		Object object = redisCacheUtil.get(token);
+//		if (object == null) {
+//			throw new BaseException(ResponseEnums.JWT_TOKEN_EXPIRED, "/login");
+//		}
+//		return JSONObject.parseObject(object.toString(), Gerent.class);
+		return SessionUtil.getLoginBean(request);
 	}
 
 	protected String getRealPath(String path, HttpServletRequest request) {

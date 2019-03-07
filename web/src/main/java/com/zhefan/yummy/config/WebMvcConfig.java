@@ -81,5 +81,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		source.registerCorsConfiguration("/**", buildConfig());
 		return new CorsFilter(source);
 	}
-
 }

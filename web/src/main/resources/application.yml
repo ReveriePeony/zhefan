@@ -81,10 +81,10 @@ spring:
             enable: true
             required: true
     
-#redisSession:
-#  cookieName: JSESSIONID
-#  cookiePath: /
-#  domainName: localhost
+redisSession:
+  cookieName: JSESSIONID
+  cookiePath: /
+  domainName: huzhenquan.com
 
 ######################## 日志 ########################
 logging:

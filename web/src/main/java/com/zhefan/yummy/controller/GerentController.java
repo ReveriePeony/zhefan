@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -103,7 +104,7 @@ public class GerentController extends BaseController {
 			json.put("shops", shops);
 			return ResponseDTO.success("success", json);
 		}
-		return ResponseDTO.error(ResponseEnums.LOGIN_ERROR);
+		return ResponseDTO.error(ResponseEnums.ACCOUNT_PWD_ERROR);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -162,4 +163,12 @@ public class GerentController extends BaseController {
 		return ResponseDTO.success();
 	}
 
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "登出", notes = "登出")
+	@PostMapping("logout")
+	public ResponseDTO logout(HttpServletRequest request, HttpServletResponse response) {
+		SessionUtil.setLogout(request, response);
+		return ResponseDTO.success();
+	}
+	
 }

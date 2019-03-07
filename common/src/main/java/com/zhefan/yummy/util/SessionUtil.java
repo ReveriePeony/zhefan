@@ -1,6 +1,8 @@
 package com.zhefan.yummy.util;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.zhefan.yummy.entity.Gerent;
@@ -37,6 +39,14 @@ public class SessionUtil {
 			return JSON.parseObject(sessionObj.toString(), Gerent.class);
 		}
 		return null;
+	}
+
+	public static void setLogout(HttpServletRequest request, HttpServletResponse response) {
+		Cookie cookie = new Cookie("JSESSIONID", "");
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		request.getSession().removeAttribute(LOGIN_INFO);
 	}
 	
 	

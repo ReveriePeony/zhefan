@@ -45,7 +45,7 @@ public class WeiXinAPIController extends BaseController {
 	@Value("${wx.appsecrret}")
 	private String appsecrret;
 	
-	@ApiOperation(value = "微信登录", notes = "微信登录")
+	@ApiOperation(value = "微信登录(小程序)", notes = "微信登录(小程序)")
 	@GetMapping("auth")
 	public ResponseDTO<UserVO> auth(@ApiParam("code") String code, @ApiParam("iv") String iv,
 			@ApiParam("encryptedData") String encryptedData) {

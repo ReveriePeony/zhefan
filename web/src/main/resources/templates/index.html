@@ -17,7 +17,8 @@
 					url: '/gerent/login',
 					type: 'POST',
 					async: false,
-					data: {name: name, password: password},
+					data: '{"name": "'+name+'", "password": "'+password+'"}',
+					contentType: 'application/json',
 					dataType: 'JSON',
 					success: function(data){
 						console.log(data);
@@ -29,6 +30,9 @@
 			});
 			$('#ccc').on('click', function(){
 				cornTest();
+			});
+			$('#logout').on('click', function(){
+				logout();
 			});
 		});
 		
@@ -47,6 +51,20 @@
 				}
 			});
 		}
+		var logout = function() {
+			$.ajax({
+				url: '/gerent/logout',
+				type: 'POST',
+				async: false,
+				dataType: 'JSON',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(xmlhq, status, thr){
+					console.log(xmlhq);
+				}
+			});
+		}
 	</script>
 </head>
 <body>
@@ -55,6 +73,7 @@
 		<input type="password" id="password">
 		<input type="button" value="aaaa" id="submit">
 		<input type="button" value="ccc" id="ccc">
+		<input type="button" value="logout" id="logout">
 	</div>
 </body>
 </html>
