@@ -1,6 +1,7 @@
 package com.zhefan.yummy.util;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -20,6 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.codehaus.xfire.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -41,18 +43,26 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class WXUtils {
 
+	private static final String LANG = "zh_CN";
+
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Value("${wx.appid}")
+	private String appid;
+	
+	@Value("${wx.appsecrret}")
+	private String appsecrret;
+	
 	/**
 	 * 
-	 * @return access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+	 * @return 小程序 access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
 		expires_in	access_token接口调用凭证超时时间，单位（秒）
 		refresh_token	用户刷新access_token
 		openid	用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 		scope	用户授权的作用域，使用逗号（,）分隔
 	 */
-	public JSONObject getAccessToken(String appid, String appsecrret) {
+	public JSONObject getMiniAccessToken(String appid, String appsecrret) {
 		String url = String.format(
 				"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", 
 				appid, appsecrret);
@@ -86,7 +96,7 @@ public class WXUtils {
 	}
 	
 	/**
-	 * 公众号 获取用户基本信息(UnionID机制)
+	 * 小程序 公众号 获取用户基本信息(UnionID机制)
 	 * @return {
 		    "subscribe": 1, 
 		    "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M", 
@@ -108,10 +118,10 @@ public class WXUtils {
 		}
 		{"errcode":40013,"errmsg":"invalid appid"}
 	 */
-	public JSONObject getUserInfo(String openid, String appid, String appsecrret) {
+	public JSONObject getMiniUserInfo(String openid, String appid, String appsecrret) {
 		String url = String.format(
 				"https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN", 
-				getAccessToken(appid, appsecrret).getString("access_token"), openid);
+				getMiniAccessToken(appid, appsecrret).getString("access_token"), openid);
 		ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url, JSONObject.class, new Object() {});
 		if(responseEntity.getStatusCodeValue() != 200) {
 			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
@@ -198,6 +208,56 @@ public class WXUtils {
 		}
 		return null;
 
+	}
+
+	/**
+	 * 获取H5微信授权URL
+	 * @param reUrl 回调路径
+	 * @param state 保留数据
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String getOauth2Url(String reUrl, String state) throws UnsupportedEncodingException {
+		
+		StringBuilder oauthUrl = new StringBuilder("https://open.weixin.qq.com/connect/oauth2/authorize?appid=");
+		oauthUrl.append(appid);
+		oauthUrl.append("&redirect_uri=");
+		oauthUrl.append(URLEncoder.encode(reUrl, "UTF-8"));
+		oauthUrl.append("&response_type=code&scope=snsapi_userinfo&state=");
+		oauthUrl.append(state);
+		oauthUrl.append("#wechat_redirect");
+		return oauthUrl.toString();
+	}
+	
+	/**
+	 * 通过code换取网页授权access_token
+	 * @param code
+	 * @return
+	 */
+	public JSONObject getH5AccessToken(String code) {
+		String url = String.format(
+				"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code", 
+				appid, appsecrret, code);
+		ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url, JSONObject.class, new Object() {});
+		if(responseEntity.getStatusCodeValue() != 200) {
+			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
+		}
+		return responseEntity.getBody();
+	}
+	
+	/**
+	 * 拉取用户信息(需scope为 snsapi_userinfo)
+	 * @return
+	 */
+	public JSONObject getH5UserInfo(String accessToken, String openid, String lang) {
+		String url = String.format(
+				"https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=%s", 
+				accessToken, openid, lang == null ? LANG : lang);
+		ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url, JSONObject.class, new Object() {});
+		if(responseEntity.getStatusCodeValue() != 200) {
+			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
+		}
+		return responseEntity.getBody();
 	}
 	
 }
