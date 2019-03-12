@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>登录</title>
+<meta name=viewport
+	content="width=device-width,initial-scale=1,maximum-scale=1">
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: '/mobile/wx/getUser',
+				type: 'POST',
+				async: false,
+				data: {token: getParam('token')},
+				dataType: 'JSON',
+				success: function(data){
+					$('div').html(data);
+				},
+				error: function(xmlhq, status, thr){
+					console.log(xmlhq);
+				}
+			});
+		});
+		
+		function getParam(paramName) { 
+		    paramValue = "", isFound = !1; 
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) { 
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0; 
+		        while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++ 
+		    } 
+		    return paramValue == "" && (paramValue = null), paramValue 
+		} 
+	</script>
+</head>
+<body>
+	<div>
+		
+	</div>
+</body>
+</html>

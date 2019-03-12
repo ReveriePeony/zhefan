@@ -14,14 +14,9 @@
 		});
 		
 		var wxlogin = function() {
-			var url = encodeURIComponent('http://www.huzhenquan.com/swagger-ui.html');
-			window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize"
-					+"?appid=wx70130051b755f363"
-					+"&redirect_uri="+url
-					+"&response_type=code"
-					+"&scope=snsapi_userinfo"
-					+"&state=test1234"
-					+"#wechat_redirect";
+			var url = encodeURIComponent('http://www.huzhenquan.com/m/index.html');
+			console.log("/mobile/wx/h5auth?url="+url)
+			window.location.href = "/mobile/wx/h5auth?url="+url;
 		}
 	</script>
 <style type="text/css">

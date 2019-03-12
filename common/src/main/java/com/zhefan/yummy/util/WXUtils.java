@@ -229,6 +229,10 @@ public class WXUtils {
 		return oauthUrl.toString();
 	}
 	
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		System.err.println(URLEncoder.encode("https://open.weixin.qq.com/connect/oauth", "UTF-8"));
+	}
+	
 	/**
 	 * 通过code换取网页授权access_token
 	 * @param code
@@ -238,26 +242,27 @@ public class WXUtils {
 		String url = String.format(
 				"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code", 
 				appid, appsecrret, code);
-		ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url, JSONObject.class, new Object() {});
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, new Object() {});
 		if(responseEntity.getStatusCodeValue() != 200) {
 			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
 		}
-		return responseEntity.getBody();
+		return JSONObject.parseObject(responseEntity.getBody());
 	}
 	
 	/**
 	 * 拉取用户信息(需scope为 snsapi_userinfo)
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public JSONObject getH5UserInfo(String accessToken, String openid, String lang) {
+	public JSONObject getH5UserInfo(String accessToken, String openid, String lang) throws UnsupportedEncodingException {
 		String url = String.format(
 				"https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=%s", 
 				accessToken, openid, lang == null ? LANG : lang);
-		ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url, JSONObject.class, new Object() {});
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, new Object() {});
 		if(responseEntity.getStatusCodeValue() != 200) {
 			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
 		}
-		return responseEntity.getBody();
+		return JSONObject.parseObject(new String(responseEntity.getBody().getBytes("ISO-8859-1"), "UTF-8"));
 	}
 	
 }

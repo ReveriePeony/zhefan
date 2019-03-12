@@ -108,17 +108,17 @@ public class User extends Model<User> {
 	}
 
 	public void copyUserInfo(JSONObject userInfo) {
-		this.name = userInfo.getString("nickName");
-		this.avatar = userInfo.getString("avatarUrl");
+		this.name = userInfo.getString("nickname");
+		this.avatar = userInfo.getString("headimgurl");
 		this.creationTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
-		this.openid = userInfo.getString("openId");
-		this.unionid = userInfo.getString("unionId");
-		this.nickname = userInfo.getString("nickName");
-		this.sex = userInfo.getInteger("gender");
+		this.openid = userInfo.getString("openid");
+		this.unionid = userInfo.getString("unionid");
+		this.nickname = userInfo.getString("nickname");
+		this.sex = userInfo.getInteger("sex");
 		this.province = userInfo.getString("province");
 		this.city = userInfo.getString("city");
 		this.country = userInfo.getString("country");
-		this.headimgurl = userInfo.getString("avatarUrl");
+		this.headimgurl = userInfo.getString("headimgurl");
 	}
 	
 }
