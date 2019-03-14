@@ -9,13 +9,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.zhefan.yummy.interceptor.AuthInterceptor;
+import com.zhefan.yummy.interceptor.MobileAuthInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -43,9 +43,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		InterceptorRegistration addInterceptor = registry.addInterceptor(new AuthInterceptor());
-		addInterceptor.excludePathPatterns("/", "/login", "/gerent/login", "/error", "/v2/**", "/webjars/**",
+		registry.addInterceptor(new AuthInterceptor())
+			.excludePathPatterns("/", "/login", "/gerent/login", "/error", "/v2/**", "/webjars/**",
 				"/swagger-resources/**", "/mobile/**", "/examples/**");
+		registry.addInterceptor(new MobileAuthInterceptor())
+			.excludePathPatterns("/", "/login", "/gerent/**", "/error", "/v2/**", "/webjars/**",
+				"/swagger-resources/**", "/examples/**", "/mobile/wx/**", "/common/**", "/area/**", 
+				"/dishesClass/**", "/dishes/**", "/menu/**", "/order/**", "/orderDetail/**", "/role/**", 
+				"/roleMenu/**", "/shop/**", "/table/**", "/tableType/**", "/user/**", "/weixinBusiness/**");
 		super.addInterceptors(registry);
 	}
 

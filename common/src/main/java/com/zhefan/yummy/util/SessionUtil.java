@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.zhefan.yummy.entity.Gerent;
 import com.zhefan.yummy.entity.User;
 
@@ -38,7 +39,7 @@ public class SessionUtil {
 	public static Gerent getLoginBean(HttpServletRequest request) {
 		Object sessionObj = request.getSession().getAttribute(LOGIN_INFO);
 		if(sessionObj != null) {
-			return JSON.parseObject(sessionObj.toString(), Gerent.class);
+			return JSONObject.parseObject(sessionObj.toString(), Gerent.class);
 		}
 		return null;
 	}
@@ -48,9 +49,10 @@ public class SessionUtil {
 	}
 	
 	public static User getMobileLoginBean(HttpServletRequest request) {
-		Object sessionObj = request.getSession().getAttribute(LOGIN_INFO);
+		Object sessionObj = request.getSession().getAttribute(MOBILE_LOGIN_INFO);
 		if(sessionObj != null) {
-			return JSON.parseObject(sessionObj.toString(), User.class);
+			System.err.println(sessionObj.toString());
+			return JSONObject.parseObject(sessionObj.toString(), User.class);
 		}
 		return null;
 	}

@@ -31,6 +31,7 @@ public enum ResponseEnums {
     USER_ID_IS_NULL(1017, "用户ID不能为空"),
     WX_REQUET_ERROR(1018, "访问微信服务器失败"),
     ACCOUNT_PWD_ERROR(1019, "账号或密码错误"),
+    WX_NOT_LOGIN(1020, "微信未授权登录"),
 
     IMAGE_ERROR(1999, "图片保存失败"),
 

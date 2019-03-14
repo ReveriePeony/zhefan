@@ -15,7 +15,10 @@
 				data: {token: getParam('token')},
 				dataType: 'JSON',
 				success: function(data){
-					$('div').html(data);
+					$('textarea').val(data.data);
+					let user = eval('('+data.data+')');
+					$('#head').prop('src', user.avatar);
+					$('#name').html(user.nickname);
 				},
 				error: function(xmlhq, status, thr){
 					console.log(xmlhq);
@@ -32,10 +35,29 @@
 		    return paramValue == "" && (paramValue = null), paramValue 
 		} 
 	</script>
+	<style type="text/css">
+		textarea {
+			width: 100%;
+			height: 0;
+		}
+		#head {
+			width: 100px;
+			height: 100px;
+		}
+		div {
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
-	<div>
+	<textarea>
 		
+	</textarea>
+	<div style="margin-top: 10%;">
+		<img id="head" src="">
+	</div>
+	<div>
+		<label id="name"></label>
 	</div>
 </body>
 </html>

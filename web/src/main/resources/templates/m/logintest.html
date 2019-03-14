@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>登录</title>
+<meta name=viewport
+	content="width=device-width,initial-scale=1,maximum-scale=1">
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+		});
+		
+		function login() {
+			$.ajax({
+				url: '/mobile/wx/login',
+				type: 'POST',
+				async: false,
+				data: {},
+				dataType: 'JSON',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(xmlhq, status, thr){
+					console.log(xmlhq);
+				}
+			});
+		}
+		
+		function zwei() {
+			$.ajax({
+				url: '/mobile/dishesClass/list',
+				type: 'get',
+				async: false,
+				data: {shopId: 1000},
+				dataType: 'JSON',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(xmlhq, status, thr){
+					console.log(xmlhq);
+				}
+			});
+		}
+	</script>
+	<style type="text/css">
+		textarea {
+			width: 100%;
+			height: 0;
+		}
+		#head {
+			width: 100px;
+			height: 100px;
+		}
+		div {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<input id="eins" type="button" value="login" onclick="login()"/>
+	<input id="zwei" type="button" value="菜品列表full"  onclick="zwei()"/>
+</body>
+</html>

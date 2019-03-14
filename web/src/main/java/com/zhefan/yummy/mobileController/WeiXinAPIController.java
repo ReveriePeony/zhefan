@@ -26,6 +26,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zhefan.yummy.base.BaseController;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.entity.User;
+import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.service.UserService;
 import com.zhefan.yummy.util.RedisCacheUtil;
 import com.zhefan.yummy.util.SessionUtil;
@@ -145,13 +146,14 @@ public class WeiXinAPIController extends BaseController {
 					User two = new User();
 					two.copyUserInfo(h5UserInfo);
 					userService.insert(two);
+//					userService.updateUserByOpenId(two);
 					BeanUtils.copyProperties(two, user);
 				} else {
 					BeanUtils.copyProperties(one, user);
 				}
 				String token = DigestUtils.md5Hex((Math.random() * 10000) + new SimpleDateFormat("yyyyMMdd$HH").format(new Date()));
 				redisUtil.set(token, JSONObject.toJSONString(user), 3600l);
-				SessionUtil.setMobileLoginInfo(request, JSONObject.toJSONString(user));
+				SessionUtil.setMobileLoginInfo(request, user);
 				modelAndView = new ModelAndView("redirect:" + URLDecoder.decode(state, "UTF-8") + "?token=" + token);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -166,6 +168,7 @@ public class WeiXinAPIController extends BaseController {
 	public ResponseDTO getUser(HttpServletRequest request, HttpServletResponse response, String token) {
 //		User user = SessionUtil.getMobileLoginBean(request);
 		Object object = redisUtil.get(token);
+		if(object == null) return ResponseDTO.error(ResponseEnums.WX_NOT_LOGIN);
 		return ResponseDTO.success(object);
 	}
 	
@@ -175,4 +178,13 @@ public class WeiXinAPIController extends BaseController {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@PostMapping("login")
+	public ResponseDTO login(HttpServletRequest request) {
+		Wrapper<User> wrapper = new EntityWrapper<>();
+		wrapper.eq("openid", "o_h18w_wu9K-ble_Cenjjdo_Ym_Y");
+		User one = userService.selectOne(wrapper);
+		SessionUtil.setMobileLoginInfo(request, one);
+		return ResponseDTO.success();
+	}
 }

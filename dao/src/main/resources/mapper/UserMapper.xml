@@ -25,5 +25,18 @@
     <sql id="Base_Column_List">
         id, name, avatar, password, creation_time, status, openid, unionid, nickname, sex, province, city, country, headimgurl, privilege
     </sql>
-
+	
+	<update id="updateUserByOpenId">
+		UPDATE t_user SET 
+			unionid = #{user.unionid}, 
+			nickname = #{user.nickname}, 
+			sex = #{user.sex}, 
+			province = #{user.province}, 
+			city = #{user.city}, 
+			country = #{user.country}, 
+			headimgurl = #{user.headimgurl}, 
+			privilege = #{user.privilege} 
+		WHERE openid = #{user.openid}
+	</update>
+	
 </mapper>
