@@ -143,5 +143,6 @@ wx:
   appsecrret: ca984074aac1a029c7b0701f0d8e90aa
   miniappid: wxf8f1d3e7106c154d
   miniappsecrret: test
+  signkey: key
 
 

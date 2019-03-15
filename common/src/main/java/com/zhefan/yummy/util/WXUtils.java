@@ -9,7 +9,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.spec.InvalidParameterSpecException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -18,6 +21,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.codehaus.xfire.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +35,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zhefan.yummy.dto.ResponseDTO;
 import com.zhefan.yummy.enums.ResponseEnums;
 import com.zhefan.yummy.exception.ResponseEntityException;
+import com.zhefan.yummy.wx.UnifiedPayment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +59,9 @@ public class WXUtils {
 	
 	@Value("${wx.appsecrret}")
 	private String appsecrret;
+	
+	@Value("${wx.signkey}")
+	private String signkey;
 	
 	/**
 	 * 
@@ -229,10 +238,6 @@ public class WXUtils {
 		return oauthUrl.toString();
 	}
 	
-	public static void main(String[] args) throws UnsupportedEncodingException {
-		System.err.println(URLEncoder.encode("https://open.weixin.qq.com/connect/oauth", "UTF-8"));
-	}
-	
 	/**
 	 * 通过code换取网页授权access_token
 	 * @param code
@@ -263,6 +268,112 @@ public class WXUtils {
 			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
 		}
 		return JSONObject.parseObject(new String(responseEntity.getBody().getBytes("ISO-8859-1"), "UTF-8"));
+	}
+	
+	/**
+	 * 统一下单接口
+	 * @return 预支付交易会话标识	prepay_id	是	String(64)	wx201410272009395522657a690389285100	
+		  微信生成的预支付会话标识，用于后续接口调用中使用，该值有效期为2小时
+	 * @throws Exception 
+	 */
+	public JSONObject UnifiedOrderAPI(UnifiedPayment unifiedPayment) throws Exception {
+		String url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+		unifiedPayment.setNonce_str(getRandomStr());
+		JSONObject json = JSONObject.parseObject(JSONObject.toJSONString(unifiedPayment));
+		unifiedPayment.setSign(getPaySign(json));
+		String param = XmlBuilder.object2XmlStr(unifiedPayment);
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, param);
+		if(responseEntity.getStatusCodeValue() != 200) {
+			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
+		}
+		Object result = XmlBuilder.xmlStr2Object(JSONObject.class, responseEntity.getBody());
+		return JSONObject.parseObject(result.toString());
+	}
+	
+	/**
+	 * 查询订单
+	 * @return 交易状态	trade_state	是	String(32)	SUCCESS	
+	 		SUCCESS—支付成功
+	 		REFUND—转入退款
+	 		NOTPAY—未支付
+	 		CLOSED—已关闭
+	 		REVOKED—已撤销（付款码支付）
+	 		USERPAYING--用户支付中（付款码支付）
+	 		PAYERROR--支付失败(其他原因，如银行返回失败)
+	 		支付状态机请见下单API页面
+	 * @throws Exception 
+	 */
+	public JSONObject QueryOrderAPI(UnifiedPayment unifiedPayment) throws Exception {
+		String url = "https://api.mch.weixin.qq.com/pay/orderquery";
+		unifiedPayment.setNonce_str(getRandomStr());
+		JSONObject json = JSONObject.parseObject(JSONObject.toJSONString(unifiedPayment));
+		unifiedPayment.setSign(getPaySign(json));
+		String param = XmlBuilder.object2XmlStr(unifiedPayment);
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, param);
+		if(responseEntity.getStatusCodeValue() != 200) {
+			ResponseDTO.error(ResponseEnums.WX_REQUET_ERROR);
+		}
+		Object result = XmlBuilder.xmlStr2Object(JSONObject.class, responseEntity.getBody());
+		return JSONObject.parseObject(result.toString());
+	}
+	
+	/**
+	 * 退款
+	 * @return 
+	 * @throws Exception 
+	 */
+	public JSONObject RefundAPI(UnifiedPayment unifiedPayment) throws Exception {
+		
+		return null;
+	}
+	
+	private String getPaySign(JSONObject json) {
+		StringBuilder param = new StringBuilder();
+		List<String> keys = new ArrayList<String>();
+		json.keySet().forEach(s -> {
+			if(StringUtils.isNotBlank(json.getString(s))) {
+				keys.add(s);
+			}
+		});
+		Collections.sort(keys);
+		keys.forEach(key -> {
+			param.append(key).append("=").append(json.getString(key)).append("&");
+		});
+		param.append("key=").append(signkey);
+		String md5Hex = DigestUtils.md5Hex(param.toString());
+		return md5Hex.toUpperCase();
+	}
+	
+	private String getRandomStr() {
+		StringBuilder r = new StringBuilder();
+		r.append(Math.random() * 100000);
+		r.append(Math.random() * 100000);
+		r.append(Math.random() * 100000);
+		return r.toString();
+	}
+	
+	public static void main(String[] args) {
+//		UnifiedPayment up = new UnifiedPayment();
+//		up.setAppid("wxd930ea5d5a258f4f");
+//		up.setMch_id("10000100");
+//		up.setDevice_info("1000");
+//		up.setBody("test");
+//		up.setNonce_str("ibuaiVcKdpRxkhJA");
+		JSONObject json = JSONObject.parseObject("{\"nonce_str\":\"ibuaiVcKdpRxkhJA\",\"device_info\":\"1000\",\"appid\":\"wxd930ea5d5a258f4f\",\"body\":\"test\",\"mch_id\":\"10000100\"}");
+		StringBuilder param = new StringBuilder();
+		List<String> keys = new ArrayList<String>();
+		json.keySet().forEach(s -> {
+			if(StringUtils.isNotBlank(json.getString(s))) {
+				keys.add(s);
+			}
+		});
+		Collections.sort(keys);
+		keys.forEach(key -> {
+			param.append(key).append("=").append(json.getString(key)).append("&");
+		});
+		param.append("key=").append("192006250b4c09247ec02edce69f6a2d");
+		String md5Hex = DigestUtils.md5Hex(param.toString());
+		System.err.println(md5Hex.toUpperCase());
 	}
 	
 }
