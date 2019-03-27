@@ -1,0 +1,69 @@
+/*订单*/
+
+.order {
+    font-size: 0.28rem;
+    .top {
+        height: 1rem;
+        background: rgba(255, 216, 0, 1);
+    }
+    .order-region {
+        padding: 0 0.2rem;
+        margin-top: -20px;
+        .order-item {
+            /*临时设置*/
+            // height: 200px;
+            margin-top: 10px;
+            background-color: #fff;
+            border-radius: 3px;
+            padding: 0 0.2rem;
+            .item-top {
+                height: .8rem;
+                line-height: .8rem;
+                .order-num {
+                    color: #999;
+                }
+            }
+            .item-info {
+                display: flex;
+                margin-top: 10px;
+                .info-l {
+                    flex: 1;
+                    img {
+                        width: 1.36rem;
+                        height: 1.41rem;
+                    }
+                }
+                .info-r {
+                    flex: 3;
+                    display: flex;
+                    border-bottom: 1px solid rgba(238, 239, 241, 1);
+                    ;
+                }
+                .info-r-info {
+                    flex: 3;
+                }
+                .money {
+                    flex: 1;
+                }
+            }
+            .item-info:first-of-type{
+                margin-top: 0;
+            }
+            .item-bottom {
+                height: 1rem;
+                line-height: 1rem; 
+                font-size: 0.28rem;
+                .gray {
+                    color: #999;
+                }
+                .order-money{
+                    font-size: 0.34rem;
+                    font-weight: bold;
+                }
+            }
+        }
+        .order-item:first-child {
+            margin-top: 0;
+        }
+    }
+}

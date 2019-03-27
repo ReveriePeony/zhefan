@@ -1,0 +1,33 @@
+@import 'normalize.css';
+@import '../fonts/iconfont.css';
+html,
+body {
+  max-width: 768px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+#home .banner-area {
+  padding: 0.3rem 0;
+}
+#home .banner {
+  height: 2.8rem;
+  position: relative;
+}
+#home .banner img {
+  width: 6.9rem;
+  display: block;
+  margin: 0 auto;
+}
+#home .banner .swipe-num {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.2rem;
+  width: 0.85rem;
+  height: 0.42rem;
+  line-height: 0.42rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.21rem;
+  color: #ffffff;
+  font-size: 0.22rem;
+}

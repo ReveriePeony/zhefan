@@ -82,7 +82,7 @@ spring:
             required: true
     
 redisSession:
-  cookieName: JSESSIONID
+  cookieName: YUMMYID
   cookiePath: /
   domainName: huzhenquan.com
 

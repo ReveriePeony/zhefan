@@ -17,9 +17,6 @@ import com.zhefan.yummy.entity.User;
  */
 public class SessionUtil {
 	
-	private static final String LOGIN_INFO = "login_user"; 
-	private static final String MOBILE_LOGIN_INFO = "mobile_login_user"; 
-	
 	public static void setSessionInfo(HttpServletRequest request, String key, Object content) {
 		request.getSession().setAttribute(key, JSON.toJSONString(content));
 	}
@@ -33,11 +30,11 @@ public class SessionUtil {
 	}
 	
 	public static void setLoginInfo(HttpServletRequest request, Object content) {
-		request.getSession().setAttribute(LOGIN_INFO, JSON.toJSONString(content));
+		request.getSession().setAttribute(request.getSession().getId(), JSON.toJSONString(content));
 	}
 
 	public static Gerent getLoginBean(HttpServletRequest request) {
-		Object sessionObj = request.getSession().getAttribute(LOGIN_INFO);
+		Object sessionObj = request.getSession().getAttribute(request.getSession().getId());
 		if(sessionObj != null) {
 			return JSONObject.parseObject(sessionObj.toString(), Gerent.class);
 		}
@@ -45,11 +42,11 @@ public class SessionUtil {
 	}
 	
 	public static void setMobileLoginInfo(HttpServletRequest request, Object content) {
-		request.getSession().setAttribute(MOBILE_LOGIN_INFO, JSON.toJSONString(content));
+		request.getSession().setAttribute(request.getSession().getId(), JSON.toJSONString(content));
 	}
 	
 	public static User getMobileLoginBean(HttpServletRequest request) {
-		Object sessionObj = request.getSession().getAttribute(MOBILE_LOGIN_INFO);
+		Object sessionObj = request.getSession().getAttribute(request.getSession().getId());
 		if(sessionObj != null) {
 			System.err.println(sessionObj.toString());
 			return JSONObject.parseObject(sessionObj.toString(), User.class);
@@ -58,11 +55,11 @@ public class SessionUtil {
 	}
 
 	public static void setLogout(HttpServletRequest request, HttpServletResponse response) {
-		Cookie cookie = new Cookie("JSESSIONID", "");
+		Cookie cookie = new Cookie("YUMMYID", "");
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
 		response.addCookie(cookie);
-		request.getSession().removeAttribute(LOGIN_INFO);
+		request.getSession().removeAttribute(request.getSession().getId());
 	}
 	
 	

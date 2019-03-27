@@ -166,10 +166,21 @@ public class WeiXinAPIController extends BaseController {
 	@ApiOperation(value = "获取用户信息", notes = "获取用户信息")
 	@PostMapping("getUser")
 	public ResponseDTO getUser(HttpServletRequest request, HttpServletResponse response, String token) {
-//		User user = SessionUtil.getMobileLoginBean(request);
-		Object object = redisUtil.get(token);
-		if(object == null) return ResponseDTO.error(ResponseEnums.WX_NOT_LOGIN);
-		return ResponseDTO.success(object);
+		User user = SessionUtil.getMobileLoginBean(request);
+//		Object object = redisUtil.get(token);
+		if(user == null) return ResponseDTO.error(ResponseEnums.WX_NOT_LOGIN);
+		return ResponseDTO.success(user);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping("login")
+	public ResponseDTO login(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("sessionid - " + request.getSession().getId());
+		Wrapper<User> wrapper = new EntityWrapper<>();
+		wrapper.eq("openid", "o_h18w_wu9K-ble_Cenjjdo_Ym_Y");
+		User one = userService.selectOne(wrapper);
+		SessionUtil.setMobileLoginInfo(request, one);
+		return ResponseDTO.success();
 	}
 	
 	@ApiOperation(value = "", notes = "", hidden = true)
@@ -177,14 +188,5 @@ public class WeiXinAPIController extends BaseController {
 	public void msg(HttpServletRequest request, HttpServletResponse response) {
 		
 	}
-	
-	@SuppressWarnings("rawtypes")
-	@PostMapping("login")
-	public ResponseDTO login(HttpServletRequest request) {
-		Wrapper<User> wrapper = new EntityWrapper<>();
-		wrapper.eq("openid", "o_h18w_wu9K-ble_Cenjjdo_Ym_Y");
-		User one = userService.selectOne(wrapper);
-		SessionUtil.setMobileLoginInfo(request, one);
-		return ResponseDTO.success();
-	}
+
 }
