@@ -105,7 +105,7 @@ public class Order extends Model<Order> {
 	public static String createOrderNubmber() {
 		StringBuilder number = new StringBuilder("YM");
 		number.append(new SimpleDateFormat("yyyyMMddssmmHH").format(System.currentTimeMillis()));
-		number.append(Math.random() * 100);
+		number.append((int) Math.random() * 100);
 		return number.toString();
 	}
 }
